@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>קטלוג מוצרי אלומיניום - אנפי 2025</title>
+    <title>קטלוג מוצרי אלומיניום - אנפי 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -336,7 +336,7 @@
         /* ------------------------------------- */
         .page-number {
             position: absolute;
-            bottom: 45px; /* הועלה מ-30px כדי למנוע חפיפה */
+            bottom: 45px;
             left: 50%;
             transform: translateX(-50%);
             color: #2d5016;
@@ -366,13 +366,13 @@
             font-family: 'Assistant', sans-serif;
             font-weight: 600;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            opacity: 0.8; /* הוספת שקיפות */
+            opacity: 0.8; 
         }
 
         .nav-btn:hover {
             background: #3d6b1f;
             transform: scale(1.05);
-            opacity: 1; /* להחזיר שקיפות מלאה במעבר עכבר */
+            opacity: 1; 
         }
 
         .nav-btn:disabled {
@@ -380,7 +380,7 @@
             cursor: not-allowed;
             transform: scale(1);
             box-shadow: none;
-            opacity: 0.5; /* שקיפות נמוכה יותר לכפתור מנוטרל */
+            opacity: 0.5; 
         }
 
         /* ------------------------------------- */
@@ -471,28 +471,28 @@
         const pages = [];
 
         // -------------------------------------
-        // URLs לתמונות המקומיות (תיקיית תמונות/) - נתיב הידית הכבדה תוקן
+        // URLs לתמונות - נתיבים יחסיים (מניח שהקבצים נטענים משורש המאגר ב-GitHub)
         // -------------------------------------
         const images = {
             // מברשות
-            brush: "תמונות/BlackBrush.png", 
+            brush: "BlackBrush.png", 
             // רשתות
-            net_fiber: "תמונות/TransparentMesh.png",
-            net_clear: "תמונות/TransparentMesh.png",
+            net_fiber: "TransparentMesh.png",
+            net_clear: "TransparentMesh.png",
             // ידיות
-            handle_standard: "תמונות/BlackRectangleHandle.jpg", 
-            handle_heavy: "תמונות/BlackRoundedHandle.png",
-            handle_bar: "תמונות/BarPullHandle.png",
+            handle_standard: "BlackRectangleHandle.jpg", 
+            handle_heavy: "BlackRoundedHandle.png", // תוקן בהתאם לשם הקובץ המדויק ב-GitHub
+            handle_bar: "BarPullHandle.png",
             // גלגלים
-            wheel_single_silver: "תמונות/SilverSingleWheels.png",
-            wheel_double_silver: "תמונות/SilverDoubleWheels.png",
-            wheel_double_blue: "תמונות/BlueDoubleWheels.png",
-            wheel_single_black: "תמונות/BlackSingleWheels.png",
+            wheel_single_silver: "SilverSingleWheels.png",
+            wheel_double_silver: "SilverDoubleWheels.png",
+            wheel_double_blue: "BlueDoubleWheels.png",
+            wheel_single_black: "BlackSingleWheels.png",
             // אביזרים נלווים ומנעולים
-            locks: "תמונות/Locks.png",
-            fork: "תמונות/Fork.png",
-            gasket: "תמונות/Gasket.png",
-            generic_hardware: "תמונות/Gasket.png" 
+            locks: "Locks.png",
+            fork: "Fork.png",
+            gasket: "Gasket.png",
+            generic_hardware: "Gasket.png" 
         };
 
         // -------------------------------------
@@ -798,8 +798,8 @@
                     <h2 class="product-title">אביזרים נלווים</h2>
                     <div class="product-grid">
                         <div class="product-card">
-                            <img src="${images.gasket}" alt="אטם" class="product-image">
-                            <div class="product-name">אטם קטן</div>
+                            <img src="${images.gasket}" alt="גסקט / גומי איטום" class="product-image">
+                            <div class="product-name">גסקט / גומי איטום</div>
                             <div class="product-spec">איטום בין פרופילים</div>
                         </div>
                         <div class="product-card">
