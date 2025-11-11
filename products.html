@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>אנפי פרזול - קטלוג מוצרים</title>
+    <style>
+      :root {
+        --primary: #1d5c43;
+        --accent: #b2c70c;
+        --light-bg: #f8f9fa;
+        --text: #222;
+        --muted: #555;
+      }
+      body {
+        font-family: "Assistant", sans-serif;
+        margin: 0;
+        background: var(--light-bg);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+      header {
+        background: linear-gradient(135deg, var(--primary), #2a7a5e);
+        color: white;
+        text-align: center;
+        padding: 3rem 1rem 2rem;
+        border-bottom: 4px solid var(--accent);
+        position: relative;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.8rem;
+        font-weight: 700;
+      }
+      header p {
+        margin: 0.7rem 0 0;
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+        text-align: center;
+      }
+      h2 {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--accent);
+        margin: 0.6rem auto 0;
+        border-radius: 2px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        padding-bottom: 2rem;
+      }
+      .product-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: right;
+        direction: rtl;
+      }
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      }
+      .product-image {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 20px 20px 0 0;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .product-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.15),
+          transparent 60%
+        );
+        border-radius: 20px 20px 0 0;
+      }
+      .product-content {
+        padding: 1.5rem 1.8rem 2rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .product-content h3 {
+        margin: 0 0 0.6rem 0;
+        color: var(--primary);
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .product-content p {
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .btn-contact {
+        display: inline-block;
+        margin: 2rem auto 0;
+        padding: 0.9rem 2rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        text-decoration: none;
+        text-align: center;
+      }
+      .btn-contact:hover {
+        background: #17472f;
+        transform: scale(1.05);
+      }
+      footer {
+        background: var(--primary);
+        color: #fff;
+        text-align: center;
+        padding: 1.2rem;
+        margin-top: 4rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
+      }
+      .whatsapp-float {
+        position: fixed;
+        bottom: 22px;
+        left: 22px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: transform 0.25s ease;
+        z-index: 100;
+        text-decoration: none;
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+      }
+      .whatsapp-float img {
+        width: 36px;
+        height: 36px;
+      }
+      /* Additional styles for the handles gallery */
+      .handles-gallery {
+        display: flex;
+        gap: 8px;
+        margin-top: 1rem;
+      }
+      .handles-gallery img {
+        width: 32%;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .handles-gallery img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      /* Popup image enlargement styles */
+      .image-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .image-popup img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>אנפי</h1>
+      <p>איכות • אמינות</p>
+    </header>
+
+    <section class="container">
+      <h2>קטלוג מוצרים</h2>
+      <div class="grid">
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('תמונות/whitebrushcatalog.png')"
+          ></div>
+          <div class="product-content">
+            <h3>מברשות</h3>
+            <p>
+              מברשות רגילות, סנפיר והדבקה במידות שונות - רחב/נמוך, צר/גבוה,
+              סנפיר 7000 ועוד.
+            </p>
+            <div class="handles-gallery extra-gallery">
+              <img src="תמונות/whitebrushcatalog 2.png" alt="מברשת נוספת 1" />
+              <img src="תמונות/BlackBrush.png" alt="מברשת נוספת 2" />
+              <img src="תמונות/blackbrushcatalog.png" alt="מברשת נוספת 3" />
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('תמונות/BlackRoundedHandle.png')"
+          ></div>
+          <div class="product-content">
+            <h3>ידיות</h3>
+            <p>
+              חצי ידית (6/4 ברגים), קיפ, נירוסטה, אלומיניום ומשופרת - במגוון
+              צבעים.
+            </p>
+            <div class="handles-gallery">
+              <img src="תמונות/BlackRectangleHandle.jpg" alt="ידית נוספת 1" />
+              <img src="תמונות/BarPullHandle.png" alt="ידית נוספת 2" />
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('תמונות/BlueDoubleWheels.png')"
+          ></div>
+          <div class="product-content">
+            <h3>גלגלים</h3>
+            <p>
+              מותאם לדגמים 7000, 7300, 4300 - כולל גלגלים מתכתיים ופלסטיים
+              איכותיים.
+            </p>
+            <div class="handles-gallery extra-gallery">
+              <img src="תמונות/BlackSingleWheels.png" alt="גלגל נוסף 1" />
+              <img src="תמונות/SilverSingleWheels.png" alt="גלגל נוסף 3" />
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('תמונות/TransparentMesh.png')"
+          ></div>
+          <div class="product-content">
+            <h3>רשתות</h3>
+            <p>
+              רשתות פיברגלס, שקופה, פוליפרופילן וגלילה (0.5-2.5 מ׳) כולל חיתוך
+              לפי מידה.
+            </p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('תמונות/Corners.png')"
+          ></div>
+          <div class="product-content">
+            <h3>פינות</h3>
+            <p>
+              פינות חיבור, פינות נעילה ונגדי נעילה לפרופילים ופתרונות אלומיניום.
+            </p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('תמונות/Locks.png')"
+          ></div>
+          <div class="product-content">
+            <h3>מנעולים</h3>
+            <p>
+              מנעולים רגילים, מתכווננים ונעילה משולשת - עמידים וידידותיים
+              לשימוש.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="mailto:anfipirzul@gmail.com"
+        class="btn-contact"
+        title="צור קשר במייל"
+      >
+        צור קשר במייל
+      </a>
+    </section>
+
+    <a
+      href="https://wa.me/972506946650"
+      target="_blank"
+      class="whatsapp-float"
+      title="שלח הודעה בוואטסאפ"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="וואטסאפ"
+      />
+    </a>
+
+    <footer>
+      <p>© 2025 אנפי פרזול | איכות ושירות מעל הכל</p>
+    </footer>
+  </body>
+  <script>
+    // Popup enlarge for gallery images
+    document.querySelectorAll(".handles-gallery img").forEach((img) => {
+      img.addEventListener("click", () => {
+        const popup = document.createElement("div");
+        popup.classList.add("image-popup");
+        popup.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+        document.body.appendChild(popup);
+        popup.addEventListener("click", () => popup.remove());
+      });
+    });
+
+    // Popup enlarge for main product images (background-image)
+    document.querySelectorAll(".product-image").forEach((div) => {
+      div.addEventListener("click", () => {
+        // Get the background-image url property
+        const bg = window.getComputedStyle(div).backgroundImage;
+        // Extract the url from the string: url("...") or url('...')
+        const match = bg.match(/url\(["']?(.*?)["']?\)/);
+        if (match && match[1]) {
+          const imgUrl = match[1];
+          const popup = document.createElement("div");
+          popup.classList.add("image-popup");
+          popup.innerHTML = `<img src="${imgUrl}" alt="">`;
+          document.body.appendChild(popup);
+          popup.addEventListener("click", () => popup.remove());
+        }
+      });
+      // Optional: indicate clickable
+      div.style.cursor = "zoom-in";
+    });
+  </script>
+</html>
