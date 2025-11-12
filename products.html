@@ -63,6 +63,13 @@
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2rem;
         padding-bottom: 2rem;
+        align-items: start;
+      }
+      /* Brush card expansion behavior */
+      .brush-card {
+        align-self: start;
+        height: auto !important;
+        transition: all 0.3s ease;
       }
       .product-card {
         background: white;
@@ -177,9 +184,11 @@
         margin-top: 1rem;
       }
       .handles-gallery img {
-        width: 32%;
+        width: 100px;
+        height: 100px;
         border-radius: 12px;
-        object-fit: cover;
+        object-fit: contain;
+        background-color: #f3f3f3;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
       }
@@ -212,6 +221,58 @@
         border-radius: 12px;
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
       }
+      /* Styles for the brush table container and table */
+      .table-container {
+        max-width: 600px;
+        margin: 1.5rem auto 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: white;
+        overflow-x: auto;
+        text-align: center;
+      }
+      .table-container th,
+      .table-container td {
+        white-space: nowrap;
+      }
+      .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        direction: rtl;
+      }
+      .table-container thead th {
+        background-color: var(--primary);
+        color: white;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .table-container tbody td {
+        padding: 0.7rem 1rem;
+        border: 1px solid #ddd;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .table-container tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      #toggleBrushTableBtn {
+        margin: 1rem auto 0;
+        display: block;
+        padding: 0.7rem 1.5rem;
+        background-color: var(--accent);
+        color: #1f1f1f;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      #toggleBrushTableBtn:hover {
+        background-color: #a8bf1a;
+      }
     </style>
   </head>
   <body>
@@ -222,21 +283,125 @@
     <section class="container">
       <h2>קטלוג מוצרים</h2>
       <div class="grid">
-        <div class="product-card">
-          <div
-            class="product-image"
-            style="background-image: url('whitebrushcatalog.png')"
-          ></div>
-          <div class="product-content">
-            <h3>מברשות</h3>
-            <p>
-              מברשות רגילות, סנפיר והדבקה במידות שונות - רחב/נמוך, צר/גבוה,
-              סנפיר 7000 ועוד.
-            </p>
-            <div class="handles-gallery extra-gallery">
-              <img src="whitebrushcatalog 2.png" alt="מברשת נוספת 1" />
-              <img src="BlackBrush.png" alt="מברשת נוספת 2" />
-              <img src="blackbrushcatalog.png" alt="מברשת נוספת 3" />
+        <div class="brush-card">
+          <div class="product-card">
+            <div
+              class="product-image"
+              style="background-image: url('תמונות/whitebrushcatalog.png')"
+            ></div>
+            <div class="product-content">
+              <h3>מברשות</h3>
+              <p>
+                מברשות רגילות, סנפיר והדבקה במידות שונות - רחב/נמוך, צר/גבוה,
+                סנפיר 7000 ועוד.
+              </p>
+              <div class="handles-gallery extra-gallery">
+                <img
+                  src="תמונות/whitebrushcatalog 2.png"
+                  alt="מברשת נוספת 1"
+                  height="80"
+                />
+                <img
+                  src="תמונות/BlackBrush.png"
+                  alt="מברשת נוספת 2"
+                  height="80"
+                />
+                <img
+                  src="תמונות/blackbrushcatalog.png"
+                  alt="מברשת נוספת 3"
+                  height="80"
+                />
+              </div>
+              <button id="toggleBrushTableBtn" onclick="toggleBrushTable()">
+                הצג טבלת מברשות
+              </button>
+              <div
+                class="table-container"
+                style="display: none"
+                id="brushTableContainer"
+              >
+                <table>
+                  <thead>
+                    <tr>
+                      <th>תיאור</th>
+                      <th>מידה</th>
+                      <th>כמות בקרטון</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>צר נמוך</td>
+                      <td>4.7 × 5.50</td>
+                      <td>4 × 375</td>
+                    </tr>
+                    <tr>
+                      <td>צר גבוה 1</td>
+                      <td>4.7 × 12</td>
+                      <td>4 × 250</td>
+                    </tr>
+                    <tr>
+                      <td>צר גבוה 2</td>
+                      <td>4.7 × 15</td>
+                      <td>4 × 200</td>
+                    </tr>
+                    <tr>
+                      <td>רחב גבוה 1</td>
+                      <td>4.7 × 12</td>
+                      <td>4 × 450</td>
+                    </tr>
+                    <tr>
+                      <td>רחב גבוה 2</td>
+                      <td>4.7 × 20</td>
+                      <td>4 × 400</td>
+                    </tr>
+                    <tr>
+                      <td>רחב נמוך</td>
+                      <td>4.7 × 5.50</td>
+                      <td>4 × 375</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר 7000</td>
+                      <td>4.7 × 12</td>
+                      <td>350 × 4</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר 7300</td>
+                      <td>4.7 × 15</td>
+                      <td>500 × 4</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר 1700</td>
+                      <td>4.7 × 12</td>
+                      <td>400 × 4</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר 7600</td>
+                      <td>4.7 × 12</td>
+                      <td>450 × 4</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר 2200</td>
+                      <td>6.7 × 9.40</td>
+                      <td>275 × 4</td>
+                    </tr>
+                    <tr>
+                      <td>הדבקה D.P</td>
+                      <td>45 × 15.00</td>
+                      <td>25 × 4</td>
+                    </tr>
+                    <tr>
+                      <td>הדבקה IMZ</td>
+                      <td>6.7 × 12</td>
+                      <td>200</td>
+                    </tr>
+                    <tr>
+                      <td>הדבקה קופסה</td>
+                      <td>-</td>
+                      <td>100</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -244,7 +409,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('BlackRoundedHandle.png')"
+            style="background-image: url('תמונות/BlackRoundedHandle.png')"
           ></div>
           <div class="product-content">
             <h3>ידיות</h3>
@@ -253,8 +418,16 @@
               צבעים.
             </p>
             <div class="handles-gallery">
-              <img src="BlackRectangleHandle.jpg" alt="ידית נוספת 1" />
-              <img src="BarPullHandle.png" alt="ידית נוספת 2" />
+              <img
+                src="תמונות/BlackRectangleHandle.jpg"
+                alt="ידית נוספת 1"
+                height="80"
+              />
+              <img
+                src="תמונות/BarPullHandle.png"
+                alt="ידית נוספת 2"
+                height="80"
+              />
             </div>
           </div>
         </div>
@@ -262,7 +435,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('BlueDoubleWheels.png')"
+            style="background-image: url('תמונות/BlueDoubleWheels.png')"
           ></div>
           <div class="product-content">
             <h3>גלגלים</h3>
@@ -271,8 +444,16 @@
               איכותיים.
             </p>
             <div class="handles-gallery extra-gallery">
-              <img src="BlackSingleWheels.png" alt="גלגל נוסף 1" />
-              <img src="SilverSingleWheels.png" alt="גלגל נוסף 3" />
+              <img
+                src="תמונות/BlackSingleWheels.png"
+                alt="גלגל נוסף 1"
+                height="80"
+              />
+              <img
+                src="תמונות/SilverSingleWheels.png"
+                alt="גלגל נוסף 3"
+                height="80"
+              />
             </div>
           </div>
         </div>
@@ -280,7 +461,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('TransparentMesh.png')"
+            style="background-image: url('תמונות/TransparentMesh.png')"
           ></div>
           <div class="product-content">
             <h3>רשתות</h3>
@@ -294,7 +475,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('Corners.png')"
+            style="background-image: url('תמונות/Corners.png')"
           ></div>
           <div class="product-content">
             <h3>פינות</h3>
@@ -307,7 +488,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('Locks.png')"
+            style="background-image: url('תמונות/Locks.png')"
           ></div>
           <div class="product-content">
             <h3>מנעולים</h3>
@@ -375,5 +556,21 @@
       // Optional: indicate clickable
       div.style.cursor = "zoom-in";
     });
+
+    // Function to toggle brush table visibility and button text
+    function toggleBrushTable() {
+      const container = document.getElementById("brushTableContainer");
+      const btn = document.getElementById("toggleBrushTableBtn");
+      if (
+        container.style.display === "none" ||
+        container.style.display === ""
+      ) {
+        container.style.display = "block";
+        btn.textContent = "הסתר טבלת מברשות";
+      } else {
+        container.style.display = "none";
+        btn.textContent = "הצג טבלת מברשות";
+      }
+    }
   </script>
 </html>
