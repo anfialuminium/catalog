@@ -273,6 +273,44 @@
       #toggleBrushTableBtn:hover {
         background-color: #a8bf1a;
       }
+      .handles-container {
+        max-width: 600px;
+        margin: 1.5rem auto 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: white;
+        overflow-x: auto;
+        text-align: center;
+        padding: 1rem;
+      }
+      .handle-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        text-align: right;
+      }
+      .handle-item img {
+        width: 100px;
+        margin-left: 20px;
+        border-radius: 6px;
+      }
+      #toggleHandlesBtn {
+        margin: 1rem auto 0;
+        display: block;
+        padding: 0.7rem 1.5rem;
+        background-color: var(--accent);
+        color: #1f1f1f;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      #toggleHandlesBtn:hover {
+        background-color: #a8bf1a;
+      }
     </style>
   </head>
   <body>
@@ -287,31 +325,11 @@
           <div class="product-card">
             <div
               class="product-image"
-              style="background-image: url('whitebrushcatalog.png')"
+              style="background-image: url('תמונות/whitebrushcatalog.png')"
             ></div>
             <div class="product-content">
               <h3>מברשות</h3>
-              <p>
-                מברשות רגילות, סנפיר והדבקה במידות שונות - רחב/נמוך, צר/גבוה,
-                סנפיר 7000 ועוד.
-              </p>
-              <div class="handles-gallery extra-gallery">
-                <img
-                  src="whitebrushcatalog 2.png"
-                  alt="מברשת נוספת 1"
-                  height="80"
-                />
-                <img
-                  src="BlackBrush.png"
-                  alt="מברשת נוספת 2"
-                  height="80"
-                />
-                <img
-                  src="blackbrushcatalog.png"
-                  alt="מברשת נוספת 3"
-                  height="80"
-                />
-              </div>
+              <p>לחץ על 'הצג טבלת מברשות' כדי לראות את כל סוגי המברשות.</p>
               <button id="toggleBrushTableBtn" onclick="toggleBrushTable()">
                 הצג טבלת מברשות
               </button>
@@ -409,59 +427,78 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('BlackRoundedHandle.png')"
+            style="background-image: url('תמונות/BlackRoundedHandle.png')"
           ></div>
           <div class="product-content">
             <h3>ידיות</h3>
-            <p>
-              חצי ידית (6/4 ברגים), קיפ, נירוסטה, אלומיניום ומשופרת - במגוון
-              צבעים.
-            </p>
-            <div class="handles-gallery">
-              <img
-                src="BlackRectangleHandle.jpg"
-                alt="ידית נוספת 1"
-                height="80"
-              />
-              <img
-                src="BarPullHandle.png"
-                alt="ידית נוספת 2"
-                height="80"
-              />
+            <p>לחץ על 'הצג ידיות' כדי לראות את כל הידיות.</p>
+            <button id="toggleHandlesBtn" onclick="toggleHandles()">
+              הצג ידיות
+            </button>
+            <div
+              class="handles-container"
+              id="handlesContainer"
+              style="display: none"
+            >
+              <div class="handle-item">
+                <img src="canva/hh6s.png" alt="ידית 6 ברגים" />
+                <div>
+                  <strong>חצי ידית 6 ברגים</strong><br />צבעים: לבן | שחור | 101
+                  | טבעי | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="canva/bhr.png" alt="ידית 4 ברגים" />
+                <div>
+                  <strong>חצי ידית כבדה 4 ברגים</strong><br />צבעים: לבן | שחור
+                  | 101 | טבעי | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="canva/alma.png" alt="ידית משופרת אלמאי" />
+                <div>
+                  <strong>חצי ידית משופרת אלמאי ימין שמאל</strong><br />צבעים:
+                  לבן | שחור | 101 | טבעי | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="canva/kh.png" alt="ידית קיפ" />
+                <div>
+                  <strong>ידית קיפ</strong><br />צבעים: לבן | שחור | 101 | טבעי
+                  | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="canva/bnph.png" alt="ידית נירוסטה" />
+                <div><strong>ידית נירוסטה</strong></div>
+              </div>
+              <div class="handle-item">
+                <div>
+                  <strong>ידית מוסטת אלומיניום</strong><br />צבעים: לבן | שחור |
+                  101 | טבעי<br />ניתן לקבל בכל הצבעים לפי הזמנה
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('BlueDoubleWheels.png')"
+            style="background-image: url('תמונות/BlueDoubleWheels.png')"
           ></div>
           <div class="product-content">
             <h3>גלגלים</h3>
             <p>
-              מותאם לדגמים 7000, 7300, 4300 - כולל גלגלים מתכתיים ופלסטיים
-              איכותיים.
+              גלגלים לדגמי חלונות ודלתות 7000, 7300, 4300 – מתכתיים ופלסטיים
+              באיכות גבוהה.
             </p>
-            <div class="handles-gallery extra-gallery">
-              <img
-                src="BlackSingleWheels.png"
-                alt="גלגל נוסף 1"
-                height="80"
-              />
-              <img
-                src="SilverSingleWheels.png"
-                alt="גלגל נוסף 3"
-                height="80"
-              />
-            </div>
           </div>
         </div>
 
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('TransparentMesh.png')"
+            style="background-image: url('תמונות/TransparentMesh.png')"
           ></div>
           <div class="product-content">
             <h3>רשתות</h3>
@@ -475,7 +512,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('Corners.png')"
+            style="background-image: url('תמונות/Corners.png')"
           ></div>
           <div class="product-content">
             <h3>פינות</h3>
@@ -488,7 +525,7 @@
         <div class="product-card">
           <div
             class="product-image"
-            style="background-image: url('Locks.png')"
+            style="background-image: url('תמונות/Locks.png')"
           ></div>
           <div class="product-content">
             <h3>מנעולים</h3>
@@ -570,6 +607,22 @@
       } else {
         container.style.display = "none";
         btn.textContent = "הצג טבלת מברשות";
+      }
+    }
+
+    // Function to toggle handles list visibility and button text
+    function toggleHandles() {
+      const container = document.getElementById("handlesContainer");
+      const btn = document.getElementById("toggleHandlesBtn");
+      if (
+        container.style.display === "none" ||
+        container.style.display === ""
+      ) {
+        container.style.display = "block";
+        btn.textContent = "הסתר ידיות";
+      } else {
+        container.style.display = "none";
+        btn.textContent = "הצג ידיות";
       }
     }
   </script>
