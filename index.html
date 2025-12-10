@@ -477,6 +477,25 @@
           >עופר 050-6946650</a
         >
       </p>
+      <button
+        id="openLeadPopupBtn"
+        style="
+          margin-top: 1.5rem;
+          padding: 0.8rem 2rem;
+          background-color: var(--accent);
+          color: #1f1f1f;
+          border: none;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        "
+        onmouseover="this.style.transform='scale(1.05)'"
+        onmouseout="this.style.transform='scale(1)'">
+        לקבלת הצעת מחיר בקליק &larr;
+      </button>
     </header>
 
     <section class="container">
@@ -1579,10 +1598,13 @@
         });
       });
 
-      // Lead popup after 5 seconds
-      setTimeout(() => {
-        document.getElementById("leadPopup").style.display = "flex";
-      }, 5000);
+      // Open popup on CTA button click
+      const openLeadPopupBtn = document.getElementById("openLeadPopupBtn");
+      if (openLeadPopupBtn) {
+        openLeadPopupBtn.addEventListener("click", () => {
+          document.getElementById("leadPopup").style.display = "flex";
+        });
+      }
 
       document
         .getElementById("closeLeadPopup")
