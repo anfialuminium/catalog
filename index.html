@@ -957,6 +957,24 @@
             <p>
               פינות חיבור, פינות נעילה ונגדי נעילה לפרופילים ופתרונות אלומיניום.
             </p>
+            <button id="toggleCornersBtn">הסתר מחברי אלומיניום</button>
+            <div
+              class="handles-container"
+              id="cornersContainer"
+              style="display: block">
+              <div class="handle-item">
+                <img src="פינות/4300.png" alt="פינה 4300" />
+                <div>
+                  <strong>פינה 4300</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="פינות/7300.png" alt="פינה 7300" />
+                <div>
+                  <strong>פינה 7300</strong>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1480,6 +1498,7 @@
           document.getElementById("pullHandlesContainer"),
           document.getElementById("wheelsContainer"),
           document.getElementById("netsContainer"),
+          document.getElementById("cornersContainer"),
         ];
         const btn = document.getElementById("toggleAllBtn");
         const shouldHide = btn.textContent.trim() === "הסתר הכל";
@@ -1502,6 +1521,9 @@
         document.getElementById("toggleNetsBtn").textContent = shouldHide
           ? "הצג רשתות"
           : "הסתר רשתות";
+        document.getElementById("toggleCornersBtn").textContent = shouldHide
+          ? "הצג מחברי אלומיניום"
+          : "הסתר מחברי אלומיניום";
       }
       document
         .getElementById("toggleAllBtn")
@@ -1581,6 +1603,21 @@
         } else {
           container.style.display = "none";
           btn.textContent = "הצג רשתות";
+        }
+      }
+
+      function toggleCorners() {
+        const container = document.getElementById("cornersContainer");
+        const btn = document.getElementById("toggleCornersBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר מחברי אלומיניום";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג מחברי אלומיניום";
         }
       }
 
@@ -1689,6 +1726,9 @@
       document
         .getElementById("toggleNetsBtn")
         .addEventListener("click", toggleNets);
+      document
+        .getElementById("toggleCornersBtn")
+        .addEventListener("click", toggleCorners);
     </script>
   </body>
 </html>
