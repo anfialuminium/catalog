@@ -380,7 +380,10 @@
       #toggleNetsBtn:hover {
         background-color: #a8bf1a;
       }
-      #toggleWheelsBtn {
+      #toggleWheelsBtn:hover {
+        background-color: #a8bf1a;
+      }
+      #toggleCornersBtn {
         margin: 1rem auto 0;
         display: block;
         padding: 0.7rem 1.5rem;
@@ -393,21 +396,23 @@
         cursor: pointer;
         transition: background 0.3s ease;
       }
-      #toggleWheelsBtn:hover {
+      #toggleCornersBtn:hover {
         background-color: #a8bf1a;
       }
       @media print {
         #toggleBrushTableBtn,
         #toggleHandlesBtn,
         #toggleWheelsBtn,
-        #toggleNetsBtn {
+        #toggleNetsBtn,
+        #toggleCornersBtn {
           display: none !important;
         }
 
         #brushTableContainer,
         #handlesContainer,
         #wheelsContainer,
-        #netsContainer {
+        #netsContainer,
+        #cornersContainer {
           display: block !important;
         }
 
