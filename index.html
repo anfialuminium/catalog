@@ -412,12 +412,29 @@
       #toggleCornersBtn:hover {
         background-color: #a8bf1a;
       }
+      #toggleWindowLocksBtn {
+        margin: 1rem auto 0;
+        display: block;
+        padding: 0.7rem 1.5rem;
+        background-color: var(--accent);
+        color: #1f1f1f;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      #toggleWindowLocksBtn:hover {
+        background-color: #a8bf1a;
+      }
       @media print {
         #toggleBrushTableBtn,
         #toggleHandlesBtn,
         #toggleWheelsBtn,
         #toggleNetsBtn,
-        #toggleCornersBtn {
+        #toggleCornersBtn,
+        #toggleWindowLocksBtn {
           display: none !important;
         }
 
@@ -425,7 +442,8 @@
         #handlesContainer,
         #wheelsContainer,
         #netsContainer,
-        #cornersContainer {
+        #cornersContainer,
+        #windowLocksContainer {
           display: block !important;
         }
 
@@ -781,7 +799,7 @@
                 </div>
               </div>
               <div class="handle-item">
-                <img src="ידיות/kh.png" alt="ידית קיפ" />
+                <img src="ידיות/kh.png" alt="ידית קיפ" style="width: 75px;" />
                 <div>
                   <strong>ידית קיפ</strong><br />צבעים: לבן | שחור | 101 | טבעי
                   | קרם
@@ -990,6 +1008,36 @@
                 <img src="פינות/7300.png" alt="פינה 7300" />
                 <div>
                   <strong>פינה 7300</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('אביזרי נעילה לחלונות/gasket.png')"></div>
+          <div class="product-content">
+            <h3>אביזרי נעילה לחלונות</h3>
+            <p>
+              אביזרי נעילה איכותיים לחלונות למניעת פריצה ובטיחות מוגברת.
+            </p>
+            <button id="toggleWindowLocksBtn">הצג אביזרי נעילה לחלונות</button>
+            <div
+              class="handles-container"
+              id="windowLocksContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/fork.png" alt="מזלג נעילה לחלון" />
+                <div>
+                  <strong>מזלג נעילה לחלון</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/gasket.png" alt="נגד נעילה לחלון" />
+                <div>
+                  <strong>נגד נעילה לחלון</strong>
                 </div>
               </div>
             </div>
@@ -1517,6 +1565,7 @@
           document.getElementById("wheelsContainer"),
           document.getElementById("netsContainer"),
           document.getElementById("cornersContainer"),
+          document.getElementById("windowLocksContainer"),
         ];
         const btn = document.getElementById("toggleAllBtn");
         const shouldHide = btn.textContent.trim() === "הסתר הכל";
@@ -1542,6 +1591,9 @@
         document.getElementById("toggleCornersBtn").textContent = shouldHide
           ? "הצג מחברי אלומיניום"
           : "הסתר מחברי אלומיניום";
+        document.getElementById("toggleWindowLocksBtn").textContent = shouldHide
+          ? "הצג אביזרי נעילה לחלונות"
+          : "הסתר אביזרי נעילה לחלונות";
       }
       document
         .getElementById("toggleAllBtn")
@@ -1636,6 +1688,21 @@
         } else {
           container.style.display = "none";
           btn.textContent = "הצג מחברי אלומיניום";
+        }
+      }
+
+      function toggleWindowLocks() {
+        const container = document.getElementById("windowLocksContainer");
+        const btn = document.getElementById("toggleWindowLocksBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר אביזרי נעילה לחלונות";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג אביזרי נעילה לחלונות";
         }
       }
 
@@ -1747,6 +1814,9 @@
       document
         .getElementById("toggleCornersBtn")
         .addEventListener("click", toggleCorners);
+      document
+        .getElementById("toggleWindowLocksBtn")
+        .addEventListener("click", toggleWindowLocks);
     </script>
   </body>
 </html>
