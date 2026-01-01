@@ -1085,16 +1085,19 @@
       <div class="container">
         <h2>מדיניות פרטיות</h2>
         <div style="text-align: right; direction: rtl">
-          אנפי יבוא ושיווק בע״מ (להלן: "החברה") מתחייבת לשמור על פרטיות
-          לקוחותיה. נתוני הפניה שלך (שם, טלפון, תחום עניין, תיאור הבקשה) משמשים
-          אך ורק לחזרה אליך ולמתן הצעת מחיר/שירות. אנו לא נעביר את פרטיך לצד ג'
-          ללא הסכמתך, למעט אם יידרש על פי דין. החברה נוקטת באמצעים סבירים לאבטחת
-          המידע, אך אינה יכולה להבטיח חסינות מוחלטת. במידה ואינך מעוניין שנשמור
-          את פרטיך, ניתן לפנות אלינו במייל
+          אנפי יבוא ושיווק בע״מ (להלן: "החברה") רואה חשיבות רבה בשמירה על פרטיות לקוחותיה.
+          נתוני הפנייה שיימסרו על ידך (שם, טלפון, מייל, תחום עניין) משמשים אך ורק למטרת חזרה אליך, מענה לבקשתך ומתן הצעות מחיר.
+          <br><br>
+          <strong>מסירת המידע:</strong> מסירת המידע באתר נעשית מרצונך החופשי ואינך מחויב/ת על פי דין לעשות זאת. עם זאת, ללא מסירת הפרטים לא נוכל לחזור אליך.
+          <br><br>
+          <strong>שירותי צד ג' ואבטחה:</strong> המידע נשמר במערכות מאובטחות (כולל שירותי ענן של Google) המשמשות לניהול קשרי לקוחות. האתר משתמש ב-Google Analytics לצורך ניתוח סטטיסטי של הרגלי הגלישה ללא זיהוי אישי.
+          <br><br>
+          <strong>זכויותיך:</strong> איננו מעבירים את פרטיך לצד ג' למטרות שיווק ללא הסכמתך. בהתאם לחוק הגנת הפרטיות, הינך זכאי/ת לעיין במידע השמור עליך, לבקש לתקנו או למחוק אותו.
+          <br><br>
+          לכל שאלה או בקשת מחיקה, ניתן לפנות אלינו במייל:
           <a href="mailto:anfialuminium@gmail.com">anfialuminium@gmail.com</a>
-          או בטלפון
-          <a href="tel:0528366744">052-8366744</a>
-          ולבקש מחיקת הפרטים.
+          או בטלפון:
+          <a href="tel:0528366744">052-8366744</a>.
         </div>
       </div>
     </section>
@@ -1414,8 +1417,31 @@
               padding-right: 12px;
               margin: 6px 0 16px;
               border: 1px solid #ccc;
-              border-radius: 6px;
+            border-radius: 6px;
             "></textarea>
+
+          <div
+            style="
+              margin-bottom: 20px;
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              font-size: 0.88rem;
+              color: #444;
+              line-height: 1.4;
+            ">
+            <input
+              type="checkbox"
+              id="privacyConsent"
+              style="margin-top: 3px; cursor: pointer; transform: scale(1.2)" />
+            <label for="privacyConsent" style="cursor: pointer">
+              אני מאשר/ת שמסירת הפרטים נעשית מרצוני החופשי לצורך קבלת הצעה, וכי
+              קראתי את
+              <a href="#privacy" style="color: #2e5541; font-weight: 700"
+                >מדיניות הפרטיות</a
+              >.
+            </label>
+          </div>
 
           <button
             type="submit"
@@ -1774,16 +1800,21 @@
           message: messageInput.value,
         };
 
-        // Validation: require businessName, fullName, phone, category (email is optional)
+        // Validation: require businessName, fullName, phone, category, and privacyConsent
         if (
           !data.businessName.trim() ||
           !data.fullName.trim() ||
           !data.phone.trim() ||
-          !data.category.trim()
+          !data.category.trim() ||
+          !document.getElementById("privacyConsent").checked
         ) {
           const err = document.getElementById("formError");
-          err.innerText =
-            "אנא מלא שם עסק, שם מלא, טלפון ותחום עניין לפני השליחה.";
+          if (!document.getElementById("privacyConsent").checked) {
+            err.innerText = "יש לאשר את הסכמתך למדיניות הפרטיות להמשך.";
+          } else {
+            err.innerText =
+              "אנא מלא שם עסק, שם מלא, טלפון ותחום עניין לפני השליחה.";
+          }
           err.style.display = "block";
           err.style.background = "#ffebeb";
           err.style.color = "#b40000";
