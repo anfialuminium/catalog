@@ -351,6 +351,35 @@
         gap: 0 40px;
       }
 
+      .category-header {
+        grid-column: 1 / -1;
+        font-size: 17px;
+        font-weight: 700;
+        background-color: #f9f9f9;
+        padding: 4px 10px;
+        margin: 10px 0 5px 0;
+        border-right: 4px solid var(--primary-black);
+        text-align: right;
+        color: var(--primary-black);
+      }
+
+      .compact-grid {
+        gap: 0 20px !important;
+      }
+
+      .compact-grid .product-item {
+        padding: 4px 0 !important;
+      }
+
+      .compact-grid .product-item-image {
+        width: 100px !important;
+        height: 100px !important;
+      }
+
+      .compact-grid .product-item-name {
+        font-size: 15px !important;
+      }
+
       .product-items-grid .product-item {
         border-bottom: 1px solid #eee;
       }
@@ -594,7 +623,7 @@
     </div>
 
     <!-- Page 3: Wheels -->
-    <div class="page content-page">
+    <div class="page content-page compact-page">
       <div class="page-header">
         <h1 class="page-title">גלגלים למערכות הזזה</h1>
         <p class="page-subtitle">גלגלים איכותיים לדגמי 9000, 7000, 7300, 4300</p>
@@ -607,7 +636,9 @@
           מגוון רחב של גלגלים איכותיים לחלונות ודלתות הזזה. זמינים בגרסאות בודדות וכפולות, פלסטיק ומתכת.
         </p>
 
-        <div class="product-items-grid">
+        <div class="product-items-grid compact-grid">
+          <div class="category-header">סדרה 7000 - גלגלים למערכות הזזה</div>
+          
           <div class="product-item">
             <div class="product-item-image">
               <img src="גלגלים/7000ws.png" alt="גלגל 7000 פלסטיק" />
@@ -644,6 +675,8 @@
             </div>
           </div>
 
+          <div class="category-header">סדרה 7300 - גלגלים למערכות הזזה</div>
+
           <div class="product-item">
             <div class="product-item-image">
               <img src="גלגלים/7300wsw.png" alt="גלגל 7300 פלסטיק" />
@@ -671,6 +704,8 @@
             </div>
           </div>
 
+          <div class="category-header">סדרה 9000 - גלגלי משקל כבד</div>
+
           <div class="product-item">
             <div class="product-item-image">
               <img src="גלגלים/wdw9000.png" alt="גלגל 9000" />
@@ -679,6 +714,8 @@
               <div class="product-item-name">גלגל 9000 מתכת כפול משקל כבד</div>
             </div>
           </div>
+
+          <div class="category-header">פתרונות לרשתות ומוצרים משלימים</div>
 
           <div class="product-item">
             <div class="product-item-image">
