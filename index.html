@@ -434,7 +434,9 @@
         #toggleWheelsBtn,
         #toggleNetsBtn,
         #toggleCornersBtn,
-        #toggleWindowLocksBtn {
+        #toggleWindowLocksBtn,
+        #downloadPdfBtn,
+        #toggleAllBtn {
           display: none !important;
         }
 
@@ -535,6 +537,39 @@
     </header>
 
     <section class="container">
+      <a
+        id="downloadPdfBtn"
+        href="https://drive.google.com/file/d/1MWyHTxGoRkjiZEWUcZYYUOWXMZ_QVuwm/view?usp=sharing"
+        target="_blank"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 2.5rem;
+          padding: 1rem 2.5rem;
+          background-color: white;
+          color: #d32f2f;
+          border: 2px solid #d32f2f;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(211, 47, 47, 0.15);
+        "
+        onmouseover="this.style.backgroundColor='#d32f2f'; this.style.color='white'; this.style.boxShadow='0 6px 20px rgba(211, 47, 47, 0.3)'; this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.backgroundColor='white'; this.style.color='#d32f2f'; this.style.boxShadow='0 4px 15px rgba(211, 47, 47, 0.15)'; this.style.transform='translateY(0)'">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          style="flex-shrink: 0">
+          <path
+            d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3.5h-1.5V9h1.5v1.5h-1.5V12h-1.5V7h3v1zm-8 3H14V8.5h1v3zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z" />
+        </svg>
+        להורדת הקטלוג
+      </a>
       <h2>קטלוג מוצרים</h2>
       <button
         id="toggleAllBtn"
