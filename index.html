@@ -428,6 +428,22 @@
       #toggleWindowLocksBtn:hover {
         background-color: #a8bf1a;
       }
+      #toggleLocksBtn {
+        margin: 1rem auto 0;
+        display: block;
+        padding: 0.7rem 1.5rem;
+        background-color: var(--accent);
+        color: #1f1f1f;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      #toggleLocksBtn:hover {
+        background-color: #a8bf1a;
+      }
       @media print {
         #toggleBrushTableBtn,
         #toggleHandlesBtn,
@@ -435,6 +451,7 @@
         #toggleNetsBtn,
         #toggleCornersBtn,
         #toggleWindowLocksBtn,
+        #toggleLocksBtn,
         #downloadPdfBtn,
         #toggleAllBtn {
           display: none !important;
@@ -1088,6 +1105,12 @@
                   <strong>נגד נעילה לחלון</strong>
                 </div>
               </div>
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/drykeep-window-mechanism.png" alt="מנגנון דריי קיפ אלמא" />
+                <div>
+                  <strong>מנגנון דריי קיפ אלמא</strong>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1097,11 +1120,23 @@
             class="product-image"
             style="background-image: url('מנעולים/Locks.png')"></div>
           <div class="product-content">
-            <h3>מנעולים</h3>
+            <h3>מנעולים חשמליים</h3>
             <p>
-              מנעולים רגילים, מתכווננים ונעילה משולשת - עמידים וידידותיים
-              לשימוש.
+              מנעולים חשמליים איכותיים ועמידים - פתרון מתקדם ובטוח למערכות אלומיניום.
             </p>
+            <button id="toggleLocksBtn">הצג מנעולים חשמליים</button>
+            <div
+              class="handles-container"
+              id="locksContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="מנעולים/manul1.png" alt="מנעול חשמלי" />
+                <div>
+                  <strong>מנעול חשמלי</strong><br />
+                  מנעול חשמלי איכותי וחזק לנעילה בטוחה ואמינה
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1423,14 +1458,14 @@
             <button
               type="button"
               class="catBtn"
-              data-value="מנעולים"
+              data-value="מנעולים חשמליים"
               style="
                 padding: 10px 14px;
                 border: 1px solid #ccc;
                 border-radius: 6px;
                 cursor: pointer;
               ">
-              מנעולים
+              מנעולים חשמליים
             </button>
             <button
               type="button"
@@ -1652,6 +1687,7 @@
           document.getElementById("netsContainer"),
           document.getElementById("cornersContainer"),
           document.getElementById("windowLocksContainer"),
+          document.getElementById("locksContainer"),
         ];
         const btn = document.getElementById("toggleAllBtn");
         const shouldHide = btn.textContent.trim() === "הסתר הכל";
@@ -1680,6 +1716,9 @@
         document.getElementById("toggleWindowLocksBtn").textContent = shouldHide
           ? "הצג אביזרי נעילה לחלונות"
           : "הסתר אביזרי נעילה לחלונות";
+        document.getElementById("toggleLocksBtn").textContent = shouldHide
+          ? "הצג מנעולים חשמליים"
+          : "הסתר מנעולים חשמליים";
       }
       document
         .getElementById("toggleAllBtn")
@@ -1789,6 +1828,21 @@
         } else {
           container.style.display = "none";
           btn.textContent = "הצג אביזרי נעילה לחלונות";
+        }
+      }
+
+      function toggleLocks() {
+        const container = document.getElementById("locksContainer");
+        const btn = document.getElementById("toggleLocksBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר מנעולים חשמליים";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג מנעולים חשמליים";
         }
       }
 
@@ -1908,6 +1962,9 @@
       document
         .getElementById("toggleWindowLocksBtn")
         .addEventListener("click", toggleWindowLocks);
+      document
+        .getElementById("toggleLocksBtn")
+        .addEventListener("click", toggleLocks);
     </script>
   </body>
 </html>
