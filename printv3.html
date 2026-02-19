@@ -466,46 +466,47 @@
 
       /* Color Palette Styles */
       .color-palette {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 20px 0;
+        text-align: center;
+        margin: 25px 0;
+        display: block;
+        width: 100%;
       }
       .color-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 80px;
+        display: inline-block;
+        vertical-align: top;
+        width: 85px;
+        margin: 0 5px;
+        text-align: center;
       }
       .color-box {
-        background-color: #d0d0d0 !important;
+        background-color: #f0f0f0 !important;
         width: 75px;
         height: 75px;
-        border-radius: 12px;
-        display: flex;
+        border-radius: 15px !important;
+        margin: 0 auto 10px auto;
+        display: flex !important;
         justify-content: center;
         align-items: center;
-        margin-bottom: 8px;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        overflow: hidden;
+        position: relative;
+        isolation: isolate;
       }
       .color-circle {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        border: 3px solid #ffffff;
-        background-clip: padding-box;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        width: 48px;
+        height: 48px;
+        border-radius: 50% !important;
+        border: 3px solid #ffffff !important;
+        box-sizing: border-box;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
       .color-label {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
         color: #333;
-        margin-top: 2px;
-        text-align: center;
+        display: block;
+        width: 100%;
       }
     </style>
   </head>
@@ -927,7 +928,7 @@
           <table class="specs-table" style="margin-top: 25px;">
             <thead>
               <tr>
-                <th colspan="2">מידות זמינות לידיות משיכה (מ"מ)</th>
+                <th colspan="2">מידות זמינות לידיות משיכה</th>
               </tr>
               <tr>
                 <th>אורך כללי (ס"מ)</th>
