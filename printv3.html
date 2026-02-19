@@ -463,6 +463,36 @@
         font-size: 12px;
         opacity: 0.6;
       }
+
+      /* Color Palette Styles */
+      .color-palette {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin: 15px 0 25px 0;
+        padding: 15px;
+        background: #fafafa;
+        border-radius: 10px;
+        border: 1px solid #eee;
+      }
+      .color-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .color-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      }
+      .color-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary-black);
+      }
     </style>
   </head>
   <body>
@@ -475,7 +505,6 @@
         קטלוג פתרונות פרזול,<br />
         איטום ואלומיניום
       </div>
-      <div class="cover-year">מעל 60 שנים של ניסיון</div>
     </div>
 
     <!-- Page 2: Brushes -->
@@ -748,8 +777,31 @@
         <div class="product-section" style="display: block;">
           <h2 class="product-name" style="text-align: center;">ידיות לדלתות ולחלונות</h2>
           <p class="product-description" style="text-align: center;">
-            מגוון רחב של ידיות איכותיות במספר דגמים וצבעים: לבן, שחור, 101, טבעי וקרם.
+            מגוון רחב של ידיות איכותיות במספר דגמים וצבעים.
           </p>
+
+          <div class="color-palette">
+            <div class="color-item">
+              <div class="color-circle" style="background-color: #ffffff; border: 1px solid #ddd;"></div>
+              <div class="color-label">לבן</div>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background-color: #000000;"></div>
+              <div class="color-label">שחור</div>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background-color: #a89b65;"></div>
+              <div class="color-label">101</div>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background-color: #b0b0b0;"></div>
+              <div class="color-label">טבעי</div>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background-color: #f5f5dc;"></div>
+              <div class="color-label">קרם</div>
+            </div>
+          </div>
 
           <div class="product-items-grid">
             <div class="product-item">
@@ -816,8 +868,7 @@
                 <img src="ידיות בר משיכה/snph.png" alt="ידית משיכה נירוסטה בודדת" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה בודדת - נירוסטה</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה בודדת<br />נירוסטה</div>
               </div>
             </div>
 
@@ -826,31 +877,58 @@
                 <img src="ידיות בר משיכה/sbph.png" alt="ידית משיכה שחורה בודדת" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה בודדת - שחור</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה בודדת<br />שחור</div>
               </div>
             </div>
 
             <div class="product-item">
-              <div class="product-item-image">
+              <div class="product-item-image" style="width: 172px; height: 172px;">
                 <img src="ידיות בר משיכה/dnph.png" alt="ידית משיכה נירוסטה כפולה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה כפולה - נירוסטה</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה כפולה<br />נירוסטה</div>
               </div>
             </div>
 
             <div class="product-item">
-              <div class="product-item-image">
+              <div class="product-item-image" style="width: 172px; height: 172px;">
                 <img src="ידיות בר משיכה/dbph.png" alt="ידית משיכה שחורה כפולה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה כפולה - שחור</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה כפולה<br />שחור</div>
               </div>
             </div>
           </div>
+
+          <table class="specs-table" style="margin-top: 25px;">
+            <thead>
+              <tr>
+                <th colspan="2">מידות זמינות לידיות משיכה (מ"מ)</th>
+              </tr>
+              <tr>
+                <th>אורך כללי (ס"מ)</th>
+                <th>מרכז חורים (ס"מ)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>50</td>
+                <td>35</td>
+              </tr>
+              <tr>
+                <td>70</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>100</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>120</td>
+                <td>90</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -876,7 +954,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת פיברגלס</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
               </div>
             </div>
 
@@ -886,7 +963,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת שקופה</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
               </div>
             </div>
 
@@ -896,7 +972,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת שקופה פוליפרופילן</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
               </div>
             </div>
 
@@ -906,7 +981,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת בעלי חיים</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
               </div>
             </div>
 
@@ -916,10 +990,35 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת גלילה</div>
-                <div class="product-item-desc">חיתוך לפי מידה<br />עד לגובה של 2.50 מטר</div>
               </div>
             </div>
           </div>
+
+          <table class="specs-table" style="margin-top: 25px;">
+            <thead>
+              <tr>
+                <th colspan="2">מידות זמינות לרשתות (רוחב בגליל - מטר)</th>
+              </tr>
+              <tr>
+                <th style="width: 35%;">סוג הרשת</th>
+                <th>מידות זמינות (רוחב במטרים)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>רשת פיברגלס / שקופה</td>
+                <td>0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</td>
+              </tr>
+              <tr>
+                <td>פוליפרופילן / בעלי חיים</td>
+                <td>1.00, 1.20, 1.50, 2.00</td>
+              </tr>
+              <tr>
+                <td>רשת גלילה</td>
+                <td>חיתוך לפי מידה (עד גובה 2.50 מ')</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -970,7 +1069,7 @@
 
             <div class="product-items-list">
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/fork.png" alt="מזלג נעילה" />
                 </div>
                 <div class="product-item-content">
@@ -980,7 +1079,7 @@
               </div>
 
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/gasket.png" alt="נגד נעילה" />
                 </div>
                 <div class="product-item-content">
@@ -990,7 +1089,7 @@
               </div>
 
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/drykeep-window-mechanism.png" alt="מנגנון דריי קיפ אלמא" />
                 </div>
                 <div class="product-item-content">
@@ -1000,7 +1099,7 @@
               </div>
 
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/additional-window-lock-point.png" alt="נקודת נעילה נוספת לחלון" />
                 </div>
                 <div class="product-item-content">
