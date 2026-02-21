@@ -94,34 +94,152 @@
         overflow: hidden;
       }
 
-      /* Cover Page */
+      /* Cover Page Refined */
       .cover-page {
+        padding: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         text-align: center;
-        padding: 45mm 15mm;
+        background: #ffffff;
+        color: #1a1a1a;
+      }
+
+      .cover-top {
+        width: 100%;
+        padding: 15mm 15mm 5mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .cover-logo img {
-        max-width: 300px;
+        max-width: 220px;
         height: auto;
-        margin-bottom: 80px;
+        margin-bottom: 8mm;
       }
 
       .cover-title {
-        font-size: 32px;
-        font-weight: 600;
-        color: var(--primary-black);
-        margin-bottom: 15px;
-        line-height: 1.4;
+        font-size: 42px;
+        font-weight: 800;
+        color: #1c2a4d;
+        margin-bottom: 3mm;
+        line-height: 1.1;
       }
 
-      .cover-year {
+      .cover-subtitle {
+        font-size: 22px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 8mm;
+      }
+
+      .cover-badge {
+        background: #ffcf33;
+        color: #1a1a1a;
+        padding: 8px 35px;
+        font-size: 22px;
+        font-weight: 800;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin-bottom: -20px;
+        z-index: 20;
+        position: relative;
+        transform: translateY(10px);
+      }
+
+      .cover-main {
+        width: 100%;
+        height: 120mm;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15mm;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .cover-features {
+        background: transparent;
+        padding: 12px 20px;
+        border-radius: 4px;
+        text-align: right;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-bottom: 12px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #1c2a4d;
+        background: transparent !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .feature-item::after {
+        content: '✓';
+        color: #2c3e50;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .cover-strip {
+        width: 100%;
+        background: #1c2a4d;
+        color: #ffffff;
+        padding: 10px 0;
         font-size: 20px;
-        color: #666;
-        margin-bottom: 80px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+
+      .cover-footer {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+      }
+
+      .footer-section.qr-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 10mm;
+      }
+
+      .footer-product-img {
+        max-height: 80px;
+        max-width: 90%;
+        object-fit: contain;
+        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+      }
+
+      .qr-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .qr-img {
+        width: 85px;
+        height: 85px;
+        border: 1px solid #eee;
+        padding: 4px;
+        border-radius: 4px;
+      }
+
+      .footer-product-img.large-handle {
+        max-height: 100px;
       }
 
 
@@ -372,8 +490,8 @@
       }
 
       .compact-grid .product-item-image {
-        width: 115px !important;
-        height: 115px !important;
+        width: 160px !important;
+        height: 160px !important;
       }
 
       .compact-grid .product-item-name {
@@ -463,19 +581,88 @@
         font-size: 12px;
         opacity: 0.6;
       }
+
+      /* Color Palette Styles */
+      .color-palette {
+        text-align: center;
+        margin: 25px 0;
+        display: block;
+        width: 100%;
+      }
+      .color-item {
+        display: inline-block;
+        vertical-align: top;
+        width: 85px;
+        margin: 0 5px;
+        text-align: center;
+      }
+      .color-box {
+        background-color: #f0f0f0 !important;
+        width: 75px;
+        height: 75px;
+        border-radius: 15px !important;
+        margin: 0 auto 10px auto;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        position: relative;
+        isolation: isolate;
+      }
+      .color-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50% !important;
+        border: 3px solid #ffffff !important;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .color-label {
+        font-size: 15px;
+        font-weight: 700;
+        color: #333;
+        display: block;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
     <!-- Cover Page -->
+    <!-- Page 1: Refined Cover Page -->
     <div class="page cover-page">
-      <div class="cover-logo">
-        <img src="logo.png" alt="אנפי יבוא ושיווק בע״מ" />
+      <div class="cover-top">
+        <div class="cover-logo">
+          <img src="logo.png" alt="אנפי יבוא ושיווק בע״מ" />
+        </div>
+        <div class="cover-title">
+          קטלוג פתרונות פרזול,<br />
+          איטום ואלומיניום
+        </div>
       </div>
-      <div class="cover-title">
-        קטלוג פתרונות פרזול,<br />
-        איטום ואלומיניום
+
+      <div class="cover-main">
+        <div class="cover-features">
+          <div class="feature-item">פתרונות זמינים במלאי</div>
+          <div class="feature-item">שירות מהיר ומקצועי</div>
+          <div class="feature-item">משלוחים לצפון עד עכו</div>
+          <div class="feature-item">משלוחים לדרום עד באר שבע</div>
+        </div>
       </div>
-      <div class="cover-year">מעל 60 שנים של ניסיון</div>
+
+      <div class="cover-footer">
+        <div class="footer-section qr-section">
+          <div class="qr-container">
+            <img src="qr_code.png" class="qr-img" alt="QR Code" />
+            <div class="qr-label">למידע נוסף</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-strip">
+        מברשות | גלגלים | ידיות | רשתות | פרזול | מנעולים
+      </div>
     </div>
 
     <!-- Page 2: Brushes -->
@@ -569,7 +756,7 @@
               </tr>
               <tr>
                 <td>סנפיר שווה (7300)</td>
-                <td><span style="direction: ltr; unicode-bidi: bidi-override">6.00 - 4.7 =</span></td>
+                <td><span style="direction: ltr; unicode-bidi: bidi-override">4.7 - 6.00 =</span></td>
                 <td>4 × 450</td>
               </tr>
               <tr>
@@ -748,8 +935,41 @@
         <div class="product-section" style="display: block;">
           <h2 class="product-name" style="text-align: center;">ידיות לדלתות ולחלונות</h2>
           <p class="product-description" style="text-align: center;">
-            מגוון רחב של ידיות איכותיות במספר דגמים וצבעים: לבן, שחור, 101, טבעי וקרם.
+            מגוון רחב של ידיות איכותיות במספר דגמים וצבעים.
           </p>
+
+          <div class="color-palette">
+            <div class="color-item">
+              <div class="color-box">
+                <div class="color-circle" style="background-color: #ffffff; border: 1px solid #ddd;"></div>
+              </div>
+              <div class="color-label">לבן</div>
+            </div>
+            <div class="color-item">
+              <div class="color-box">
+                <div class="color-circle" style="background-color: #000000;"></div>
+              </div>
+              <div class="color-label">שחור</div>
+            </div>
+            <div class="color-item">
+              <div class="color-box">
+                <div class="color-circle" style="background-color: #a89b65;"></div>
+              </div>
+              <div class="color-label">101</div>
+            </div>
+            <div class="color-item">
+              <div class="color-box">
+                <div class="color-circle" style="background-color: #b0b0b0;"></div>
+              </div>
+              <div class="color-label">טבעי</div>
+            </div>
+            <div class="color-item">
+              <div class="color-box">
+                <div class="color-circle" style="background-color: #f5f5dc;"></div>
+              </div>
+              <div class="color-label">קרם</div>
+            </div>
+          </div>
 
           <div class="product-items-grid">
             <div class="product-item">
@@ -816,8 +1036,7 @@
                 <img src="ידיות בר משיכה/snph.png" alt="ידית משיכה נירוסטה בודדת" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה בודדת - נירוסטה</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה בודדת<br />נירוסטה</div>
               </div>
             </div>
 
@@ -826,31 +1045,58 @@
                 <img src="ידיות בר משיכה/sbph.png" alt="ידית משיכה שחורה בודדת" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה בודדת - שחור</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה בודדת<br />שחור</div>
               </div>
             </div>
 
             <div class="product-item">
-              <div class="product-item-image">
+              <div class="product-item-image" style="width: 172px; height: 172px;">
                 <img src="ידיות בר משיכה/dnph.png" alt="ידית משיכה נירוסטה כפולה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה כפולה - נירוסטה</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה כפולה<br />נירוסטה</div>
               </div>
             </div>
 
             <div class="product-item">
-              <div class="product-item-image">
+              <div class="product-item-image" style="width: 172px; height: 172px;">
                 <img src="ידיות בר משיכה/dbph.png" alt="ידית משיכה שחורה כפולה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה כפולה - שחור</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+                <div class="product-item-name">ידית משיכה כפולה<br />שחור</div>
               </div>
             </div>
           </div>
+
+          <table class="specs-table" style="margin-top: 25px;">
+            <thead>
+              <tr>
+                <th colspan="2">מידות זמינות לידיות משיכה</th>
+              </tr>
+              <tr>
+                <th>אורך כללי (ס"מ)</th>
+                <th>מרכז חורים (ס"מ)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>50</td>
+                <td>35</td>
+              </tr>
+              <tr>
+                <td>70</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>100</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>120</td>
+                <td>90</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -876,7 +1122,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת פיברגלס</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
               </div>
             </div>
 
@@ -886,7 +1131,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת שקופה</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
               </div>
             </div>
 
@@ -896,7 +1140,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת שקופה פוליפרופילן</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
               </div>
             </div>
 
@@ -906,7 +1149,6 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת בעלי חיים</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
               </div>
             </div>
 
@@ -916,10 +1158,35 @@
               </div>
               <div class="product-item-content">
                 <div class="product-item-name">רשת גלילה</div>
-                <div class="product-item-desc">חיתוך לפי מידה<br />עד לגובה של 2.50 מטר</div>
               </div>
             </div>
           </div>
+
+          <table class="specs-table" style="margin-top: 25px;">
+            <thead>
+              <tr>
+                <th colspan="2">מידות זמינות לרשתות</th>
+              </tr>
+              <tr>
+                <th style="width: 35%;">סוג הרשת</th>
+                <th>מידות זמינות (רוחב במטרים)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>רשת פיברגלס / שקופה</td>
+                <td>0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</td>
+              </tr>
+              <tr>
+                <td>פוליפרופילן / בעלי חיים</td>
+                <td>1.00, 1.20, 1.50, 2.00</td>
+              </tr>
+              <tr>
+                <td>רשת גלילה</td>
+                <td>חיתוך לפי מידה (עד גובה 2.50 מ')</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -959,6 +1226,16 @@
                   <div class="product-item-desc">מחבר איכותי לדגם 7300</div>
                 </div>
               </div>
+
+              <div class="product-item">
+                <div class="product-item-image">
+                  <img src="פינות/7300Tris_1.png" alt="פינה 7300 תריס" />
+                </div>
+                <div class="product-item-content">
+                  <div class="product-item-name">פינה 7300 תריס</div>
+                  <div class="product-item-desc">מחבר ייעודי לדגם 7300 תריס</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -970,7 +1247,7 @@
 
             <div class="product-items-list">
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/fork.png" alt="מזלג נעילה" />
                 </div>
                 <div class="product-item-content">
@@ -980,7 +1257,7 @@
               </div>
 
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/gasket.png" alt="נגד נעילה" />
                 </div>
                 <div class="product-item-content">
@@ -990,8 +1267,8 @@
               </div>
 
               <div class="product-item">
-                <div class="product-item-image">
-                  <img src="אביזרי נעילה לחלונות/no-bg/drykeep-window-mechanism.png" alt="מנגנון דריי קיפ אלמא" />
+                <div class="product-item-image" style="width: 110px; height: 110px; overflow: visible;">
+                  <img src="אביזרי נעילה לחלונות/no-bg/drykeep-window-mechanism.png" alt="מנגנון דריי קיפ אלמא" style="transform: scale(1.25); transform-origin: center;" />
                 </div>
                 <div class="product-item-content">
                   <div class="product-item-name">מנגנון דריי קיפ אלמא</div>
@@ -1000,7 +1277,7 @@
               </div>
 
               <div class="product-item">
-                <div class="product-item-image">
+                <div class="product-item-image" style="width: 110px; height: 110px;">
                   <img src="אביזרי נעילה לחלונות/no-bg/additional-window-lock-point.png" alt="נקודת נעילה נוספת לחלון" />
                 </div>
                 <div class="product-item-content">
@@ -1051,7 +1328,7 @@
         </a>
       </div>
 
-      <div class="copyright">© כל הזכויות שמורות לאנפי יבוא ושיווק בע"מ | מעל 60 שנים של ניסיון</div>
+
     </div>
   </body>
 </html>
