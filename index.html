@@ -291,7 +291,15 @@
         border: 1px solid #ddd !important;
         font-size: 0.9rem !important;
       }
-      #toggleBrushTableBtn {
+      #toggleBrushTableBtn,
+      #toggleHandlesBtn,
+      #togglePullHandlesBtn,
+      #toggleNetsBtn,
+      #toggleWheelsBtn,
+      #toggleBtn,
+      #toggleWindowLocksBtn,
+      #toggleLocksBtn,
+      #toggleCornersBtn {
         margin: 1rem auto 0;
         display: block;
         padding: 0.7rem 1.5rem;
@@ -304,9 +312,18 @@
         cursor: pointer;
         transition: background 0.3s ease;
       }
-      #toggleBrushTableBtn:hover {
+      #toggleBrushTableBtn:hover,
+      #toggleHandlesBtn:hover,
+      #togglePullHandlesBtn:hover,
+      #toggleNetsBtn:hover,
+      #toggleWheelsBtn:hover,
+      #toggleBtn:hover,
+      #toggleWindowLocksBtn:hover,
+      #toggleLocksBtn:hover,
+      #toggleCornersBtn:hover {
         background-color: #a8bf1a;
       }
+
       .handles-container {
         max-width: 600px;
         margin: 1.5rem auto 0;
@@ -332,126 +349,17 @@
         margin-left: 20px;
         border-radius: 6px;
       }
-      #toggleHandlesBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #toggleHandlesBtn:hover {
-        background-color: #a8bf1a;
-      }
-      #togglePullHandlesBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #togglePullHandlesBtn:hover {
-        background-color: #a8bf1a;
-      }
-      #toggleNetsBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #toggleNetsBtn:hover {
-        background-color: #a8bf1a;
-      }
-      #toggleWheelsBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #toggleWheelsBtn:hover {
-        background-color: #a8bf1a;
-      }
-      #toggleBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #toggleBtn:hover {
-        background-color: #a8bf1a;
-      }
-      #toggleWindowLocksBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #toggleWindowLocksBtn:hover {
-        background-color: #a8bf1a;
-      }
-      #toggleLocksBtn {
-        margin: 1rem auto 0;
-        display: block;
-        padding: 0.7rem 1.5rem;
-        background-color: var(--accent);
-        color: #1f1f1f;
-        border: none;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      #toggleLocksBtn:hover {
-        background-color: #a8bf1a;
-      }
+
       @media print {
         #toggleBrushTableBtn,
         #toggleHandlesBtn,
+        #togglePullHandlesBtn,
         #toggleWheelsBtn,
         #toggleNetsBtn,
         #toggleBtn,
         #toggleWindowLocksBtn,
         #toggleLocksBtn,
+        #toggleCornersBtn,
         #downloadPdfBtn,
         #toggleAllBtn {
           display: none !important;
@@ -459,10 +367,12 @@
 
         #brushTableContainer,
         #handlesContainer,
+        #pullHandlesContainer,
         #wheelsContainer,
         #netsContainer,
-        #Container,
-        #windowLocksContainer {
+        #cornersContainer,
+        #windowLocksContainer,
+        #locksContainer {
           display: block !important;
         }
 
