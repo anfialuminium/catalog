@@ -1464,7 +1464,10 @@
             <label for="privacyConsent" style="cursor: pointer">
               אני מאשר/ת שמסירת הפרטים נעשית מרצוני החופשי לצורך קבלת הצעה, וכי
               קראתי את
-              <a href="#privacy" style="color: #2e5541; font-weight: 700"
+              <a
+                href="#privacy"
+                onclick="document.getElementById('leadPopup').style.display = 'none';"
+                style="color: #2e5541; font-weight: 700"
                 >מדיניות הפרטיות</a
               >.
             </label>
@@ -1542,9 +1545,9 @@
       // Hash navigation for privacy/accessibility
       function handleHashSections() {
         var hash = location.hash;
-        var catalog = document.querySelector(".container");
         var privacy = document.getElementById("privacy");
         var accessibility = document.getElementById("accessibility");
+        var leadPopup = document.getElementById("leadPopup");
         // main catalog section is the first .container inside a section
         var mainCatalogSection = document.querySelector("section.container");
         if (!privacy || !accessibility || !mainCatalogSection) return;
@@ -1557,11 +1560,13 @@
           privacy.style.display = "block";
           accessibility.style.display = "none";
           mainCatalogSection.style.display = "none";
+          if (leadPopup) leadPopup.style.display = "none";
           window.scrollTo(0, 0);
         } else if (hash === "#accessibility") {
           accessibility.style.display = "block";
           privacy.style.display = "none";
           mainCatalogSection.style.display = "none";
+          if (leadPopup) leadPopup.style.display = "none";
           window.scrollTo(0, 0);
         }
       }
