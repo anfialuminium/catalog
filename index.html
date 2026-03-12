@@ -465,6 +465,33 @@
 
     <section class="container">
       <a
+        id="blogBtn"
+        href="../../blog/index.html"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 1rem;
+          padding: 1rem 2.5rem;
+          background-color: white;
+          color: #1e40af;
+          border: 2px solid #1e40af;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(30, 64, 175, 0.15);
+        "
+        onmouseover="this.style.backgroundColor='#1e40af'; this.style.color='white'; this.style.boxShadow='0 6px 20px rgba(30, 64, 175, 0.3)'; this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.backgroundColor='white'; this.style.color='#1e40af'; this.style.boxShadow='0 4px 15px rgba(30, 64, 175, 0.15)'; this.style.transform='translateY(0)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0">
+           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v12h16V6H4zm2 3h12v2H6V9zm0 4h12v2H6v-2z"/>
+        </svg>
+        לבלוג של אנפי
+      </a>
+      <br />
+      <a
         id="downloadPdfBtn"
         href="print_assets/Catalog_Anfi.pdf"
         download="אנפי - קטלוג מוצרים.pdf"
