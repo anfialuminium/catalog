@@ -463,13 +463,133 @@
         font-size: 12px;
         opacity: 0.6;
       }
+
+      .product-price { font-size: 16px; font-weight: 700; color: #2c7a7b; margin-top: 5px; text-align: right; border-top: 1px solid #eee; padding-top: 5px; }
+      .price-val { padding: 2px 4px; border-radius: 4px; transition: all 0.2s; display: inline-block; min-width: 40px; }
+      [contenteditable="true"] { cursor: text; transition: all 0.2s; border-radius: 4px; padding: 0 2px; outline: none; }
+      body.edit-mode [contenteditable="true"] { background-color: #fffde7; outline: 2px solid #fff59d; }
+
+      /* Product Hiding Rules */
+      body:not(.edit-mode) .product-hidden { display: none !important; }
+      @media print { .product-hidden { display: none !important; } }
+      body.edit-mode .product-hidden { opacity: 0.35; filter: grayscale(1); }
+      /* End Product Hiding Rules */
+
+      .admin-controls { position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; gap: 8px; border: 1px solid #e0e0e0; direction: ltr; }
+      .admin-btn { padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+      .btn-save { background: #4caf50; color: white; }
+      .btn-edit { background: #2196f3; color: white; }
+      .btn-print { background: #607d8b; color: white; }
+      .edit-mode .btn-edit { background: #f44336; }
+      @media print { .admin-controls { display: none !important; } .page { box-shadow: none !important; margin: 0 !important; width: 100% !important; border: none !important; } body.edit-mode [contenteditable] { background: transparent !important; outline: none !important; } .price-hidden { display: none !important; } }
+      .price-hidden { display: none !important; }
+      body.edit-mode .price-hidden { display: inline-block !important; opacity: 0.35; text-decoration: line-through; filter: grayscale(1); }
+      body.edit-mode .product-price.price-hidden { display: block !important; }
+      body.edit-mode td.price-hidden { display: table-cell !important; opacity: 0.35; text-decoration: line-through; filter: grayscale(1); }
+      body.edit-mode .price-val, body.edit-mode .product-price, body.edit-mode td:has(.price-val) { cursor: pointer; }
+      
+      .symbol-hidden { display: none !important; }
+      body.edit-mode .symbol-hidden { display: inline-block !important; opacity: 0.35; text-decoration: line-through; filter: grayscale(1); }
+      
+      .rtf-toolbar {
+        position: absolute;
+        display: none;
+        background: #333;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 10001;
+        gap: 4px;
+        align-items: center;
+      }
+      .rtf-toolbar::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+      }
+      .rtf-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+      }
+      .rtf-btn:hover { background: rgba(255,255,255,0.2); }
+      .rtf-color-picker {
+        border: none; padding: 0; width: 22px; height: 22px; cursor: pointer; border-radius: 11px; overflow: hidden; appearance: none; -webkit-appearance: none; background: transparent;
+      }
+      .rtf-color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+      .rtf-color-picker::-webkit-color-swatch { border: 1px solid rgba(255,255,255,0.5); border-radius: 50%; }
+      .rtf-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.2); margin: 0 4px; }
+      
+      /* Product Hiding Rules */
+      body:not(.edit-mode) .product-hidden { display: none !important; }
+      @media print { .product-hidden { display: none !important; } }
+      body.edit-mode .product-hidden { opacity: 0.35; filter: grayscale(1); }
+      /* End Product Hiding Rules */
+
+      /* Dedicated Buttons in Edit Mode */
+      .global-price-controls {
+        display: none;
+        position: absolute;
+        background: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        z-index: 10000;
+        gap: 6px;
+      }
+      body.edit-mode .product-price, body.edit-mode td:has(.price-val) {
+        position: relative;
+        overflow: visible !important;
+      }
+      .ctrl-btn {
+        background: #e2e8f0;
+        border: 1px solid #cbd5e1;
+        color: #1a202c;
+        padding: 4px 8px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: bold;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .ctrl-btn:hover { background: #cbd5e1; }
+
+
+      /* Toast Notifications */
+      .toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+      .toast { background: rgba(33, 33, 33, 0.9); color: white; padding: 12px 24px; border-radius: 50px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: toast-in 0.4s ease-out, toast-out 0.4s ease-in 3.6s forwards; opacity: 0; pointer-events: auto; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+      .toast.success { border-left: 4px solid #4caf50; }
+      .toast.error { border-left: 4px solid #f44336; }
+      @keyframes toast-in { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes toast-out { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-20px); opacity: 0; } }
     </style>
   </head>
   <body>
     <!-- Cover Page -->
     <div class="page cover-page">
       <div class="cover-logo">
-        <img src="logo.png" alt="אנפי יבוא ושיווק בע״מ" />
+        <img src="catalog/logo.png" alt="אנפי יבוא ושיווק בע״מ" />
       </div>
       <div class="cover-title">
         קטלוג פתרונות פרזול,<br />
@@ -489,20 +609,20 @@
         <div class="product-section">
         <div class="product-images">
           <div class="product-image-box large">
-            <img src="מברשות/whitebrushroll-nobg.png" alt="מברשת לבנה" />
+            <img src="catalog/מברשות/whitebrushroll-nobg.png" alt="מברשת לבנה" />
           </div>
           <div class="product-image-box large">
-            <img src="מברשות/blackbrushroll.png" alt="מברשת אפורה" />
+            <img src="catalog/מברשות/blackbrushroll.png" alt="מברשת אפורה" />
           </div>
           <div class="product-image-box large">
-            <img src="מברשות/blackbrushroll2.png" alt="מברשת שחורה" />
+            <img src="catalog/מברשות/blackbrushroll2.png" alt="מברשת שחורה" />
           </div>
 
         </div>
 
         <div class="product-content">
-          <h2 class="product-name">מברשות איטום - מגוון מלא</h2>
-          <p class="product-description">
+          <h2 class="product-name" contenteditable="true">מברשות איטום - מגוון מלא</h2>
+          <p class="product-description" contenteditable="true">
             מברשות איטום איכותיות במגוון רחב של מידות וסוגים. מספקות איטום מעולה נגד אבק, רוח וחדירת מים.
             זמינות במברשות רגילות, סנפיר והדבקה.
           </p>
@@ -523,46 +643,64 @@
                 <td><span style="white-space: nowrap">צר נמוך</span></td>
                 <td>5.50 - 4.7</td>
                 <td>4 × 375</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">צר גבוה - 12</span></td>
                 <td>12 - 4.7</td>
                 <td>4 × 250</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">צר גבוה - 15</span></td>
                 <td>15 - 4.7</td>
                 <td>4 × 200</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">צר גבוה - 20</span></td>
                 <td>20.0 - 4.7</td>
                 <td>4 × 150</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">רחב נמוך</span></td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">6.7 - 5.00</span></td>
                 <td>4 × 375</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">רחב גבוה - 12</span></td>
                 <td>12 - 6.7</td>
                 <td>4 × 200</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">רחב גבוה - 15</span></td>
                 <td>15 - 6.7</td>
                 <td>4 × 150</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">רחב גבוה - 20</span></td>
                 <td>20.0 - 6.7</td>
                 <td>4 × 100</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td><span style="white-space: nowrap">מברשת אינסרט</span></td>
                 <td>24/12</td>
                 <td>6 × 50</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr class="section-header">
                 <td colspan="3">מברשות סנפיר</td>
@@ -571,31 +709,43 @@
                 <td>סנפיר שווה (7300)</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">6.00 - 4.7 =</span></td>
                 <td>4 × 450</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>סנפיר גבוה (7000)</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">6.7 - 5.50 + 2</span></td>
                 <td>4 × 350</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>סנפיר גבוה (7300)</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">4.7 - 5.50 + 2</span></td>
                 <td>4 × 400</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>סנפיר שווה (1700)</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">4.7 - 5.5 =</span></td>
                 <td>4 × 500</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>סנפיר שווה (7600)</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">6.7 - 6.50 =</span></td>
                 <td>4 × 350</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>סנפיר שווה (2200)</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">6.7 - 9.0 =</span></td>
                 <td>4 × 275</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr class="section-header">
                 <td colspan="3">מברשות הדבקה</td>
@@ -604,16 +754,22 @@
                 <td>הדבקה D.P</td>
                 <td><span style="direction: ltr; unicode-bidi: bidi-override">4.5 - 15.00</span></td>
                 <td>4 × 25</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>הדבקה 12mm גלילים</td>
                 <td>12 - 6.7</td>
                 <td>4 × 200</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
               <tr>
                 <td>הדבקה</td>
                 <td>קופסה 5 מ׳<br /><span style="direction: ltr; unicode-bidi: bidi-override">7 - 12</span></td>
                 <td>100</td>
+              
+                <td style="direction: rtl;"><span class="price-val" contenteditable="true">0.00</span> ₪</td>
               </tr>
             </tbody>
           </table>
@@ -641,37 +797,45 @@
           
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/7000ws.png" alt="גלגל 7000 פלסטיק" />
+              <img src="catalog/גלגלים/7000ws.png" alt="גלגל 7000 פלסטיק" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7000 פלסטיק<br />בודד מתכוונן</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7000 פלסטיק<br />בודד מתכוונן</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/ssw.png" alt="גלגל 7000 מתכת בודד" />
+              <img src="catalog/גלגלים/ssw.png" alt="גלגל 7000 מתכת בודד" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7000 מתכת<br />בודד מתכוונן</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7000 מתכת<br />בודד מתכוונן</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/7000wdw.png" alt="גלגל 7000 פלסטיק כפול משקל כבד" />
+              <img src="catalog/גלגלים/7000wdw.png" alt="גלגל 7000 פלסטיק כפול משקל כבד" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7000 פלסטיק<br />כפול משקל כבד</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7000 פלסטיק<br />כפול משקל כבד</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/sdw.png" alt="גלגל 7000 מתכת כפול משקל כבד" />
+              <img src="catalog/גלגלים/sdw.png" alt="גלגל 7000 מתכת כפול משקל כבד" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7000 מתכת<br />כפול משקל כבד</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7000 מתכת<br />כפול משקל כבד</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
@@ -679,28 +843,34 @@
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/7300wsw.png" alt="גלגל 7300 פלסטיק" />
+              <img src="catalog/גלגלים/7300wsw.png" alt="גלגל 7300 פלסטיק" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7300 פלסטיק<br />בודד מתכוונן</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7300 פלסטיק<br />בודד מתכוונן</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/bdw-wb.png" alt="גלגל 7300 פלסטיק כפול משקל כבד" />
+              <img src="catalog/גלגלים/bdw-wb.png" alt="גלגל 7300 פלסטיק כפול משקל כבד" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7300 פלסטיק<br />כפול משקל כבד</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7300 פלסטיק<br />כפול משקל כבד</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/7300-plastic-single-wheel.png" alt="גלגל 7300 פלסטיק בודד לרשת" />
+              <img src="catalog/גלגלים/7300-plastic-single-wheel.png" alt="גלגל 7300 פלסטיק בודד לרשת" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 7300 פלסטיק<br />בודד לרשת</div>
+              <div class="product-item-name" contenteditable="true">גלגל 7300 פלסטיק<br />בודד לרשת</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
@@ -708,19 +878,23 @@
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/wdw9000.png" alt="גלגל 9000 מתכת כפול משקל כבד" />
+              <img src="catalog/גלגלים/wdw9000.png" alt="גלגל 9000 מתכת כפול משקל כבד" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 9000 מתכת<br />כפול משקל כבד</div>
+              <div class="product-item-name" contenteditable="true">גלגל 9000 מתכת<br />כפול משקל כבד</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/9000psw.png" alt="גלגל 9000 פלסטיק בודד לרשת" />
+              <img src="catalog/גלגלים/9000psw.png" alt="גלגל 9000 פלסטיק בודד לרשת" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל 9000 פלסטיק<br />בודד לרשת</div>
+              <div class="product-item-name" contenteditable="true">גלגל 9000 פלסטיק<br />בודד לרשת</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
 
@@ -728,10 +902,12 @@
 
           <div class="product-item">
             <div class="product-item-image">
-              <img src="גלגלים/pwr.png" alt="גלגל רשת קלה" />
+              <img src="catalog/גלגלים/pwr.png" alt="גלגל רשת קלה" />
             </div>
             <div class="product-item-content">
-              <div class="product-item-name">גלגל פלסטיק לרשת קלה</div>
+              <div class="product-item-name" contenteditable="true">גלגל פלסטיק לרשת קלה</div>
+            
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
             </div>
           </div>
         </div>
@@ -756,42 +932,50 @@
           <div class="product-items-grid">
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות/hh6s.png" alt="חצי ידית כבדה" />
+                <img src="catalog/ידיות/hh6s.png" alt="חצי ידית כבדה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">חצי ידית כבדה 4 ברגים</div>
-                <div class="product-item-desc">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">חצי ידית כבדה 4 ברגים</div>
+                <div class="product-item-desc" contenteditable="true">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות/hhh4s.png" alt="חצי ידית 6 ברגים" />
+                <img src="catalog/ידיות/hhh4s.png" alt="חצי ידית 6 ברגים" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">חצי ידית 6 ברגים</div>
-                <div class="product-item-desc">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">חצי ידית 6 ברגים</div>
+                <div class="product-item-desc" contenteditable="true">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות/alma.png" alt="ידית אלמא" />
+                <img src="catalog/ידיות/alma.png" alt="ידית אלמא" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">חצי ידית משופרת<br />אלמא ימין שמאל</div>
-                <div class="product-item-desc">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">חצי ידית משופרת<br />אלמא ימין שמאל</div>
+                <div class="product-item-desc" contenteditable="true">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות/kh.png" alt="ידית קיפ" />
+                <img src="catalog/ידיות/kh.png" alt="ידית קיפ" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית קיפ</div>
-                <div class="product-item-desc">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">ידית קיפ</div>
+                <div class="product-item-desc" contenteditable="true">צבעים:<br /> לבן | שחור | 101 | טבעי | קרם</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
           </div>
         </div>
@@ -815,42 +999,50 @@
           <div class="product-items-grid">
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות בר משיכה/snph.png" alt="ידית משיכה נירוסטה בודדת" />
+                <img src="catalog/ידיות בר משיכה/snph.png" alt="ידית משיכה נירוסטה בודדת" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה בודדת - נירוסטה</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">ידית משיכה בודדת - נירוסטה</div>
+                <div class="product-item-desc" contenteditable="true">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות בר משיכה/sbph.png" alt="ידית משיכה שחורה בודדת" />
+                <img src="catalog/ידיות בר משיכה/sbph.png" alt="ידית משיכה שחורה בודדת" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה בודדת - שחור</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">ידית משיכה בודדת - שחור</div>
+                <div class="product-item-desc" contenteditable="true">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות בר משיכה/dnph.png" alt="ידית משיכה נירוסטה כפולה" />
+                <img src="catalog/ידיות בר משיכה/dnph.png" alt="ידית משיכה נירוסטה כפולה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה כפולה - נירוסטה</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">ידית משיכה כפולה - נירוסטה</div>
+                <div class="product-item-desc" contenteditable="true">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="ידיות בר משיכה/dbph.png" alt="ידית משיכה שחורה כפולה" />
+                <img src="catalog/ידיות בר משיכה/dbph.png" alt="ידית משיכה שחורה כפולה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">ידית משיכה כפולה - שחור</div>
-                <div class="product-item-desc">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">ידית משיכה כפולה - שחור</div>
+                <div class="product-item-desc" contenteditable="true">מידות:<br /> 35/50, 50/70, 70/100, 90/120</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
           </div>
         </div>
@@ -874,52 +1066,62 @@
           <div class="product-items-grid">
             <div class="product-item">
               <div class="product-item-image">
-                <img src="רשתות/רשת פיברגלס.png" alt="רשת פיברגלס" />
+                <img src="catalog/רשתות/רשת פיברגלס.png" alt="רשת פיברגלס" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">רשת פיברגלס</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">רשת פיברגלס</div>
+                <div class="product-item-desc" contenteditable="true">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="רשתות/רשת שקופה.png" alt="רשת שקופה" />
+                <img src="catalog/רשתות/רשת שקופה.png" alt="רשת שקופה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">רשת שקופה</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">רשת שקופה</div>
+                <div class="product-item-desc" contenteditable="true">מידות (במטר):<br /> 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="רשתות/רשת שקופה.png" alt="רשת פוליפרופילן" />
+                <img src="catalog/רשתות/רשת שקופה.png" alt="רשת פוליפרופילן" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">רשת שקופה פוליפרופילן</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">רשת שקופה פוליפרופילן</div>
+                <div class="product-item-desc" contenteditable="true">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="רשתות/רשת שקופה.png" alt="רשת בעלי חיים" />
+                <img src="catalog/רשתות/רשת שקופה.png" alt="רשת בעלי חיים" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">רשת בעלי חיים</div>
-                <div class="product-item-desc">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">רשת בעלי חיים</div>
+                <div class="product-item-desc" contenteditable="true">מידות (במטר):<br /> 1.00, 1.20, 1.50, 2.00</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
 
             <div class="product-item">
               <div class="product-item-image">
-                <img src="רשתות/רשת גלילה.png" alt="רשת גלילה" />
+                <img src="catalog/רשתות/רשת גלילה.png" alt="רשת גלילה" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">רשת גלילה</div>
-                <div class="product-item-desc">חיתוך לפי מידה<br />עד לגובה של 2.50 מטר</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">רשת גלילה</div>
+                <div class="product-item-desc" contenteditable="true">חיתוך לפי מידה<br />עד לגובה של 2.50 מטר</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
           </div>
         </div>
@@ -944,22 +1146,26 @@
             <div class="product-items-list">
               <div class="product-item">
                 <div class="product-item-image">
-                  <img src="פינות/4300.png" alt="פינה 4300" />
+                  <img src="catalog/פינות/4300.png" alt="פינה 4300" />
                 </div>
                 <div class="product-item-content">
-                  <div class="product-item-name">פינה 4300</div>
-                  <div class="product-item-desc">מחבר איכותי לדגם 4300</div>
-                </div>
+                  <div class="product-item-name" contenteditable="true">פינה 4300</div>
+                  <div class="product-item-desc" contenteditable="true">מחבר איכותי לדגם 4300</div>
+                
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
               </div>
 
               <div class="product-item">
                 <div class="product-item-image">
-                  <img src="פינות/7300.png" alt="פינה 7300" />
+                  <img src="catalog/פינות/7300.png" alt="פינה 7300" />
                 </div>
                 <div class="product-item-content">
-                  <div class="product-item-name">פינה 7300</div>
-                  <div class="product-item-desc">מחבר איכותי לדגם 7300</div>
-                </div>
+                  <div class="product-item-name" contenteditable="true">פינה 7300</div>
+                  <div class="product-item-desc" contenteditable="true">מחבר איכותי לדגם 7300</div>
+                
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
               </div>
             </div>
           </div>
@@ -973,22 +1179,26 @@
             <div class="product-items-list">
               <div class="product-item">
                 <div class="product-item-image">
-                  <img src="אביזרי נעילה לחלונות/no-bg/fork.png" alt="מזלג נעילה" />
+                  <img src="catalog/אביזרי נעילה לחלונות/no-bg/fork.png" alt="מזלג נעילה" />
                 </div>
                 <div class="product-item-content">
-                  <div class="product-item-name">מזלג נעילה לחלון</div>
-                  <div class="product-item-desc">איכותי ועמיד</div>
-                </div>
+                  <div class="product-item-name" contenteditable="true">מזלג נעילה לחלון</div>
+                  <div class="product-item-desc" contenteditable="true">איכותי ועמיד</div>
+                
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
               </div>
 
               <div class="product-item">
                 <div class="product-item-image">
-                  <img src="אביזרי נעילה לחלונות/no-bg/gasket.png" alt="נגד נעילה" />
+                  <img src="catalog/אביזרי נעילה לחלונות/no-bg/gasket.png" alt="נגד נעילה" />
                 </div>
                 <div class="product-item-content">
-                  <div class="product-item-name">נגד נעילה לחלון</div>
-                  <div class="product-item-desc">נגד איכותי לנעילה בטוחה</div>
-                </div>
+                  <div class="product-item-name" contenteditable="true">נגד נעילה לחלון</div>
+                  <div class="product-item-desc" contenteditable="true">נגד איכותי לנעילה בטוחה</div>
+                
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
               </div>
             </div>
           </div>
@@ -1003,12 +1213,14 @@
           <div class="product-items-list">
             <div class="product-item">
               <div class="product-item-image" style="width: 120px; height: 120px;">
-                <img src="מנעולים/מנעולים.png" alt="מנעול חשמלי" />
+                <img src="catalog/מנעולים/מנעולים.png" alt="מנעול חשמלי" />
               </div>
               <div class="product-item-content">
-                <div class="product-item-name">מנעול חשמלי</div>
-                <div class="product-item-desc">מנעול חשמלי איכותי וחזק לנעילה בטוחה ואמינה</div>
-              </div>
+                <div class="product-item-name" contenteditable="true">מנעול חשמלי</div>
+                <div class="product-item-desc" contenteditable="true">מנעול חשמלי איכותי וחזק לנעילה בטוחה ואמינה</div>
+              
+              <div class="product-price">מחיר: <span class="price-val" contenteditable="true">0.00</span> ₪</div>
+            </div>
             </div>
           </div>
         </div>
@@ -1018,7 +1230,7 @@
     <!-- Page 8: Back Cover -->
     <div class="page back-cover">
       <div class="back-logo">
-        <img src="logo.png" alt="אנפי יבוא ושיווק בע״מ" style="filter: brightness(0) invert(1);" />
+        <img src="catalog/logo.png" alt="אנפי יבוא ושיווק בע״מ" style="filter: brightness(0) invert(1);" />
       </div>
 
       <div class="contact-section">
@@ -1035,5 +1247,414 @@
 
       <div class="copyright">© כל הזכויות שמורות לאנפי יבוא ושיווק בע"מ | מעל 60 שנים של ניסיון</div>
     </div>
+  <div class="admin-controls">
+      <button class="admin-btn btn-edit" id="toggleEdit"><span>✖ בטל עריכה</span></button>
+      <button class="admin-btn btn-save" id="saveChanges"><span>💾 שמירה</span></button>
+      <button class="admin-btn btn-print" id="printPage" onclick="window.print()"><span>🖨️ הדפסה</span></button>
+      <button class="admin-btn btn-clear" id="clearDraft" style="background: #ff9800; color: white;">🗑️ נקה נתונים</button>
+    </div>
+    <script>
+      const body = document.body;
+      const toggle = document.getElementById('toggleEdit');
+      toggle.onclick = () => {
+        const isEdit = body.classList.toggle('edit-mode');
+        toggle.querySelector('span').textContent = isEdit ? '✖ בטל עריכה' : '✎ עריכה';
+        if (isEdit) wrapCurrencySymbols(); // Re-scan when entering edit mode to catch new text
+      };
+      async function save() {
+        try {
+          // Reset button text to 'עריכה' before capturing HTML
+          const wasEdMode = body.classList.contains('edit-mode');
+          body.classList.remove('edit-mode');
+          toggle.querySelector('span').textContent = '✎ עריכה';
+          
+          const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+          
+          // Restore state if needed
+          if (wasEdMode) {
+            body.classList.add('edit-mode');
+            toggle.querySelector('span').textContent = '✖ בטל עריכה';
+          }
+          if (window.showSaveFilePicker) {
+            const h = await window.showSaveFilePicker({suggestedName:"local.html", types:[{description:"HTML", accept:{"text/html":[".html"]}}]});
+            const w = await h.createWritable(); await w.write(html); await w.close(); 
+            showToast("✅ השינויים נשמרו בהצלחה!", "success");
+          } else {
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html],{type:"text/html"})); a.download="local.html"; a.click();
+            showToast("🚀 הקובץ הועבר להורדה", "success");
+          }
+        } catch(e) { 
+          if(e.name!=='AbortError') showToast("❌ שגיאה: " + e.message, "error"); 
+        }
+      }
+      document.getElementById('saveChanges').onclick = () => {
+        save();
+      };
+      
+      document.getElementById('clearDraft').onclick = () => {
+        if (confirm('מחיקת נתונים: הפעולה תמחק את הטיוטה ששמורה בדפדפן (וכל שיבוש שנוצר בה) ותחזיר את העמוד למצבו המקורי. השינויים האחרונים שלא שמרת בקובץ יימחקו. להמשיך?')) {
+          localStorage.removeItem('anfi-catalog-draft');
+          window.location.reload();
+        }
+      };
+
+      document.addEventListener('keydown', e => {
+        if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='s'){ e.preventDefault(); save(); }
+        if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='e'){ e.preventDefault(); toggle.click(); }
+      });
+
+      // Price Visibility Toggle logic via Dedicated Buttons
+      document.addEventListener('click', e => {
+        if (!body.classList.contains('edit-mode')) return;
+
+        const btnHidePrice = e.target.closest('.hide-price-btn');
+        const btnHideSymbol = e.target.closest('.hide-symbol-btn');
+        const btnHideProduct = e.target.closest('.hide-product-btn');
+
+        if (btnHideProduct) {
+          const bar = e.target.closest('.global-price-controls');
+          if (!bar || !bar.currentContainer) return;
+          const productEl = bar.currentContainer.closest('.product-item, tr');
+          if (productEl) {
+             productEl.classList.toggle('product-hidden');
+             e.target.textContent = productEl.classList.contains('product-hidden') ? 'הצג מוצר' : 'הסתר מוצר';
+             saveDraft();
+          }
+          return;
+        }
+
+        if (btnHidePrice || btnHideSymbol) {
+          const bar = e.target.closest('.global-price-controls');
+          if (!bar || !bar.currentContainer) return;
+          
+          if (btnHidePrice) {
+            bar.currentContainer.classList.toggle('price-hidden');
+          } else if (btnHideSymbol) {
+            const symbols = bar.currentContainer.querySelectorAll('.currency-symbol');
+            symbols.forEach(s => s.classList.toggle('symbol-hidden'));
+          }
+          saveDraft();
+          return;
+        }
+      });
+
+      // LocalStorage Persistence Logic
+      function saveDraft() {
+        const state = {
+          texts: Array.from(document.querySelectorAll('[contenteditable="true"]')).map(el => el.innerHTML),
+          hiddenPrices: Array.from(document.querySelectorAll('.product-price, td:has(.price-val)')).map(el => el.classList.contains('price-hidden')),
+          hiddenSymbols: Array.from(document.querySelectorAll('.currency-symbol')).map(el => el.classList.contains('symbol-hidden')),
+          hiddenProducts: Array.from(document.querySelectorAll('.product-item, tr:has(.price-val)')).map(el => el.classList.contains('product-hidden'))
+        };
+        localStorage.setItem('anfi-catalog-draft', JSON.stringify(state));
+      }
+
+      function loadDraft() { localStorage.removeItem("anfi-catalog-draft"); 
+        const raw = localStorage.getItem('anfi-catalog-draft');
+        if (!raw) return null;
+        try {
+          const state = JSON.parse(raw);
+          const editables = document.querySelectorAll('[contenteditable="true"]');
+          const prices = document.querySelectorAll('.product-price, td:has(.price-val)');
+          
+          if (state.texts) {
+            // Rescue backwards compatibility: remove corrupted inline control texts from the draft array
+            let sanitizedTexts = state.texts.filter(text => {
+              if (typeof text !== 'string') return true;
+              return !text.includes('hide-price-btn') && !text.includes('price-controls');
+            });
+
+            sanitizedTexts.forEach((text, i) => {
+              if (editables[i]) {
+                editables[i].innerHTML = text;
+                // Cleanup rogue buttons from innerHTML overrides
+                editables[i].querySelectorAll('.price-controls, .ctrl-btn, .global-price-controls').forEach(el => el.remove());
+              }
+            });
+          }
+          
+          if (state.hiddenPrices) {
+            state.hiddenPrices.forEach((isHidden, i) => {
+              if (prices[i]) {
+                if (isHidden) prices[i].classList.add('price-hidden');
+                else prices[i].classList.remove('price-hidden');
+              }
+            });
+          }
+
+          if (state.hiddenProducts && state.hiddenProducts.length > 0) {
+            const products = document.querySelectorAll('.product-item, tr:has(.price-val)');
+            products.forEach((el, i) => {
+              if (state.hiddenProducts[i] && products[i]) products[i].classList.add('product-hidden');
+            });
+          }
+
+          return state;
+        } catch (e) {
+          console.error("Failed to load draft:", e);
+          return null;
+        }
+      }
+
+      function applySymbolStates(state) {
+        if (!state || !state.hiddenSymbols) return;
+        const symbols = document.querySelectorAll('.currency-symbol');
+        state.hiddenSymbols.forEach((isHidden, i) => {
+          if (symbols[i]) {
+            if (isHidden) symbols[i].classList.add('symbol-hidden');
+            else symbols[i].classList.remove('symbol-hidden');
+          }
+        });
+      }
+
+
+      function initRTFToolbar() {
+        let bar = document.querySelector('.rtf-toolbar');
+        if (!bar) {
+          bar = document.createElement('div');
+          bar.className = 'rtf-toolbar';
+          bar.contentEditable = "false";
+          bar.innerHTML = `
+            <button class="rtf-btn rtf-bold" title="מודגש">B</button>
+            <button class="rtf-btn rtf-underline" title="קו תחתון">U</button>
+            <div class="rtf-divider"></div>
+            <button class="rtf-btn rtf-bigger" title="הגדל טקסט">A+</button>
+            <button class="rtf-btn rtf-smaller" title="הקטן טקסט">A-</button>
+            <div class="rtf-divider"></div>
+            <input type="color" class="rtf-color-picker" title="צבע טקסט" value="#ff0000" />
+            <button class="rtf-btn rtf-clear" title="נקה עיצוב" style="font-size:12px">🧹</button>
+          `;
+          document.body.appendChild(bar);
+
+          bar.addEventListener('mousedown', e => {
+            if (e.target.tagName !== 'INPUT') e.preventDefault(); // Prevent losing text selection
+            
+            if (e.target.closest('.rtf-bold')) document.execCommand('bold', false, null);
+            if (e.target.closest('.rtf-underline')) document.execCommand('underline', false, null);
+            
+            if (e.target.closest('.rtf-bigger')) {
+               let node = window.getSelection().focusNode;
+               if (!node) return;
+               let el = node.nodeType === 3 ? node.parentElement : node;
+               if(el && el.closest('[contenteditable="true"]')) {
+                   let currentSize = parseInt(window.getComputedStyle(el).fontSize) || 16;
+                   document.execCommand('fontSize', false, "7");
+                   document.querySelectorAll('font[size="7"]').forEach(f => {
+                       f.removeAttribute('size');
+                       f.style.fontSize = (currentSize + 2) + 'px';
+                   });
+               }
+            }
+            if (e.target.closest('.rtf-smaller')) {
+               let node = window.getSelection().focusNode;
+               if (!node) return;
+               let el = node.nodeType === 3 ? node.parentElement : node;
+               if(el && el.closest('[contenteditable="true"]')) {
+                   let currentSize = parseInt(window.getComputedStyle(el).fontSize) || 16;
+                   document.execCommand('fontSize', false, "1");
+                   document.querySelectorAll('font[size="1"]').forEach(f => {
+                       f.removeAttribute('size');
+                       f.style.fontSize = (Math.max(10, currentSize - 2)) + 'px';
+                   });
+               }
+            }
+            if (e.target.closest('.rtf-clear')) {
+               document.execCommand('removeFormat', false, null);
+            }
+            saveDraft();
+          });
+
+          // Hack to ensure color picker changes are applied immediately to selection
+          const colorPicker = bar.querySelector('.rtf-color-picker');
+          colorPicker.addEventListener('input', e => {
+             document.execCommand('foreColor', false, e.target.value);
+             saveDraft();
+          });
+        }
+
+        document.addEventListener('selectionchange', () => {
+          if (!document.body.classList.contains('edit-mode')) {
+            bar.style.display = 'none';
+            return;
+          }
+          
+          const selection = window.getSelection();
+          if (!selection.rangeCount || selection.isCollapsed) {
+            bar.style.display = 'none';
+            return;
+          }
+
+          const range = selection.getRangeAt(0);
+          const container = range.commonAncestorContainer;
+          const node = container.nodeType === 3 ? container.parentNode : container;
+          
+          if (!node || node.nodeType !== 1 || !node.closest('[contenteditable="true"]')) {
+            bar.style.display = 'none';
+            return;
+          }
+
+          const rect = range.getBoundingClientRect();
+          if (rect.width === 0 || rect.height === 0) {
+              bar.style.display = 'none';
+              return;
+          }
+
+          bar.style.display = 'flex';
+          bar.style.top = (window.scrollY + rect.top - 46) + 'px';
+          bar.style.left = (window.scrollX + rect.left + rect.width / 2 - bar.offsetWidth / 2) + 'px';
+        });
+      }
+
+      function initPriceControls() {
+        // Cleanup old inline controls that might be stuck in HTML
+        document.querySelectorAll('.price-controls').forEach(el => el.remove());
+        document.querySelectorAll('.ctrl-btn').forEach(el => el.remove());
+
+        // 1. Wrap symbols
+        document.querySelectorAll('.product-price, td:has(.price-val)').forEach(el => {
+          const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+          const nodes = [];
+          let node;
+          while (node = walker.nextNode()) {
+            if (node.nodeValue.includes('₪') && (!node.parentElement || !node.parentElement.closest('.currency-symbol'))) {
+              nodes.push(node);
+            }
+          }
+          nodes.forEach(node => {
+            const parent = node.parentNode;
+            if (!parent) return;
+            const parts = node.nodeValue.split('₪');
+            if (parts.length > 1) {
+              const fragment = document.createDocumentFragment();
+              parts.forEach((part, index) => {
+                if (part) fragment.appendChild(document.createTextNode(part));
+                if (index < parts.length - 1) {
+                  const span = document.createElement('span');
+                  span.className = 'currency-symbol';
+                  span.textContent = '₪';
+                  fragment.appendChild(span);
+                }
+              });
+              parent.insertBefore(fragment, node);
+              parent.removeChild(node);
+            }
+          });
+        });
+
+        // 2. Setup Global Floating Toolbar
+        let bar = document.querySelector('.global-price-controls');
+        if (!bar) {
+          bar = document.createElement('div');
+          bar.className = 'global-price-controls';
+          bar.contentEditable = "false";
+          bar.innerHTML = `
+            <button class="ctrl-btn hide-price-btn" title="הסתר/הצג מחיר שלם">👁️ מחיר</button>
+            <button class="ctrl-btn hide-symbol-btn" title="הסתר/הצג סימן ₪">₪ סמל</button>
+            <button class="ctrl-btn hide-product-btn" title="הסתר/הצג מוצר שלם" style="background:#ff9800; border-top:1px solid #ccc;">הסתר מוצר</button>
+          `;
+          document.body.appendChild(bar);
+
+          // Listen for movement across the document to smartly position the bar
+          document.addEventListener('mouseover', e => {
+            if (!document.body.classList.contains('edit-mode')) {
+              bar.style.display = 'none';
+              return;
+            }
+            
+            const target = e.target.closest('.product-price, td:has(.price-val)');
+            if (target) {
+              const rect = target.getBoundingClientRect();
+              bar.style.top = (window.scrollY + rect.top - 36) + 'px';
+              bar.style.left = (window.scrollX + Math.max(rect.right - bar.offsetWidth, rect.left)) + 'px';
+              bar.style.display = 'flex';
+              bar.currentContainer = target;
+              
+              const isProductHidden = target.closest('.product-item, tr') && target.closest('.product-item, tr').classList.contains('product-hidden');
+              bar.querySelector('.hide-product-btn').textContent = isProductHidden ? 'הצג מוצר' : 'הסתר מוצר';
+            } else if (!e.target.closest('.global-price-controls')) {
+              bar.style.display = 'none';
+              bar.currentContainer = null;
+            }
+          });
+        }
+      }
+
+      function showToast(message, type = 'success') {
+        let container = document.querySelector('.toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.className = 'toast-container';
+          document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+      }
+
+      // Initialize auto-save
+      document.addEventListener('input', e => {
+        if (e.target.hasAttribute('contenteditable')) {
+          saveDraft();
+        }
+      });
+
+      // Load draft on startup
+      document.addEventListener('DOMContentLoaded', () => {
+        const state = loadDraft(); // First load text into DOM so nodes are populated properly
+        initPriceControls();
+        initRTFToolbar(); // Then configure buttons and spans
+        applySymbolStates(state); // Finally apply visibility states to the wrapped symbols
+      });
+      // Fallback if DOMContentLoaded already fired
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        const state = loadDraft();
+        initPriceControls();
+        initRTFToolbar();
+        applySymbolStates(state);
+      }
+    </script>
+  <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+
   </body>
 </html>
