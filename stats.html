@@ -229,9 +229,7 @@
     // Simple access check (Client side only for demo simplicity, but obfuscated slightly)
     function checkAccess() {
         const pass = document.getElementById('pass-input').value;
-        if (pass === "anfi2024") { // Simplified password for the user
-            document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('main-dashboard').style.display = 'block';
+        if (pass === "anfi2024") {
             fetchStats();
         } else {
             alert('סיסמה שגויה');
