@@ -1824,10 +1824,55 @@
         });
       });
 
+      // Statistics Tracking
+      const STATS_URL = "https://script.google.com/macros/s/AKfycbyolKY2mdEd6Xlb8OvkescCG7H-_t-1lZsBBGPbUTTxaoHXZQxA7nc5Goh7qtqm-YfRSA/exec";
+
+      function logStat(eventType) {
+        const data = {
+          action: "logStat",
+          eventType: eventType,
+          device: /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString()
+        };
+
+        // Use sendBeacon for reliable, non-blocking tracking
+        if (navigator.sendBeacon) {
+          const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+          navigator.sendBeacon(STATS_URL, blob);
+        } else {
+          fetch(STATS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data),
+            keepalive: true
+          });
+        }
+      }
+
+      // Track Page View
+      window.addEventListener("DOMContentLoaded", () => {
+        logStat("page_view");
+      });
+
+      // Track Download
+      document.getElementById("downloadPdfBtn").addEventListener("click", () => {
+        logStat("catalog_download");
+      });
+
+      // Track WhatsApp Clicks
+      const whatsappBtn = document.querySelector(".whatsapp-float");
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener("click", () => {
+          logStat("whatsapp_click");
+        });
+      }
+
       // Open popup on CTA button click
       const openLeadPopupBtn = document.getElementById("openLeadPopupBtn");
       if (openLeadPopupBtn) {
         openLeadPopupBtn.addEventListener("click", () => {
+          logStat("lead_popup_open");
           document.getElementById("leadPopup").style.display = "flex";
         });
       }
@@ -1840,71 +1885,71 @@
 
       // Handle lead form submission
       const leadForm = document.getElementById("leadForm");
-      leadForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+      if (leadForm) {
+        leadForm.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        const businessNameInput = document.getElementById("businessName");
-        const fullNameInput = document.getElementById("fullName");
-        const phoneInput = document.getElementById("phone");
-        const messageInput = document.getElementById("message");
-        const selectedCategories = Array.from(
-          document.querySelectorAll(".catBtn.selected")
-        ).map((b) => b.dataset.value);
+          const businessNameInput = document.getElementById("businessName");
+          const fullNameInput = document.getElementById("fullName");
+          const phoneInput = document.getElementById("phone");
+          const messageInput = document.getElementById("message");
+          const selectedCategories = Array.from(
+            document.querySelectorAll(".catBtn.selected")
+          ).map((b) => b.dataset.value);
 
-        const data = {
-          businessName: businessNameInput.value,
-          fullName: fullNameInput.value,
-          phone: phoneInput.value,
-          email: document.getElementById("email").value,
-          category: selectedCategories.join(", "),
-          message: messageInput.value,
-        };
+          const data = {
+            businessName: businessNameInput.value,
+            fullName: fullNameInput.value,
+            phone: phoneInput.value,
+            email: document.getElementById("email").value,
+            category: selectedCategories.join(", "),
+            message: messageInput.value,
+          };
 
-        // Validation: require businessName, fullName, phone, category, and privacyConsent
-        if (
-          !data.businessName.trim() ||
-          !data.fullName.trim() ||
-          !data.phone.trim() ||
-          !data.category.trim() ||
-          !document.getElementById("privacyConsent").checked
-        ) {
-          const err = document.getElementById("formError");
-          if (!document.getElementById("privacyConsent").checked) {
-            err.innerText = "יש לאשר את הסכמתך למדיניות הפרטיות להמשך.";
-          } else {
-            err.innerText =
-              "אנא מלא שם עסק, שם מלא, טלפון ותחום עניין לפני השליחה.";
+          // Validation
+          if (
+            !data.businessName.trim() ||
+            !data.fullName.trim() ||
+            !data.phone.trim() ||
+            !data.category.trim() ||
+            !document.getElementById("privacyConsent").checked
+          ) {
+            const err = document.getElementById("formError");
+            if (!document.getElementById("privacyConsent").checked) {
+              err.innerText = "יש לאשר את הסכמתך למדיניות הפרטיות להמשך.";
+            } else {
+              err.innerText =
+                "אנא מלא שם עסק, שם מלא, טלפון ותחום עניין לפני השליחה.";
+            }
+            err.style.display = "block";
+            err.style.background = "#ffebeb";
+            err.style.color = "#b40000";
+            return;
           }
-          err.style.display = "block";
-          err.style.background = "#ffebeb";
-          err.style.color = "#b40000";
-          return;
-        } else {
-          // Hide error if previously shown
-          const err = document.getElementById("formError");
-          err.style.display = "none";
-        }
 
-        fetch(
-          "https://script.google.com/macros/s/AKfycbz69KsvMxbEK_MJfwl7qvkRD0KsgrlgNTRBZab5PrOONj2YJHY5_CeGI5VW7A48WA5f/exec",
-          {
+          logStat("lead_submission_attempt");
+
+          fetch(STATS_URL, {
             method: "POST",
             mode: "no-cors",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
-          }
-        );
+          }).then(() => {
+            logStat("lead_submission_success");
+          });
 
-        document.getElementById("formError").style.display = "none";
-        const success = document.getElementById("formSuccess");
-        success.innerText = "תודה! הפרטים נשלחו בהצלחה.";
-        success.style.display = "block";
-        setTimeout(() => {
-          document.getElementById("leadPopup").style.display = "none";
-        }, 2000);
-        leadForm.reset();
-      });
-      // Add event listeners for toggle buttons instead of inline onclick
+          document.getElementById("formError").style.display = "none";
+          const success = document.getElementById("formSuccess");
+          success.innerText = "תודה! הפרטים נשלחו בהצלחה.";
+          success.style.display = "block";
+          setTimeout(() => {
+            document.getElementById("leadPopup").style.display = "none";
+          }, 2000);
+          leadForm.reset();
+        });
+      }
+
+      // Add event listeners for toggle buttons
       document
         .getElementById("toggleBrushTableBtn")
         .addEventListener("click", toggleBrushTable);

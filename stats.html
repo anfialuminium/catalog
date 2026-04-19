@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אנפי - סטטיסטיקות קטלוג</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2e5541;
+            --accent: #c4d71f;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(46, 85, 65, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(196, 215, 31, 0.1) 0px, transparent 50%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .logo-section img {
+            height: 50px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            background: linear-gradient(to left, var(--text-main), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .chart-card h2 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--text-dim);
+        }
+
+        #login-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--dark-bg);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            width: 250px;
+            text-align: center;
+        }
+
+        button {
+            background: var(--accent);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-overlay">
+    <img src="logo white.png" alt="Anfi" style="height: 60px; margin-bottom: 2rem;">
+    <h1>כניסה למערכת דוחות</h1>
+    <input type="password" id="pass-input" placeholder="הכנס סיסמה">
+    <button onclick="checkAccess()">כניסה</button>
+</div>
+
+<div class="dashboard" id="main-dashboard" style="display: none;">
+    <header>
+        <div class="logo-section">
+            <img src="logo white.png" alt="Anfi">
+        </div>
+        <h1>מערכת ניתוח נתונים - קטלוג</h1>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value" id="total-views">0</div>
+            <div class="stat-label">צפיות באתר</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="total-downloads">0</div>
+            <div class="stat-label">הורדות קטלוג</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="conv-rate">0%</div>
+            <div class="stat-label">יחס המרה (הורדות)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="whatsapp-clicks">0</div>
+            <div class="stat-label">לחיצות וואטסאפ</div>
+        </div>
+    </div>
+
+    <div class="charts-container">
+        <div class="chart-card">
+            <h2>פעילות לפי ימים</h2>
+            <canvas id="dailyChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h2>פילוח לפי מכשיר</h2>
+            <canvas id="deviceChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbyolKY2mdEd6Xlb8OvkescCG7H-_t-1lZsBBGPbUTTxaoHXZQxA7nc5Goh7qtqm-YfRSA/exec";
+    
+    // Simple access check (Client side only for demo simplicity, but obfuscated slightly)
+    function checkAccess() {
+        const pass = document.getElementById('pass-input').value;
+        if (pass === "anfi2024") { // Simplified password for the user
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('main-dashboard').style.display = 'block';
+            fetchStats();
+        } else {
+            alert('סיסמה שגויה');
+        }
+    }
+
+    // Allow Enter key for login
+    document.getElementById('pass-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkAccess();
+    });
+
+    async function fetchStats() {
+        try {
+            const response = await fetch(`${GAS_URL}?action=getStats`);
+            const result = await response.json();
+            
+            if (result.success) {
+                renderDashboard(result.data);
+            } else {
+                console.error("Failed to fetch stats:", result.error);
+                alert("שגיאה בטעינת נתונים. וודא שהגדרת את ה-Google Apps Script לפי ההוראות.");
+            }
+        } catch (err) {
+            console.error("Fetch error:", err);
+        }
+    }
+
+    function renderDashboard(data) {
+        // Update counters
+        document.getElementById('total-views').innerText = data.summary.page_view || 0;
+        document.getElementById('total-downloads').innerText = data.summary.catalog_download || 0;
+        document.getElementById('whatsapp-clicks').innerText = data.summary.whatsapp_click || 0;
+        
+        const views = data.summary.page_view || 1;
+        const downloads = data.summary.catalog_download || 0;
+        const rate = ((downloads / views) * 100).toFixed(1);
+        document.getElementById('conv-rate').innerText = `${rate}%`;
+
+        // Daily Chart
+        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+        new Chart(dailyCtx, {
+            type: 'line',
+            data: {
+                labels: data.daily.labels,
+                datasets: [{
+                    label: 'צפיות',
+                    data: data.daily.views,
+                    borderColor: '#c4d71f',
+                    backgroundColor: 'rgba(196, 215, 31, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'הורדות',
+                    data: data.daily.downloads,
+                    borderColor: '#f8fafc',
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#94a3b8' } }
+                },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, border: { display: false }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Device Chart
+        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+        new Chart(deviceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Desktop', 'Mobile'],
+                datasets: [{
+                    data: [data.devices.Desktop || 0, data.devices.Mobile || 0],
+                    backgroundColor: ['#2e5541', '#c4d71f'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

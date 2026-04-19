@@ -1476,7 +1476,7 @@
         localStorage.setItem('anfi-catalog-draft', JSON.stringify(state));
       }
 
-      function loadDraft() { localStorage.removeItem("anfi-catalog-draft"); 
+      function loadDraft() {
         const raw = localStorage.getItem('anfi-catalog-draft');
         if (!raw) return null;
         try {
@@ -1708,6 +1708,8 @@
               bar.style.display = 'none';
               bar.currentContainer = null;
             }
+          });
+        }
         // 3. Tag Price Columns in Tables
         document.querySelectorAll('.specs-table').forEach(table => {
           const headers = table.querySelectorAll('thead th');
