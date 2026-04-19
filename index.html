@@ -1838,8 +1838,8 @@
 
         // Use sendBeacon for reliable, non-blocking tracking
         if (navigator.sendBeacon) {
-          const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-          navigator.sendBeacon(STATS_URL, blob);
+          // Sending as string without explicit Blob type avoids preflight (defaults to text/plain)
+          navigator.sendBeacon(STATS_URL, JSON.stringify(data));
         } else {
           fetch(STATS_URL, {
             method: "POST",
@@ -1932,7 +1932,6 @@
           fetch(STATS_URL, {
             method: "POST",
             mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           }).then(() => {
             logStat("lead_submission_success");
