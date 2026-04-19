@@ -244,86 +244,116 @@
     });
 
     async function fetchStats() {
+        const dashboard = document.getElementById('main-dashboard');
+        const loginOverlay = document.getElementById('login-overlay');
+        
+        // Show loading state in the button
+        const loginBtn = loginOverlay.querySelector('button');
+        const originalBtnText = loginBtn.innerText;
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<span class="loader" style="width: 20px; height: 20px; border-width: 3px; vertical-align: middle; margin-right: 10px;"></span>טוען...';
+
         try {
             const response = await fetch(`${GAS_URL}?action=getStats`);
             const result = await response.json();
             
-            if (result.success) {
+            if (result.success && result.data) {
+                loginOverlay.style.display = 'none';
+                dashboard.style.display = 'block';
                 renderDashboard(result.data);
             } else {
                 console.error("Failed to fetch stats:", result.error);
-                alert("שגיאה בטעינת נתונים. וודא שהגדרת את ה-Google Apps Script לפי ההוראות.");
+                alert("שגיאה בטעינת נתונים: " + (result.error || "נתונים חסרים"));
+                loginBtn.disabled = false;
+                loginBtn.innerText = originalBtnText;
             }
         } catch (err) {
             console.error("Fetch error:", err);
+            alert("שגיאה בתקשורת עם השרת. וודא שהסקריפט מוגדר כראוי.");
+            loginBtn.disabled = false;
+            loginBtn.innerText = originalBtnText;
         }
     }
 
     function renderDashboard(data) {
+        // Safety checks for data structure
+        const summary = data.summary || {};
+        const daily = data.daily || { labels: [], views: [], downloads: [] };
+        const devices = data.devices || { Desktop: 0, Mobile: 0 };
+
         // Update counters
-        document.getElementById('total-views').innerText = data.summary.page_view || 0;
-        document.getElementById('total-downloads').innerText = data.summary.catalog_download || 0;
-        document.getElementById('whatsapp-clicks').innerText = data.summary.whatsapp_click || 0;
+        document.getElementById('total-views').innerText = summary.page_view || 0;
+        document.getElementById('total-downloads').innerText = summary.catalog_download || 0;
+        document.getElementById('whatsapp-clicks').innerText = summary.whatsapp_click || 0;
         
-        const views = data.summary.page_view || 1;
-        const downloads = data.summary.catalog_download || 0;
+        const views = summary.page_view || 1;
+        const downloads = summary.catalog_download || 0;
         const rate = ((downloads / views) * 100).toFixed(1);
         document.getElementById('conv-rate').innerText = `${rate}%`;
 
         // Daily Chart
-        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
-        new Chart(dailyCtx, {
-            type: 'line',
-            data: {
-                labels: data.daily.labels,
-                datasets: [{
-                    label: 'צפיות',
-                    data: data.daily.views,
-                    borderColor: '#c4d71f',
-                    backgroundColor: 'rgba(196, 215, 31, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }, {
-                    label: 'הורדות',
-                    data: data.daily.downloads,
-                    borderColor: '#f8fafc',
-                    borderDash: [5, 5],
-                    fill: false,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { labels: { color: '#94a3b8' } }
+        const dailyCtx = document.getElementById('dailyChart');
+        if (dailyCtx) {
+            new Chart(dailyCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: daily.labels || [],
+                    datasets: [{
+                        label: 'צפיות',
+                        data: daily.views || [],
+                        borderColor: '#c4d71f',
+                        backgroundColor: 'rgba(196, 215, 31, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'הורדות',
+                        data: daily.downloads || [],
+                        borderColor: '#f8fafc',
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.4
+                    }]
                 },
-                scales: {
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, border: { display: false }, ticks: { color: '#94a3b8' } },
-                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: '#94a3b8' } }
+                    },
+                    scales: {
+                        y: { 
+                            grid: { color: 'rgba(255,255,255,0.05)' }, 
+                            border: { display: false }, 
+                            ticks: { color: '#94a3b8' },
+                            beginAtZero: true
+                        },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Device Chart
-        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
-        new Chart(deviceCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Desktop', 'Mobile'],
-                datasets: [{
-                    data: [data.devices.Desktop || 0, data.devices.Mobile || 0],
-                    backgroundColor: ['#2e5541', '#c4d71f'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+        const deviceCtx = document.getElementById('deviceChart');
+        if (deviceCtx) {
+            new Chart(deviceCtx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Desktop', 'Mobile'],
+                    datasets: [{
+                        data: [devices.Desktop || 0, devices.Mobile || 0],
+                        backgroundColor: ['#2e5541', '#c4d71f'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 </script>
 </body>
