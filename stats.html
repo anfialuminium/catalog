@@ -104,6 +104,9 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
             padding: 2rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
         }
 
         .chart-card h2 {
@@ -111,6 +114,12 @@
             margin-top: 0;
             margin-bottom: 1.5rem;
             color: var(--text-dim);
+        }
+
+        .chart-wrapper {
+            flex: 1;
+            position: relative;
+            min-height: 300px;
         }
 
         #login-overlay {
@@ -214,11 +223,15 @@
     <div class="charts-container">
         <div class="chart-card">
             <h2>פעילות לפי ימים</h2>
-            <canvas id="dailyChart"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="dailyChart"></canvas>
+            </div>
         </div>
         <div class="chart-card">
             <h2>פילוח לפי מכשיר</h2>
-            <canvas id="deviceChart"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="deviceChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -226,7 +239,10 @@
 <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbzcyP7FAoXB5gNWTe7s5HDO0QMN7AMK1HM4ty9Bf5VUdcaiA_FYswU3N6YKAC3KnUAS/exec";
     
-    // Simple access check (Client side only for demo simplicity, but obfuscated slightly)
+    // Track chart instances for cleanup
+    let dailyChartInstance = null;
+    let deviceChartInstance = null;
+
     function checkAccess() {
         const pass = document.getElementById('pass-input').value;
         if (pass === "anfi2024") {
@@ -277,7 +293,15 @@
         // Safety checks for data structure
         const summary = data.summary || {};
         const daily = data.daily || { labels: [], views: [], downloads: [] };
-        const devices = data.devices || { Desktop: 0, Mobile: 0 };
+        
+        // Robust device parsing (check both cases)
+        const rawDevices = data.devices || {};
+        const desktopCount = rawDevices.Desktop || rawDevices.desktop || 0;
+        const mobileCount = rawDevices.Mobile || rawDevices.mobile || 0;
+
+        // Cleanup existing charts
+        if (dailyChartInstance) dailyChartInstance.destroy();
+        if (deviceChartInstance) deviceChartInstance.destroy();
 
         // Update counters
         document.getElementById('total-views').innerText = summary.page_view || 0;
@@ -292,7 +316,7 @@
         // Daily Chart
         const dailyCtx = document.getElementById('dailyChart');
         if (dailyCtx) {
-            new Chart(dailyCtx.getContext('2d'), {
+            dailyChartInstance = new Chart(dailyCtx.getContext('2d'), {
                 type: 'line',
                 data: {
                     labels: daily.labels || [],
@@ -314,6 +338,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { labels: { color: '#94a3b8' } }
                     },
@@ -333,12 +358,12 @@
         // Device Chart
         const deviceCtx = document.getElementById('deviceChart');
         if (deviceCtx) {
-            new Chart(deviceCtx.getContext('2d'), {
+            deviceChartInstance = new Chart(deviceCtx.getContext('2d'), {
                 type: 'doughnut',
                 data: {
                     labels: ['Desktop', 'Mobile'],
                     datasets: [{
-                        data: [devices.Desktop || 0, devices.Mobile || 0],
+                        data: [desktopCount, mobileCount],
                         backgroundColor: ['#2e5541', '#c4d71f'],
                         borderWidth: 0
                     }]
