@@ -221,12 +221,19 @@
 
     async function fetchStats() {
         try {
-            const response = await fetch(`${GAS_URL}?action=getStats`);
+            // Adding a timestamp to bypass any cached error responses
+            const url = `${GAS_URL}?action=getStats&t=${new Date().getTime()}`;
+            const response = await fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache'
+            });
             const result = await response.json();
             if (result.success) render(result.data);
+            else throw new Error(result.error);
         } catch (err) {
-            console.error(err);
-            alert("שגיאה בטעינת נתונים");
+            console.error("Dashboard Error:", err);
+            alert("שגיאה בטעינת נתונים. וודא שהסקריפט הוגדר כ-'Anyone' ב-Google Apps Script.");
         }
     }
 
