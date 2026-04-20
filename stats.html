@@ -21,8 +21,7 @@
             font-family: 'Assistant', sans-serif;
             background-color: var(--dark-bg);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(46, 85, 65, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(196, 215, 31, 0.1) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(46, 85, 65, 0.1) 0px, transparent 50%);
             color: var(--text-main);
             margin: 0;
             padding: 0;
@@ -30,96 +29,88 @@
         }
 
         .dashboard {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
 
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
             margin-bottom: 3rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1rem;
         }
 
-        .logo-section img {
-            height: 50px;
+        header img {
+            height: 60px;
+            margin-bottom: 1rem;
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin: 0;
-            background: linear-gradient(to left, var(--text-main), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .stats-grid {
+        .main-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
 
         .stat-card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem 1rem;
             text-align: center;
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .stat-card .value {
+            font-size: 3rem;
+            font-weight: 800;
             color: var(--accent);
+            display: block;
             margin-bottom: 0.5rem;
         }
 
-        .stat-label {
+        .stat-card .label {
+            font-size: 1.1rem;
             color: var(--text-dim);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        .charts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
-        }
-
-        .chart-card {
+        .chart-section {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 2rem;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        .chart-card h2 {
-            font-size: 1.2rem;
+        .chart-section h2 {
             margin-top: 0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .chart-container {
+            height: 400px;
+            position: relative;
+        }
+
+        .conversion-info {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
             color: var(--text-dim);
         }
 
-        .chart-wrapper {
-            flex: 1;
-            position: relative;
-            min-height: 300px;
+        .conversion-info span {
+            color: var(--accent);
+            font-weight: 700;
         }
 
         #login-overlay {
@@ -137,11 +128,11 @@
         input {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.8rem 1.5rem;
+            padding: 1rem;
             border-radius: 12px;
             color: white;
-            font-size: 1rem;
-            width: 250px;
+            font-size: 1.2rem;
+            width: 280px;
             text-align: center;
         }
 
@@ -149,45 +140,28 @@
             background: var(--accent);
             color: var(--dark-bg);
             border: none;
-            padding: 0.8rem 2rem;
+            padding: 1rem 3rem;
             border-radius: 12px;
             font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: transform 0.2s;
         }
 
         button:hover {
             transform: scale(1.05);
-            filter: brightness(1.1);
         }
 
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 5px solid #FFF;
-            border-bottom-color: var(--accent);
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .charts-container {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 600px) {
+            .dashboard { padding: 1rem; }
+            .stat-card .value { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
 <div id="login-overlay">
-    <img src="logo white.png" alt="Anfi" style="height: 60px; margin-bottom: 2rem;">
+    <img src="logo white.png" alt="Anfi">
     <h1>כניסה למערכת דוחות</h1>
     <input type="password" id="pass-input" placeholder="הכנס סיסמה">
     <button onclick="checkAccess()">כניסה</button>
@@ -195,188 +169,112 @@
 
 <div class="dashboard" id="main-dashboard" style="display: none;">
     <header>
-        <div class="logo-section">
-            <img src="logo white.png" alt="Anfi">
-        </div>
-        <h1>מערכת ניתוח נתונים - קטלוג</h1>
+        <img src="logo white.png" alt="Anfi">
+        <h1>סיכום פעילות קטלוג</h1>
     </header>
 
-    <div class="stats-grid">
+    <div class="main-stats">
         <div class="stat-card">
-            <div class="stat-value" id="total-views">0</div>
-            <div class="stat-label">צפיות באתר</div>
+            <span class="value" id="total-views">0</span>
+            <span class="label">מבקרים באתר</span>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="total-downloads">0</div>
-            <div class="stat-label">הורדות קטלוג</div>
+            <span class="value" id="total-downloads">0</span>
+            <span class="label">הורדות קטלוג</span>
+        </div>
+        <div class="stat-card" style="border: 2px solid var(--accent);">
+            <span class="value" id="total-leads">0</span>
+            <span class="label">לידים ופניות</span>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="conv-rate">0%</div>
-            <div class="stat-label">יחס המרה (הורדות)</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value" id="whatsapp-clicks">0</div>
-            <div class="stat-label">לחיצות וואטסאפ</div>
+            <span class="value" id="whatsapp-clicks">0</span>
+            <span class="label">לחיצות וואטסאפ</span>
         </div>
     </div>
 
-    <div class="charts-container">
-        <div class="chart-card">
-            <h2>פעילות לפי ימים</h2>
-            <div class="chart-wrapper">
-                <canvas id="dailyChart"></canvas>
-            </div>
+    <div class="chart-section">
+        <h2>פעילות לפי ימים</h2>
+        <div class="chart-container">
+            <canvas id="mainChart"></canvas>
         </div>
-        <div class="chart-card">
-            <h2>פילוח לפי מכשיר</h2>
-            <div class="chart-wrapper">
-                <canvas id="deviceChart"></canvas>
-            </div>
+        <div class="conversion-info">
+            עד כה, סך הכל <span id="conv-rate">0%</span> מהמבקרים הורידו את הקטלוג.
         </div>
     </div>
 </div>
 
 <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbzcyP7FAoXB5gNWTe7s5HDO0QMN7AMK1HM4ty9Bf5VUdcaiA_FYswU3N6YKAC3KnUAS/exec";
-    
-    // Track chart instances for cleanup
-    let dailyChartInstance = null;
-    let deviceChartInstance = null;
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbw-8JaMT1F8Dbfz7auyKeave-YXkZXmXfcldK5i6WmUtdY_yVfRJYhTvrvMszkeTlPR/exec";
+    let chartInstance = null;
 
     function checkAccess() {
-        const pass = document.getElementById('pass-input').value;
-        if (pass === "anfi2024") {
+        if (document.getElementById('pass-input').value === "anfi2024") {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('main-dashboard').style.display = 'block';
             fetchStats();
         } else {
             alert('סיסמה שגויה');
         }
     }
 
-    // Allow Enter key for login
-    document.getElementById('pass-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') checkAccess();
-    });
+    document.getElementById('pass-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAccess(); });
 
     async function fetchStats() {
-        const dashboard = document.getElementById('main-dashboard');
-        const loginOverlay = document.getElementById('login-overlay');
-        
-        // Show loading state in the button
-        const loginBtn = loginOverlay.querySelector('button');
-        const originalBtnText = loginBtn.innerText;
-        loginBtn.disabled = true;
-        loginBtn.innerHTML = '<span class="loader" style="width: 20px; height: 20px; border-width: 3px; vertical-align: middle; margin-right: 10px;"></span>טוען...';
-
         try {
             const response = await fetch(`${GAS_URL}?action=getStats`);
             const result = await response.json();
-            
-            if (result.success && result.data) {
-                loginOverlay.style.display = 'none';
-                dashboard.style.display = 'block';
-                renderDashboard(result.data);
-            } else {
-                console.error("Failed to fetch stats:", result.error);
-                alert("שגיאה בטעינת נתונים: " + (result.error || "נתונים חסרים"));
-                loginBtn.disabled = false;
-                loginBtn.innerText = originalBtnText;
-            }
+            if (result.success) render(result.data);
         } catch (err) {
-            console.error("Fetch error:", err);
-            alert("שגיאה בתקשורת עם השרת. וודא שהסקריפט מוגדר כראוי.");
-            loginBtn.disabled = false;
-            loginBtn.innerText = originalBtnText;
+            console.error(err);
+            alert("שגיאה בטעינת נתונים");
         }
     }
 
-    function renderDashboard(data) {
-        // Safety checks for data structure
-        const summary = data.summary || {};
-        const daily = data.daily || { labels: [], views: [], downloads: [] };
+    function render(data) {
+        const s = data.summary;
+        const totalLeads = (s.total_leads || 0) + (s.whatsapp_click || 0);
         
-        // Robust device parsing (check both cases)
-        const rawDevices = data.devices || {};
-        const desktopCount = rawDevices.Desktop || rawDevices.desktop || 0;
-        const mobileCount = rawDevices.Mobile || rawDevices.mobile || 0;
-
-        // Cleanup existing charts
-        if (dailyChartInstance) dailyChartInstance.destroy();
-        if (deviceChartInstance) deviceChartInstance.destroy();
-
-        // Update counters
-        document.getElementById('total-views').innerText = summary.page_view || 0;
-        document.getElementById('total-downloads').innerText = summary.catalog_download || 0;
-        document.getElementById('whatsapp-clicks').innerText = summary.whatsapp_click || 0;
+        document.getElementById('total-views').innerText = s.page_view || 0;
+        document.getElementById('total-downloads').innerText = s.catalog_download || 0;
+        document.getElementById('total-leads').innerText = totalLeads;
+        document.getElementById('whatsapp-clicks').innerText = s.whatsapp_click || 0;
         
-        const views = summary.page_view || 1;
-        const downloads = summary.catalog_download || 0;
-        const rate = ((downloads / views) * 100).toFixed(1);
+        const rate = (((s.catalog_download || 0) / (s.page_view || 1)) * 100).toFixed(1);
         document.getElementById('conv-rate').innerText = `${rate}%`;
 
-        // Daily Chart
-        const dailyCtx = document.getElementById('dailyChart');
-        if (dailyCtx) {
-            dailyChartInstance = new Chart(dailyCtx.getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: daily.labels || [],
-                    datasets: [{
-                        label: 'צפיות',
-                        data: daily.views || [],
-                        borderColor: '#c4d71f',
-                        backgroundColor: 'rgba(196, 215, 31, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }, {
-                        label: 'הורדות',
-                        data: daily.downloads || [],
-                        borderColor: '#f8fafc',
-                        borderDash: [5, 5],
-                        fill: false,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { labels: { color: '#94a3b8' } }
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        if (chartInstance) chartInstance.destroy();
+        
+        chartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.daily.labels,
+                datasets: [
+                    {
+                        label: 'מבקרים',
+                        data: data.daily.views,
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: '#94a3b8',
+                        borderWidth: 1
                     },
-                    scales: {
-                        y: { 
-                            grid: { color: 'rgba(255,255,255,0.05)' }, 
-                            border: { display: false }, 
-                            ticks: { color: '#94a3b8' },
-                            beginAtZero: true
-                        },
-                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    {
+                        label: 'הורדות',
+                        data: data.daily.downloads,
+                        backgroundColor: '#c4d71f',
+                        borderRadius: 5
                     }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#f8fafc', font: { family: 'Assistant', size: 14 } } } },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
                 }
-            });
-        }
-
-        // Device Chart
-        const deviceCtx = document.getElementById('deviceChart');
-        if (deviceCtx) {
-            deviceChartInstance = new Chart(deviceCtx.getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Desktop', 'Mobile'],
-                    datasets: [{
-                        data: [desktopCount, mobileCount],
-                        backgroundColor: ['#2e5541', '#c4d71f'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { color: '#94a3b8' } }
-                    }
-                }
-            });
-        }
+            }
+        });
     }
 </script>
 </body>
