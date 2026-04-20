@@ -252,10 +252,18 @@
         const ctx = document.getElementById('mainChart').getContext('2d');
         if (chartInstance) chartInstance.destroy();
         
+        // Format dates for display (e.g., 20/04)
+        const formattedLabels = (data.daily.labels || []).map(label => {
+            try {
+                const date = new Date(label);
+                return date.toLocaleDateString('he-IL', { day: '2-digit', month: '12' === '12' ? '2-digit' : 'short' });
+            } catch (e) { return label; }
+        });
+
         chartInstance = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: data.daily.labels,
+                labels: formattedLabels,
                 datasets: [
                     {
                         label: 'מבקרים',
