@@ -473,7 +473,23 @@
       body:not(.edit-mode) .product-hidden { display: none !important; }
       @media print { .product-hidden { display: none !important; } }
       body.edit-mode .product-hidden { opacity: 0.35; filter: grayscale(1); }
+      body.edit-mode .product-item, body.edit-mode tr:has(.price-val) { cursor: pointer; }
       /* End Product Hiding Rules */
+
+      /* Image Hiding Rules */
+      body:not(.edit-mode) .image-hidden { display: none !important; }
+      @media print { .image-hidden { display: none !important; } }
+      body.edit-mode .image-hidden { opacity: 0.35; filter: grayscale(1); }
+      body.edit-mode .product-image-box img, body.edit-mode .product-item-image img { cursor: pointer; }
+      
+      /* Hide text under image if image is hidden */
+      body:not(.edit-mode) div:has(> .product-image-box > img.image-hidden):has(> .product-item-name) { display: none !important; }
+      @media print { div:has(> .product-image-box > img.image-hidden):has(> .product-item-name) { display: none !important; } }
+      body.edit-mode div:has(> .product-image-box > img.image-hidden):has(> .product-item-name) { opacity: 0.35; filter: grayscale(1); }
+
+      /* Prevent line breaks for text under images */
+      .product-image-box + .product-item-name { white-space: nowrap; }
+      /* End Image Hiding Rules */
 
       .admin-controls { position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; gap: 8px; border: 1px solid #e0e0e0; direction: ltr; }
       .admin-btn { padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 14px; display: flex; align-items: center; gap: 8px; }
@@ -703,7 +719,7 @@
     <div class="page content-page">
       <div class="page-header">
         <h1 class="page-title">מברשות איטום</h1>
-        <p class="page-subtitle">מברשות איכותיות לאיטום חלונות ודלתות אלומיניום</p>
+        <p class="page-subtitle" contenteditable="true">מברשות איכותיות לאיטום חלונות ודלתות אלומיניום</p>
       </div>
 
       <div class="sections-wrapper">
@@ -884,7 +900,7 @@
     <div class="page content-page compact-page">
       <div class="page-header">
         <h1 class="page-title">גלגלים למערכות הזזה</h1>
-        <p class="page-subtitle">גלגלים איכותיים לדגמי 9000, 7000, 7300</p>
+        <p class="page-subtitle" contenteditable="true">גלגלים איכותיים לדגמי 9000, 7000, 7300</p>
       </div>
 
       <div class="sections-wrapper">
@@ -1021,7 +1037,7 @@
     <div class="page content-page">
       <div class="page-header">
         <h1 class="page-title">ידיות ומערכות נעילה</h1>
-        <p class="page-subtitle">ידיות איכותיות במגוון צבעים ודגמים</p>
+        <p class="page-subtitle" contenteditable="true">ידיות איכותיות במגוון צבעים ודגמים</p>
       </div>
 
       <div class="sections-wrapper">
@@ -1088,7 +1104,7 @@
     <div class="page content-page">
       <div class="page-header">
         <h1 class="page-title">ידיות ומערכות נעילה</h1>
-        <p class="page-subtitle">ידיות איכותיות במגוון צבעים ודגמים</p>
+        <p class="page-subtitle" contenteditable="true">ידיות איכותיות במגוון צבעים ודגמים</p>
       </div>
 
       <div class="sections-wrapper">
@@ -1164,15 +1180,12 @@
     <div class="page content-page">
       <div class="page-header">
         <h1 class="page-title">רשתות</h1>
-        <p class="page-subtitle">פתרונות מיגון וסינון לחלונות ודלתות</p>
+        <p class="page-subtitle" contenteditable="true">פתרונות מיגון וסינון לחלונות ודלתות</p>
       </div>
 
       <div class="sections-wrapper">
         <div class="product-section" style="display: block;">
-          <h2 class="product-name" style="text-align: center;">רשתות</h2>
-          <p class="product-description" style="text-align: center;">
-            רשתות פיברגלס, שקופה, פוליפרופילן וגלילה. כולל חיתוך לפי מידה.
-          </p>
+
 
           <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 30px; text-align: center;">
             <div style="display: flex; flex-direction: column; align-items: center; width: 150px;">
@@ -1233,7 +1246,7 @@
     <div class="page content-page">
       <div class="page-header">
         <h1 class="page-title">מחברים ומנעולים</h1>
-        <p class="page-subtitle">פתרונות משלימים למערכות אלומיניום</p>
+        <p class="page-subtitle" contenteditable="true">פתרונות משלימים למערכות אלומיניום</p>
       </div>
 
       <div class="sections-wrapper">
@@ -1360,7 +1373,7 @@
 
       <div class="copyright">© כל הזכויות שמורות לאנפי יבוא ושיווק בע"מ | מעל 60 שנים של ניסיון</div>
     </div>
-  <div class="admin-controls">
+  <div class="admin-controls" contenteditable="false">
       <button class="admin-btn btn-edit" id="toggleEdit"><span>✖ בטל עריכה</span></button>
       <button class="admin-btn btn-save" id="saveChanges"><span>💾 שמירה</span></button>
       <button class="admin-btn btn-print" id="printPage" onclick="window.print()"><span>🖨️ הדפסה</span></button>
@@ -1374,7 +1387,8 @@
       toggle.onclick = () => {
         const isEdit = body.classList.toggle('edit-mode');
         toggle.querySelector('span').textContent = isEdit ? '✖ בטל עריכה' : '✎ עריכה';
-        if (isEdit) initPriceControls(); // Fixed: Re-scan when entering edit mode to catch new text
+        if (typeof updateEditableStates === 'function') updateEditableStates(isEdit);
+        if (isEdit) initPriceControls();
       };
 
       toggleAllPrices.onclick = () => {
@@ -1389,6 +1403,7 @@
           const wasEdMode = body.classList.contains('edit-mode');
           body.classList.remove('edit-mode');
           toggle.querySelector('span').textContent = '✎ עריכה';
+          if (typeof updateEditableStates === 'function') updateEditableStates(false);
           
           const html = '<!doctype html>\n' + document.documentElement.outerHTML;
           
@@ -1396,6 +1411,7 @@
           if (wasEdMode) {
             body.classList.add('edit-mode');
             toggle.querySelector('span').textContent = '✖ בטל עריכה';
+            if (typeof updateEditableStates === 'function') updateEditableStates(true);
           }
           if (window.showSaveFilePicker) {
             const h = await window.showSaveFilePicker({suggestedName:"local.html", types:[{description:"HTML", accept:{"text/html":[".html"]}}]});
@@ -1437,6 +1453,27 @@
         const btnHideSymbol = e.target.closest('.hide-symbol-btn');
         const btnHideProduct = e.target.closest('.hide-product-btn');
 
+        // Direct click on product image to hide logic
+        const imageEl = e.target.closest('.product-image-box img, .product-item-image img');
+        if (imageEl && !e.target.closest('.global-price-controls') && !e.target.closest('.admin-controls') && !e.target.closest('.rtf-toolbar')) {
+          imageEl.classList.toggle('image-hidden');
+          saveDraft();
+          return;
+        }
+
+        // Direct click on product to hide logic
+        const productEl = e.target.closest('.product-item, tr:has(.price-val)');
+        if (productEl && !e.target.closest('[contenteditable="true"]') && !e.target.closest('.global-price-controls') && !e.target.closest('.admin-controls') && !e.target.closest('.rtf-toolbar') && !btnHidePrice && !btnHideSymbol && !btnHideProduct) {
+          productEl.classList.toggle('product-hidden');
+          saveDraft();
+          
+          const bar = document.querySelector('.global-price-controls');
+          if (bar && bar.currentContainer && bar.currentContainer.closest('.product-item, tr') === productEl) {
+             bar.querySelector('.hide-product-btn').textContent = productEl.classList.contains('product-hidden') ? 'הצג מוצר' : 'הסתר מוצר';
+          }
+          return;
+        }
+
         if (btnHideProduct) {
           const bar = e.target.closest('.global-price-controls');
           if (!bar || !bar.currentContainer) return;
@@ -1466,11 +1503,19 @@
 
       // LocalStorage Persistence Logic
       function saveDraft() {
+        const textsObj = {};
+        document.querySelectorAll('[data-editable-id]').forEach(el => {
+          textsObj[el.getAttribute('data-editable-id')] = el.innerHTML;
+        });
+
         const state = {
-          texts: Array.from(document.querySelectorAll('[contenteditable="true"]')).map(el => el.innerHTML),
+          textsObj,
+          texts: Array.from(document.querySelectorAll('[contenteditable="true"]:not(.page-subtitle)')).map(el => el.innerHTML),
+          subtitles: Array.from(document.querySelectorAll('.page-subtitle')).map(el => el.innerHTML),
           hiddenPrices: Array.from(document.querySelectorAll('.product-price, td:has(.price-val)')).map(el => el.classList.contains('price-hidden')),
           hiddenSymbols: Array.from(document.querySelectorAll('.currency-symbol')).map(el => el.classList.contains('symbol-hidden')),
           hiddenProducts: Array.from(document.querySelectorAll('.product-item, tr:has(.price-val)')).map(el => el.classList.contains('product-hidden')),
+          hiddenImages: Array.from(document.querySelectorAll('.product-image-box img, .product-item-image img')).map(el => el.classList.contains('image-hidden')),
           hideAllPrices: body.classList.contains('hide-all-prices')
         };
         localStorage.setItem('anfi-catalog-draft', JSON.stringify(state));
@@ -1481,23 +1526,39 @@
         if (!raw) return null;
         try {
           const state = JSON.parse(raw);
-          const editables = document.querySelectorAll('[contenteditable="true"]');
-          const prices = document.querySelectorAll('.product-price, td:has(.price-val)');
           
-          if (state.texts) {
-            // Rescue backwards compatibility: remove corrupted inline control texts from the draft array
-            let sanitizedTexts = state.texts.filter(text => {
-              if (typeof text !== 'string') return true;
-              return !text.includes('hide-price-btn') && !text.includes('price-controls');
-            });
-
-            sanitizedTexts.forEach((text, i) => {
-              if (editables[i]) {
-                editables[i].innerHTML = text;
-                // Cleanup rogue buttons from innerHTML overrides
-                editables[i].querySelectorAll('.price-controls, .ctrl-btn, .global-price-controls').forEach(el => el.remove());
+          if (state.textsObj) {
+            document.querySelectorAll('[data-editable-id]').forEach(el => {
+              const id = el.getAttribute('data-editable-id');
+              if (state.textsObj[id]) {
+                el.innerHTML = state.textsObj[id];
               }
             });
+          } else {
+            const editables = document.querySelectorAll('[contenteditable="true"]:not(.page-subtitle)');
+            const subtitles = document.querySelectorAll('.page-subtitle');
+            
+            if (state.subtitles) {
+              state.subtitles.forEach((text, i) => {
+                if (subtitles[i] && text && text !== '[object HTMLParagraphElement]') {
+                  subtitles[i].innerHTML = text;
+                }
+              });
+            }
+
+            if (state.texts) {
+              let sanitizedTexts = state.texts.filter(text => {
+                if (typeof text !== 'string') return true;
+                return !text.includes('hide-price-btn') && !text.includes('price-controls');
+              });
+
+              sanitizedTexts.forEach((text, i) => {
+                if (editables[i]) {
+                  editables[i].innerHTML = text;
+                  editables[i].querySelectorAll('.price-controls, .ctrl-btn, .global-price-controls').forEach(el => el.remove());
+                }
+              });
+            }
           }
           
           if (state.hiddenPrices) {
@@ -1513,6 +1574,13 @@
             const products = document.querySelectorAll('.product-item, tr:has(.price-val)');
             products.forEach((el, i) => {
               if (state.hiddenProducts[i] && products[i]) products[i].classList.add('product-hidden');
+            });
+          }
+
+          if (state.hiddenImages && state.hiddenImages.length > 0) {
+            const images = document.querySelectorAll('.product-image-box img, .product-item-image img');
+            images.forEach((el, i) => {
+              if (state.hiddenImages[i] && images[i]) images[i].classList.add('image-hidden');
             });
           }
 
@@ -1814,9 +1882,27 @@
         }
       });
 
+      function initEditableIDs() {
+        let idx = 0;
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, th, td, .cover-title, .cover-year, .category-header, .product-item-name, .product-item-desc, .product-name, .product-description, .price-val').forEach(el => {
+          if (!el.hasAttribute('data-editable-id') && !el.closest('.admin-controls') && !el.closest('.rtf-toolbar') && !el.closest('.global-price-controls')) {
+            el.setAttribute('data-editable-id', idx++);
+          }
+        });
+      }
+      
+      function updateEditableStates(isEdit) {
+        document.querySelectorAll('[data-editable-id]').forEach(el => {
+          if (isEdit) el.setAttribute('contenteditable', 'true');
+          else el.removeAttribute('contenteditable');
+        });
+      }
+
       // Load draft on startup
       document.addEventListener('DOMContentLoaded', () => {
+        initEditableIDs();
         const state = loadDraft(); // First load text into DOM so nodes are populated properly
+        if (body.classList.contains('edit-mode')) updateEditableStates(true);
         initPriceControls();
         initRTFToolbar(); // Then configure buttons and spans
         applySymbolStates(state); // Finally apply visibility states to the wrapped symbols
@@ -1824,7 +1910,9 @@
       });
       // Fallback if DOMContentLoaded already fired
       if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        initEditableIDs();
         const state = loadDraft();
+        if (body.classList.contains('edit-mode')) updateEditableStates(true);
         initPriceControls();
         initRTFToolbar();
         applySymbolStates(state);
