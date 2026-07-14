@@ -1,0 +1,259 @@
+const ADMIN_PASSWORD = '3737';
+
+// UI Elements
+const loginArea = document.getElementById('login-area');
+const adminPanel = document.getElementById('admin-panel');
+const passwordInput = document.getElementById('password');
+const loginBtn = document.getElementById('login-btn');
+const loginError = document.getElementById('login-error');
+const logoutBtn = document.getElementById('logout-btn');
+
+const postsList = document.getElementById('posts-list');
+const postModal = document.getElementById('post-modal');
+const addPostBtn = document.getElementById('add-post-btn');
+const closeModalBtn = document.getElementById('close-modal');
+const postForm = document.getElementById('post-form');
+
+const modalTitle = document.getElementById('modal-title');
+const postIdInput = document.getElementById('post-id');
+const postTitleInput = document.getElementById('post-title');
+const postImageInput = document.getElementById('post-image');
+// const postContentInput = document.getElementById('post-content'); // Removed unused
+const htmlEditor = document.getElementById('html-editor');
+const toggleHtmlBtn = document.getElementById('toggle-html');
+const editorContainer = document.getElementById('editor-container');
+
+let isHtmlView = false;
+
+// Initialize Quill Editor
+const quill = new Quill('#editor-container', {
+    theme: 'snow',
+    modules: {
+        toolbar: [
+            [{ 'header': [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'align': [] }],
+            ['link', 'image', 'video'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['clean']
+        ]
+    },
+    placeholder: 'כתוב את תוכן הפוסט כאן...'
+});
+
+// Check Login State
+if (sessionStorage.getItem('anfi_admin_logged_in') === 'true') {
+    showAdmin();
+}
+
+// Login Logic
+loginBtn.addEventListener('click', () => {
+    if (passwordInput.value === ADMIN_PASSWORD) {
+        sessionStorage.setItem('anfi_admin_logged_in', 'true');
+        showAdmin();
+    } else {
+        loginError.style.display = 'block';
+        passwordInput.value = '';
+    }
+});
+
+passwordInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') loginBtn.click();
+});
+
+logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem('anfi_admin_logged_in');
+    location.reload();
+});
+
+function showAdmin() {
+    loginArea.style.display = 'none';
+    adminPanel.style.display = 'block';
+    renderAdminPosts();
+}
+
+// Post Management - Supabase
+async function fetchPosts() {
+    try {
+        const { data, error } = await supabaseClient
+            .from('blog_posts')
+            .select('*')
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching admin posts:', error);
+        return [];
+    }
+}
+
+async function renderAdminPosts() {
+    postsList.innerHTML = '<tr><td colspan="3" style="text-align: center;">טוען פוסטים...</td></tr>';
+    
+    const posts = await fetchPosts();
+    
+    postsList.innerHTML = '';
+    if (posts.length === 0) {
+        postsList.innerHTML = '<tr><td colspan="3" style="text-align: center;">אין פוסטים להצגה.</td></tr>';
+        return;
+    }
+
+    posts.forEach(post => {
+        const tr = document.createElement('tr');
+        const dateStr = new Date(post.created_at).toLocaleDateString('he-IL');
+        
+        tr.innerHTML = `
+            <td>${dateStr}</td>
+            <td><strong>${post.title}</strong></td>
+            <td class="admin-actions">
+                <a href="../post.html?id=${post.id}" target="_blank" class="btn btn-small" style="background: #e3f2fd; color: #1976d2; text-decoration: none;">צפה</a>
+                <button class="btn btn-small" onclick="editPost('${post.id}')">ערוך</button>
+                <button class="btn btn-small btn-danger" onclick="deletePost('${post.id}')">מחק</button>
+            </td>
+        `;
+        postsList.appendChild(tr);
+    });
+}
+
+// Global scope functions for onclick
+window.deletePost = async function(id) {
+    if (confirm('האם אתה בטוח שברצונך למחוק פוסט זה?')) {
+        try {
+            const { error } = await supabaseClient
+                .from('blog_posts')
+                .delete()
+                .eq('id', id);
+            
+            if (error) throw error;
+            renderAdminPosts();
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            alert('שגיאה במחיקת הפוסט');
+        }
+    }
+}
+
+window.editPost = async function(id) {
+    try {
+        const { data: post, error } = await supabaseClient
+            .from('blog_posts')
+            .select('*')
+            .eq('id', id)
+            .single();
+        
+        if (error) throw error;
+
+        modalTitle.innerText = 'עריכת פוסט';
+        postIdInput.value = post.id;
+        postTitleInput.value = post.title;
+        postImageInput.value = post.image_url || '';
+        
+        // Show modal first to ensure Quill container is visible (sometimes needed for layout/parsing)
+        postModal.style.display = 'block';
+
+        if (isHtmlView) {
+            // Force reset to visual view
+            isHtmlView = false;
+            htmlEditor.style.display = 'none';
+            editorContainer.style.display = 'block';
+            document.querySelector('.ql-toolbar').style.display = 'block';
+            toggleHtmlBtn.innerText = 'ערוך HTML </>';
+        }
+
+        // Use clipboard for more robust HTML pasting
+        quill.clipboard.dangerouslyPasteHTML(post.content || '');
+        htmlEditor.value = post.content || '';
+    } catch (error) {
+        console.error('Error fetching post for edit:', error);
+        alert('שגיאה בטעינת נתוני הפוסט');
+    }
+}
+
+// Modal Handlers
+addPostBtn.addEventListener('click', () => {
+    modalTitle.innerText = 'הוספת פוסט חדש';
+    postIdInput.value = '';
+    postForm.reset();
+    quill.setContents([]);
+    htmlEditor.value = '';
+    
+    // Reset to Visual view if in HTML view
+    if (isHtmlView) toggleHtmlBtn.click();
+    
+    postModal.style.display = 'block';
+});
+
+closeModalBtn.addEventListener('click', () => {
+    postModal.style.display = 'none';
+});
+
+window.onclick = function(event) {
+    if (event.target == postModal) {
+        postModal.style.display = 'none';
+    }
+}
+
+// Toggle HTML Source
+toggleHtmlBtn.addEventListener('click', () => {
+    if (!isHtmlView) {
+        // Switching to HTML view
+        htmlEditor.value = quill.root.innerHTML;
+        editorContainer.style.display = 'none';
+        document.querySelector('.ql-toolbar').style.display = 'none';
+        htmlEditor.style.display = 'block';
+        toggleHtmlBtn.innerText = 'חזרה לעורך ויזואלי';
+        isHtmlView = true;
+    } else {
+        // Switching to Quill view
+        quill.clipboard.dangerouslyPasteHTML(htmlEditor.value);
+        htmlEditor.style.display = 'none';
+        editorContainer.style.display = 'block';
+        document.querySelector('.ql-toolbar').style.display = 'block';
+        toggleHtmlBtn.innerText = 'ערוך HTML </>';
+        isHtmlView = false;
+    }
+});
+
+postForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const id = postIdInput.value;
+    const title = postTitleInput.value;
+    const image_url = postImageInput.value;
+    
+    let content;
+    // Sync content if in HTML view
+    if (isHtmlView) {
+        content = htmlEditor.value;
+        quill.clipboard.dangerouslyPasteHTML(content); // Keep Quill in sync
+    } else {
+        content = quill.root.innerHTML;
+    }
+
+    const postData = { title, image_url, content, updated_at: new Date().toISOString() };
+
+    try {
+        if (id) {
+            // Update
+            const { error } = await supabaseClient
+                .from('blog_posts')
+                .update(postData)
+                .eq('id', id);
+            if (error) throw error;
+        } else {
+            // Create
+            const { error } = await supabaseClient
+                .from('blog_posts')
+                .insert([postData]);
+            if (error) throw error;
+        }
+
+        postModal.style.display = 'none';
+        renderAdminPosts();
+    } catch (error) {
+        console.error('Error saving post:', error);
+        alert('שגיאה בשמירת הפוסט');
+    }
+});
