@@ -365,6 +365,27 @@
         text-align: right;
         flex-wrap: nowrap;
       }
+      .handle-item.new-item {
+        position: relative;
+        background: linear-gradient(135deg, #fffcfc 0%, #fff3f3 100%);
+        border-right: 4px solid #ff4d4d;
+        border-bottom: 1px solid #ffd1d1;
+        border-radius: 8px;
+        margin: 5px 0;
+        box-shadow: 0 2px 8px rgba(255, 77, 77, 0.08);
+      }
+      .badge-new {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #ff4d4d;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 3px 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 6px rgba(255, 77, 77, 0.3);
+      }
       .handle-item img {
         width: 100px;
         margin-left: 20px;
@@ -762,6 +783,14 @@
               class="handles-container"
               id="handlesContainer"
               style="display: none">
+              <div class="handle-item new-item">
+                <span class="badge-new">חדש!</span>
+                <img src="ידיות/modern.png" alt="ידית מודרנית" />
+                <div>
+                  <strong>ידית מודרנית</strong><br />צבעים: לבן | שחור | 101 | טבעי
+                  | קרם
+                </div>
+              </div>
               <div class="handle-item">
                 <img src="ידיות/hh6s.png" alt="חצי ידית כבדה 4 ברגים" />
                 <div>
@@ -1839,7 +1868,7 @@
       });
 
       // Statistics Tracking
-      const STATS_URL = "https://script.google.com/macros/s/AKfycbxgT7JkJsl5ONoIWXqDD-Afz1VB1VQlcWKBVvDP8CB0OwJh-vcdoTA23UdazX5FtVYjHA/exec";
+      const STATS_URL = "https://script.google.com/macros/s/AKfycbz69KsvMxbEK_MJfwl7qvkRD0KsgrlgNTRBZab5PrOONj2YJHY5_CeGI5VW7A48WA5f/exec";
 
       function logStat(eventType) {
         const data = {
