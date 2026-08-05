@@ -43,7 +43,7 @@
         <img src="logo white.png" alt="אנפי לוגו" class="logo">
     </a>
     <div style="margin-bottom: 1rem;">
-        <a href="../index.html" class="btn btn-small" style="background: white; color: var(--primary); border: 2px solid var(--accent);">חזרה לקטלוג המוצרים</a>
+        <a href="https://www.anfi.co.il/" class="btn btn-small" style="background: white; color: var(--primary); border: 2px solid var(--accent);">חזרה לקטלוג המוצרים</a>
     </div>
     <h1>הבלוג של אנפי</h1>
 </header>
@@ -83,6 +83,8 @@
             document.title = `אנפי - ${post.title}`;
             const dateFormatted = new Date(post.created_at).toLocaleDateString('he-IL');
             
+            const sanitizedContent = (post.content || '').replaceAll('https://anfialuminium.github.io/catalog/index.html', 'https://www.anfi.co.il/').replaceAll('https://anfialuminium.github.io/catalog/', 'https://www.anfi.co.il/');
+
             container.innerHTML = `
                 <div class="post-header">
                     <h1>${post.title}</h1>
@@ -91,7 +93,7 @@
                     </div>
                 </div>
                 ${post.image_url ? `<img src="${post.image_url}" class="post-full-image" alt="${post.title}">` : ''}
-                <div class="post-content-text">${post.content}</div>
+                <div class="post-content-text">${sanitizedContent}</div>
             `;
         } catch (error) {
             console.error('Error fetching post:', error);
