@@ -3,91 +3,2027 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>אנפי יבוא ושיווק בע״מ - מעביר לאתר הרשמי</title>
-    <meta http-equiv="refresh" content="0; url=https://www.anfi.co.il/" />
-    <link rel="canonical" href="https://www.anfi.co.il/" />
-    <script>
-      window.location.replace("https://www.anfi.co.il/");
+    <title>אנפי יבוא ושיווק בע״מ - קטלוג מוצרים</title>
+    <meta name="description" content="אנפי יבוא ושיווק בע״מ - קטלוג מוצרים. יבוא ושיווק מוצרי אלומיניום, מנעולים, ידיות ואביזרים מעל 60 שנה." />
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <!-- Facebook Open Graph Meta Tags -->
+    <meta property="og:site_name" content="אנפי יבוא ושיווק" />
+    <meta property="og:title" content="אנפי יבוא ושיווק בע״מ - קטלוג מוצרים" />
+    <meta property="og:description" content="יבוא ושיווק מוצרי אלומיניום, מנעולים, ידיות ואביזרים מעל 60 שנה." />
+    <meta property="og:image" content="https://anfialuminium.github.io/catalog/logobig.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="768" />
+    <meta property="og:url" content="https://anfialuminium.github.io/catalog/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "אנפי יבוא ושיווק",
+      "url": "https://anfialuminium.github.io/catalog/"
+    }
     </script>
+
     <style>
       :root {
-        --primary: #2e5541;
-        --accent: #c4d71f;
-        --bg: #f8fafc;
-        --text: #1e293b;
+        --primary: #2e5541; /* ירוק כהה אלגנטי */
+        --accent: #c4d71f; /* ירוק לימוני עדין למגע של חיים */
+        --light-bg: #f3f4f6; /* רקע בהיר ונקי */
+        --text: #1f1f1f; /* טקסט כהה */
+        --muted: #5f5f5f; /* טקסט משני */
       }
       body {
-        font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background-color: var(--bg);
+        font-family: "Assistant", sans-serif;
+        margin: 0;
+        background: var(--light-bg);
         color: var(--text);
+        overflow-x: hidden;
+      }
+      header {
+        background: linear-gradient(135deg, var(--primary), #3f6c54);
+        color: white;
+        text-align: center;
+        padding: 3rem 1rem 2rem;
+        border-bottom: 3px solid var(--accent);
+        position: relative;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.8rem;
+        font-weight: 700;
+      }
+      header p {
+        margin: 0.7rem 0 0;
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+        text-align: center;
+      }
+      h2 {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--accent);
+        margin: 0.6rem auto 0;
+        border-radius: 2px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        padding-bottom: 2rem;
+        align-items: start;
+      }
+      /* Brush card expansion behavior */
+      .brush-card {
+        align-self: start;
+        height: auto !important;
+        transition: all 0.3s ease;
+      }
+      .product-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: right;
+        direction: rtl;
+      }
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      }
+      .product-image {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 20px 20px 0 0;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .product-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.15),
+          transparent 60%
+        );
+        border-radius: 20px 20px 0 0;
+      }
+      .product-content {
+        padding: 1.5rem 1.8rem 2rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .product-content h3 {
+        margin: 0 0 0.6rem 0;
+        color: var(--primary);
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .product-content p {
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .btn-contact {
+        display: block;
+        width: fit-content;
+        margin: 2rem auto 0;
+        padding: 0.9rem 2rem;
+        background: var(--accent);
+        color: #1f1f1f;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        text-decoration: none;
+        text-align: center;
+      }
+      .btn-contact:hover {
+        background: #a8bf1a;
+        color: #000;
+        transform: scale(1.05);
+      }
+      footer {
+        background: var(--primary);
+        color: #f1f1f1;
+        text-align: center;
+        padding: 1.2rem;
+        margin-top: 4rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
+      }
+      .whatsapp-float {
+        position: fixed;
+        bottom: 22px;
+        left: 22px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        width: 64px;
+        height: 64px;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        text-align: center;
-        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: transform 0.25s ease;
+        z-index: 100;
+        text-decoration: none;
       }
-      .card {
-        background: white;
-        padding: 2.5rem 2rem;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        max-width: 480px;
-        width: 100%;
-        border-top: 4px solid var(--primary);
+      .whatsapp-float:hover {
+        transform: scale(1.1);
       }
+      .whatsapp-float img {
+        width: 36px;
+        height: 36px;
+      }
+      /* Additional styles for the handles gallery */
+      .catBtn.selected {
+        background: #c4d71f !important;
+      }
+      .handles-gallery {
+        display: flex;
+        gap: 8px;
+        margin-top: 1rem;
+      }
+      .handles-gallery img {
+        width: 100px;
+        height: 100px;
+        border-radius: 12px;
+        object-fit: contain;
+        background-color: #f3f3f3;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .handles-gallery img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      /* Popup image enlargement styles */
       .logo {
-        max-width: 160px;
+        width: 220px;
         height: auto;
-        margin-bottom: 1.5rem;
+        display: block;
+        margin: 0 auto;
       }
-      h1 {
-        font-size: 1.5rem;
-        color: var(--primary);
-        margin: 0 0 1rem;
+      .image-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
       }
-      p {
-        color: #64748b;
-        font-size: 1.05rem;
-        line-height: 1.6;
-        margin: 0 0 1.5rem;
+      .image-popup img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
       }
-      .btn {
-        display: inline-block;
+      .popup-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #ffffffcc;
+        color: #000;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 1rem;
+        border: 2px solid red;
+      }
+      /* Styles for the brush table container and table */
+      .table-container {
+        max-width: 600px;
+        margin: 1.5rem auto 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: white;
+        overflow-x: auto;
+        text-align: center;
+        max-width: 100% !important;
+      }
+      .table-container th,
+      .table-container td {
+        white-space: normal;
+      }
+      .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        direction: rtl;
+        table-layout: auto !important;
+      }
+      .table-container td:nth-child(2),
+      .table-container th:nth-child(2) {
+        width: 180px;
+        white-space: nowrap;
+      }
+      .table-container thead th {
         background-color: var(--primary);
         color: white;
-        text-decoration: none;
-        padding: 0.8rem 1.8rem;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: background-color 0.2s ease, transform 0.1s ease;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        font-weight: 700;
+        font-size: 0.9rem;
       }
-      .btn:hover {
-        background-color: #234333;
-        transform: translateY(-1px);
+      .table-container tbody td {
+        padding: 0.7rem 1rem;
+        border: 1px solid #ddd;
+        font-size: 0.82rem;
+        color: var(--text);
       }
-      .spinner {
-        width: 32px;
-        height: 32px;
-        border: 3px solid rgba(46, 85, 65, 0.2);
-        border-radius: 50%;
-        border-top-color: var(--primary);
-        animation: spin 0.8s linear infinite;
+      .table-container tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      /* Ensure all brush section headers look identical */
+      .table-container td[colspan="3"] {
+        background: #f0f0f0 !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+        padding: 0.7rem 1rem !important;
+        border: 1px solid #ddd !important;
+        font-size: 0.9rem !important;
+      }
+      #toggleBrushTableBtn,
+      #toggleHandlesBtn,
+      #togglePullHandlesBtn,
+      #toggleNetsBtn,
+      #toggleWheelsBtn,
+      #toggleBtn,
+      #toggleWindowLocksBtn,
+      #toggleLocksBtn,
+      #toggleCornersBtn {
+        margin: 1rem auto 0;
+        display: block;
+        padding: 0.7rem 1.5rem;
+        background-color: var(--accent);
+        color: #1f1f1f;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      #toggleBrushTableBtn:hover,
+      #toggleHandlesBtn:hover,
+      #togglePullHandlesBtn:hover,
+      #toggleNetsBtn:hover,
+      #toggleWheelsBtn:hover,
+      #toggleBtn:hover,
+      #toggleWindowLocksBtn:hover,
+      #toggleLocksBtn:hover,
+      #toggleCornersBtn:hover {
+        background-color: #a8bf1a;
+      }
+
+      .handles-container {
+        max-width: 600px;
         margin: 1.5rem auto 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: white;
+        /* overflow-x: auto; removed */
+        text-align: center;
+        padding: 1rem;
+        max-width: 100%;
+        overflow-x: hidden;
       }
-      @keyframes spin {
-        to { transform: rotate(360deg); }
+      .handle-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        text-align: right;
+        flex-wrap: nowrap;
+      }
+      .handle-item.new-item {
+        position: relative;
+        background: linear-gradient(135deg, #fffcfc 0%, #fff3f3 100%);
+        border-right: 4px solid #ff4d4d;
+        border-bottom: 1px solid #ffd1d1;
+        border-radius: 8px;
+        margin: 5px 0;
+        box-shadow: 0 2px 8px rgba(255, 77, 77, 0.08);
+      }
+      .badge-new {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #ff4d4d;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 3px 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 6px rgba(255, 77, 77, 0.3);
+      }
+      .handle-item img {
+        width: 100px;
+        margin-left: 20px;
+        border-radius: 6px;
+      }
+
+      @media print {
+        #toggleBrushTableBtn,
+        #toggleHandlesBtn,
+        #togglePullHandlesBtn,
+        #toggleWheelsBtn,
+        #toggleNetsBtn,
+        #toggleBtn,
+        #toggleWindowLocksBtn,
+        #toggleLocksBtn,
+        #toggleCornersBtn,
+        #downloadPdfBtn,
+        #toggleAllBtn {
+          display: none !important;
+        }
+
+        #brushTableContainer,
+        #handlesContainer,
+        #pullHandlesContainer,
+        #wheelsContainer,
+        #netsContainer,
+        #cornersContainer,
+        #windowLocksContainer,
+        #locksContainer {
+          display: block !important;
+        }
+
+        .product-card:hover {
+          transform: none;
+          box-shadow: none;
+        }
       }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-X483PK63CM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-X483PK63CM");
+    </script>
   </head>
   <body>
-    <div class="card">
-      <img src="logo.png" alt="אנפי יבוא ושיווק בע״מ" class="logo" />
-      <h1>מעביר אתכם לאתר אנפי...</h1>
-      <p>הקטלוג הדיגיטלי עבר לכתובת החדשה שלנו.</p>
-      <a href="https://www.anfi.co.il/" class="btn">לחצו כאן אם אינכם מועברים אוטומטית</a>
-      <div class="spinner"></div>
+    <button
+      id="scrollTopBtn"
+      style="
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 200000;
+        background: #ffffff;
+        border: 2px solid #000;
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        cursor: pointer;
+      ">
+      &#8679;
+    </button>
+    <header>
+      <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">אנפי יבוא ושיווק בע״מ - קטלוג מוצרים</h1>
+      <a href="#">
+        <img
+          src="logo white.png"
+          alt="אנפי יבוא ושיווק בע״מ לוגו"
+          class="logo" />
+      </a>
+      <br />
+      <p
+        style="
+          color: white;
+          font-size: 1.2rem;
+          margin: -1rem 0 0;
+          font-family: 'Assistant', sans-serif;
+        ">
+        מעל 60 שנים של ניסיון
+      </p>
+      <p>
+        <a
+          href="mailto:anfialuminium@gmail.com"
+          style="color: white; text-decoration: none"
+          >anfialuminium@gmail.com</a
+        >
+        |
+        <a href="tel:0528366744" style="color: white; text-decoration: none"
+          >שחר 052-8366744</a
+        >
+      </p>
+      <button
+        id="openLeadPopupBtn"
+        style="
+          margin-top: 1.5rem;
+          padding: 0.8rem 2rem;
+          background-color: var(--accent);
+          color: #1f1f1f;
+          border: none;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        "
+        onmouseover="this.style.transform='scale(1.05)'"
+        onmouseout="this.style.transform='scale(1)'">
+        לקבלת הצעת מחיר בקליק &larr;
+      </button>
+    </header>
+
+    <section class="container">
+      <a
+        id="downloadPdfBtn"
+        href="print_assets/Catalog_Anfi.pdf"
+        download="אנפי - קטלוג מוצרים.pdf"
+        target="_blank"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 2.5rem;
+          padding: 1rem 2.5rem;
+          background-color: white;
+          color: #d32f2f;
+          border: 2px solid #d32f2f;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(211, 47, 47, 0.15);
+        "
+        onmouseover="this.style.backgroundColor='#d32f2f'; this.style.color='white'; this.style.boxShadow='0 6px 20px rgba(211, 47, 47, 0.3)'; this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.backgroundColor='white'; this.style.color='#d32f2f'; this.style.boxShadow='0 4px 15px rgba(211, 47, 47, 0.15)'; this.style.transform='translateY(0)'">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          style="flex-shrink: 0">
+          <path
+            d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3.5h-1.5V9h1.5v1.5h-1.5V12h-1.5V7h3v1zm-8 3H14V8.5h1v3zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z" />
+        </svg>
+        להורדת הקטלוג
+      </a>
+      <h2>קטלוג מוצרים</h2>
+      <button
+        id="toggleAllBtn"
+        style="
+          margin-bottom: 20px;
+          padding: 0.7rem 1.5rem;
+          background-color: var(--accent);
+          border: none;
+          border-radius: 25px;
+          font-weight: 700;
+          font-size: 1rem;
+          cursor: pointer;
+        ">
+        הצג הכל
+      </button>
+      <div class="grid">
+        <div class="brush-card">
+          <div class="product-card">
+            <div
+              class="product-image"
+              style="
+                background-image: url(מברשות/whitebrushcatalog2.png);
+              "></div>
+            <div class="product-content">
+              <h3>מברשות</h3>
+              <p>לחץ על 'הצג טבלת מברשות' כדי לראות את כל סוגי המברשות.</p>
+              <button id="toggleBrushTableBtn">הצג טבלת מברשות</button>
+              <div
+                class="table-container"
+                style="display: none"
+                id="brushTableContainer">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>תיאור</th>
+                      <th>מידה</th>
+                      <th>כמות בקרטון</th>
+                    </tr>
+                    <tr>
+                      <td
+                        colspan="3"
+                        style="
+                          text-align: center;
+                          font-weight: 700;
+                          background: #f0f0f0;
+                        ">
+                        מברשות רגילות
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span style="white-space: nowrap">צר נמוך</span></td>
+                      <td>5.50 - 4.7</td>
+                      <td>4 × 375</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">צר גבוה - 12</span>
+                      </td>
+                      <td>12 - 4.7</td>
+                      <td>4 × 250</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">צר גבוה - 15</span>
+                      </td>
+                      <td>15 - 4.7</td>
+                      <td>4 × 200</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">צר גבוה - 20</span>
+                      </td>
+                      <td>20.0 - 4.7</td>
+                      <td>4 × 150</td>
+                    </tr>
+                    <tr>
+                      <td><span style="white-space: nowrap">רחב נמוך</span></td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >6.7 - 5.00</span
+                        >
+                      </td>
+                      <td>4 × 375</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">רחב גבוה - 12</span>
+                      </td>
+                      <td>12 - 6.7</td>
+                      <td>4 × 200</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">רחב גבוה - 15</span>
+                      </td>
+                      <td>15 - 6.7</td>
+                      <td>4 × 150</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">רחב גבוה - 20</span>
+                      </td>
+                      <td>20.0 - 6.7</td>
+                      <td>4 × 100</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="white-space: nowrap">מברשת אינסרט</span>
+                      </td>
+                      <td>24/12</td>
+                      <td>6 × 50</td>
+                    </tr>
+                    <tr>
+                      <td
+                        colspan="3"
+                        style="
+                          text-align: center;
+                          font-weight: 700;
+                          background: #f0f0f0;
+                        ">
+                        מברשות סנפיר
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר שווה (7300)</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >6.00 - 4.7 =</span
+                        >
+                      </td>
+                      <td>4 × 450</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר גבוה (7000)</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >6.7 - 5.50 + 2</span
+                        >
+                      </td>
+                      <td>4 × 350</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר גבוה (7300)</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >4.7 - 5.50 + 2</span
+                        >
+                      </td>
+                      <td>4 × 400</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר שווה (1700)</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >4.7 - 5.5 =</span
+                        >
+                      </td>
+                      <td>4 × 500</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר שווה (7600)</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >6.7 - 6.50 =</span
+                        >
+                      </td>
+                      <td>4 × 350</td>
+                    </tr>
+                    <tr>
+                      <td>סנפיר שווה (2200)</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >6.7 - 9.0 =</span
+                        >
+                      </td>
+                      <td>4 × 275</td>
+                    </tr>
+                    <tr>
+                      <td
+                        colspan="3"
+                        style="
+                          text-align: center;
+                          font-weight: 700;
+                          background: #f0f0f0;
+                        ">
+                        מברשות הדבקה
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>הדבקה D.P</td>
+                      <td>
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >4.5 - 15.00</span
+                        >
+                      </td>
+                      <td>4 × 25</td>
+                    </tr>
+                    <tr>
+                      <td>הדבקה 12mm גלילים</td>
+                      <td>12 - 6.7</td>
+                      <td>4 × 200</td>
+                    </tr>
+                    <tr>
+                      <td>הדבקה</td>
+                      <td>
+                        קופסה 5 מ׳<br />
+                        <span
+                          style="direction: ltr; unicode-bidi: bidi-override"
+                          >7 - 12</span
+                        >
+                      </td>
+                      <td>100</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url(ידיות/BlackRoundedHandle.png)"></div>
+          <div class="product-content">
+            <h3>ידיות</h3>
+            <p>לחץ על 'הצג ידיות' כדי לראות את כל הידיות.</p>
+            <button id="toggleHandlesBtn">הצג ידיות</button>
+            <div
+              class="handles-container"
+              id="handlesContainer"
+              style="display: none">
+              <div class="handle-item new-item">
+                <span class="badge-new">בקרוב</span>
+                <img src="ידיות/088-black.png" alt="ידית מודרנית" />
+                <div>
+                  <strong>ידית מודרנית</strong><br />צבעים: שחור
+                </div>
+              </div>
+              <div class="handle-item new-item">
+                <span class="badge-new">בקרוב</span>
+                <img src="ידיות/078-black.png" alt="ידית קלאסית" />
+                <div>
+                  <strong>ידית קלאסית</strong><br />צבעים: שחור
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="ידיות/hh6s.png" alt="חצי ידית כבדה 4 ברגים" />
+                <div>
+                  <strong>חצי ידית כבדה 4 ברגים</strong><br />צבעים: לבן | שחור
+                  | 101 | טבעי | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="ידיות/hhh4s.png" alt="חצי ידית 6 ברגים" />
+                <div>
+                  <strong>חצי ידית 6 ברגים</strong><br />צבעים: לבן | שחור | 101
+                  | טבעי | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="ידיות/alma.png" alt="ידית 4 ברגים" />
+                <div>
+                  <strong>חצי ידית משופרת אלמא ימין שמאל</strong><br />צבעים:
+                  לבן | שחור | 101 | טבעי | קרם
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="ידיות/kh.png" alt="ידית קיפ" style="width: 75px;" />
+                <div>
+                  <strong>ידית קיפ</strong><br />צבעים: לבן | שחור | 101 | טבעי
+                  | קרם
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="
+              background-image: url('ידיות/ידיות בר משיכה/sbph-bg.png');
+            "></div>
+          <div class="product-content">
+            <h3>ידיות משיכה</h3>
+            <p>ידיות משיכה בודדות וכפולות - במגוון מידות.</p>
+            <button id="togglePullHandlesBtn">הצג ידיות משיכה</button>
+            <div
+              class="handles-container"
+              id="pullHandlesContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img
+                  src="ידיות/ידיות בר משיכה/snph.png"
+                  alt="ידית משיכה בודדת נירוסטה" />
+                <div>
+                  <strong>ידית משיכה בודדת - נירוסטה</strong><br />
+                  מידות: 35/50, 50/70, 70/100, 90/120
+                </div>
+              </div>
+
+              <div class="handle-item">
+                <img
+                  src="ידיות/ידיות בר משיכה/sbph.png"
+                  alt="ידית משיכה בודדת צבע שחור" />
+                <div>
+                  <strong>ידית משיכה בודדת - שחור</strong><br />
+                  מידות: 35/50, 50/70, 70/100, 90/120
+                </div>
+              </div>
+
+              <div class="handle-item">
+                <img
+                  src="ידיות/ידיות בר משיכה/dnph.png"
+                  alt="ידית משיכה כפולה נירוסטה" />
+                <div>
+                  <strong>ידית משיכה כפולה - נירוסטה</strong><br />
+                  מידות: 35/50, 50/70, 70/100, 90/120
+                </div>
+              </div>
+
+              <div class="handle-item">
+                <img
+                  src="ידיות/ידיות בר משיכה/dbph.png"
+                  alt="ידית משיכה כפולה צבע שחור" />
+                <div>
+                  <strong>ידית משיכה כפולה - שחור</strong><br />
+                  מידות: 35/50, 50/70, 70/100, 90/120
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('גלגלים/bdw.png')"></div>
+          <div class="product-content">
+            <h3>גלגלים</h3>
+            <p>
+              גלגלים לדגמי חלונות ודלתות 9000, 7000, 7300 - מתכתיים ופלסטיים
+              באיכות גבוהה.
+            </p>
+            <button id="toggleWheelsBtn">הצג גלגלים</button>
+            <div
+              class="handles-container"
+              id="wheelsContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="גלגלים/7000ws.png" alt="גלגל 7000 פלסטיק" />
+                <div>
+                  <strong>גלגל 7000 פלסטיק בודד מתכוונן</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/ssw.png" alt="גלגל 7000 מתכת בודד אפור" />
+                <div>
+                  <strong>גלגל 7000 מתכת בודד מתכוונן</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/7000wdw.png" alt="גלגל 7000 פלסטיק כפול משקל כבד" />
+                <div>
+                  <strong>גלגל 7000 פלסטיק כפול משקל כבד</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/sdw.png" alt="גלגל 7000 מתכת כפול משקל כבד" />
+                <div>
+                  <strong>גלגל 7000 מתכת כפול משקל כבד</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/7300wsw.png" alt="גלגל 7300 פלסטיק" />
+                <div><strong>גלגל 7300 פלסטיק בודד מתכוונן</strong></div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/bdw-wb.png" alt="גלגל 7300 פלסטיק כפול משקל כבד" />
+                <div>
+                  <strong>גלגל 7300 פלסטיק כפול משקל כבד</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/7300-plastic-single-wheel.png" alt="גלגל 7300 פלסטיק בודד לרשת" />
+                <div>
+                  <strong>גלגל 7300 פלסטיק בודד לרשת</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/wdw9000.png" alt="גלגל 9000 מתכת כפול משקל כבד" />
+                <div>
+                  <strong>גלגל 9000 מתכת כפול משקל כבד</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/9000psw.png" alt="גלגל 9000 פלסטיק בודד לרשת" />
+                <div>
+                  <strong>גלגל 9000 פלסטיק בודד לרשת</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="גלגלים/pwr.png" alt="גלגל פלסטיק לרשת קלה" />
+                <div>
+                  <strong>גלגל פלסטיק לרשת קלה</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url(רשתות/TransparentMesh.png)"></div>
+          <div class="product-content">
+            <h3>רשתות</h3>
+            <p>
+              רשתות פיברגלס, שקופה, פוליפרופילן וגלילה (0.5-2.5 מ׳) כולל חיתוך
+              לפי מידה.
+            </p>
+            <button id="toggleNetsBtn">הצג רשתות</button>
+            <div
+              class="handles-container"
+              id="netsContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="רשתות/רשת פיברגלס.png" alt="רשת פיברגלס" />
+                <div>
+                  <strong>רשת פיברגלס</strong><br />
+                  מידות (במטר): 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="רשתות/רשת שקופה.png" alt="רשת שקופה" />
+                <div>
+                  <strong>רשת שקופה</strong><br />
+                  מידות (במטר): 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.20, 1.50, 1.80, 2.00, 2.50
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="רשתות/רשת שקופה.png" alt="רשת שקופה פוליפרופילן" />
+                <div>
+                  <strong>רשת שקופה פוליפרופילן</strong><br />
+                  מידות (במטר): 1.00, 1.20, 1.50, 2.00
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="רשתות/רשת שקופה.png" alt="רשת בעלי חיים" />
+                <div>
+                  <strong>רשת בעלי חיים</strong><br />
+                  מידות (במטר): 1.00, 1.20, 1.50, 2.00
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="רשתות/רשת גלילה.png" alt="רשת גלילה" />
+                <div>
+                  <strong>רשת גלילה</strong><br />
+                  חיתוך לפי מידה עד לגובה של 2.50 מ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('פינות/corners.png')"></div>
+          <div class="product-content">
+            <h3>מחברי אלומיניום</h3>
+            <p>
+              פינות חיבור, פינות נעילה ונגדי נעילה לפרופילים ופתרונות אלומיניום.
+            </p>
+            <button id="toggleCornersBtn">הצג מחברי אלומיניום</button>
+            <div
+              class="handles-container"
+              id="cornersContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="פינות/4300.png" alt="פינה 4300" />
+                <div>
+                  <strong>פינה 4300</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="פינות/7300.png" alt="פינה 7300" />
+                <div>
+                  <strong>פינה 7300</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="פינות/7300Tris_1.png" alt="פינה 7300 תריס" />
+                <div>
+                  <strong>פינה 7300 תריס</strong>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('אביזרי נעילה לחלונות/gasket.png')"></div>
+          <div class="product-content">
+            <h3>אביזרי נעילה לחלונות</h3>
+            <p>
+              פתרונות לנעילת חלונות - מזלגות נעילה ונגדי נעילה לסגירה הרמטית ופעולה חלקה ונוחה.
+            </p>
+            <button id="toggleWindowLocksBtn">הצג אביזרי נעילה לחלונות</button>
+            <div
+              class="handles-container"
+              id="windowLocksContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/no-bg/fork.png" alt="מזלג נעילה לחלון" />
+                <div>
+                  <strong>מזלג נעילה לחלון</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/no-bg/gasket.png" alt="נגד נעילה לחלון" />
+                <div>
+                  <strong>נגד נעילה לחלון</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/no-bg/drykeep-window-mechanism.png" alt="מנגנון דריי קיפ אלמא" />
+                <div>
+                  <strong>מנגנון דריי קיפ אלמא</strong>
+                </div>
+              </div>
+              <div class="handle-item">
+                <img src="אביזרי נעילה לחלונות/additional-window-lock-point.png" alt="נקודת נעילה נוספת לחלון" />
+                <div>
+                  <strong>נקודת נעילה נוספת לחלון</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div
+            class="product-image"
+            style="background-image: url('מנעולים/Locks.png')"></div>
+          <div class="product-content">
+            <h3>מנעולים חשמליים</h3>
+            <p>
+              מנעולים חשמליים איכותיים ועמידים - פתרון מתקדם ובטוח למערכות אלומיניום.
+            </p>
+            <button id="toggleLocksBtn">הצג מנעולים חשמליים</button>
+            <div
+              class="handles-container"
+              id="locksContainer"
+              style="display: none">
+              <div class="handle-item">
+                <img src="מנעולים/מנעול חשמלי - תוצרת ספרד.png" alt="מנעול חשמלי ספרדי חדש" />
+                <div>
+                  <strong>מנעול חשמלי ספרדי חדש</strong><br />
+                  מנעול חשמלי איכותי וחזק תוצרת ספרד לנעילה בטוחה ואמינה
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="mailto:anfialuminium@gmail.com"
+        class="btn-contact"
+        title="צור קשר במייל">
+        צור קשר במייל
+      </a>
+      <a
+        href="https://wa.me/972528366744"
+        class="btn-contact"
+        title="צור קשר בווטסאפ"
+        target="_blank"
+        style="margin-top: 1rem">
+        צור קשר בווטסאפ
+      </a>
+    </section>
+
+    <!-- Privacy Policy Section (hidden by default) -->
+    <section id="privacy" style="display: none; width: 100%">
+      <div class="container">
+        <h2>מדיניות פרטיות</h2>
+        <div style="text-align: right; direction: rtl">
+          אנפי יבוא ושיווק בע״מ (להלן: "החברה") רואה חשיבות רבה בשמירה על פרטיות לקוחותיה.
+          נתוני הפנייה שיימסרו על ידך (שם, טלפון, מייל, תחום עניין) משמשים אך ורק למטרת חזרה אליך, מענה לבקשתך ומתן הצעות מחיר.
+          <br><br>
+          <strong>מסירת המידע:</strong> מסירת המידע באתר נעשית מרצונך החופשי ואינך מחויב/ת על פי דין לעשות זאת. עם זאת, ללא מסירת הפרטים לא נוכל לחזור אליך.
+          <br><br>
+          <strong>שירותי צד ג' ואבטחה:</strong> המידע נשמר במערכות מאובטחות (כולל שירותי ענן של Google) המשמשות לניהול קשרי לקוחות. האתר משתמש ב-Google Analytics לצורך ניתוח סטטיסטי של הרגלי הגלישה ללא זיהוי אישי.
+          <br><br>
+          <strong>זכויותיך:</strong> איננו מעבירים את פרטיך לצד ג' למטרות שיווק ללא הסכמתך. בהתאם לחוק הגנת הפרטיות, הינך זכאי/ת לעיין במידע השמור עליך, לבקש לתקנו או למחוק אותו.
+          <br><br>
+          לכל שאלה או בקשת מחיקה, ניתן לפנות אלינו במייל:
+          <a href="mailto:anfialuminium@gmail.com">anfialuminium@gmail.com</a>
+          או בטלפון:
+          <a href="tel:0528366744">052-8366744</a>.
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility Statement Section (hidden by default) -->
+    <section id="accessibility" style="display: none; width: 100%">
+      <div
+        style="
+          text-align: right;
+          direction: rtl;
+          font-size: 1rem;
+          line-height: 1.8;
+          text-align: center;
+        ">
+        אתר אנפי יבוא ושיווק בע״מ שואף להנגיש את תכניו לכלל הציבור, כולל אנשים
+        עם מוגבלות. האתר נבנה תוך התחשבות בעקרונות נגישות בסיסיים, במטרה לאפשר
+        חוויית שימוש טובה ונוחה.
+
+        <br /><br />
+        <strong
+          style="
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+          "
+          >עקרונות הנגישות המיושמים באתר</strong
+        >
+        <ul
+          style="
+            padding-right: 18px;
+            margin-top: 0.5rem;
+            display: inline-block;
+            text-align: right;
+          ">
+          <li>
+            שימוש במבנה סמנטי תקין הכולל כותרות, חלוקה לאזורים ותגיות תיאוריות.
+          </li>
+          <li>תמיכה מלאה בשפה העברית ובכיוון כתיבה מימין לשמאל.</li>
+          <li>הוספת טקסט חלופי (alt) לתמונות רלוונטיות.</li>
+          <li>ניגודיות צבעים מספקת בין טקסט לרקע ברוב חלקי האתר.</li>
+          <li>אפשרות ניווט בסיסית באמצעות מקלדת ללא מלכודות נגישות.</li>
+          <li>כפתור חזרה לראש העמוד המופיע בעת גלילה.</li>
+          <li>הצגת הודעות שגיאה והצלחה בטופס באופן ברור, ללא חלונות קופצים.</li>
+        </ul>
+
+        <br />
+        אם נתקלת בבעיה או קושי בנושא נגישות, נשמח שתפנה אלינו:
+        <br />
+        מייל:
+        <a href="mailto:anfialuminium@gmail.com">anfialuminium@gmail.com</a>
+        <br />
+        טלפון: <a href="tel:0528366744">052-8366744</a>
+      </div>
+    </section>
+
+    <a
+      href="https://wa.me/972528366744"
+      target="_blank"
+      class="whatsapp-float"
+      title="שלח הודעה בוואטסאפ">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="וואטסאפ" />
+    </a>
+
+    <!-- Popup Lead Form -->
+    <div
+      id="leadPopup"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.55);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+      ">
+      <div
+        style="
+          background: white;
+          width: 90%;
+          max-width: 420px;
+          padding: 2rem 1.5rem;
+          border-radius: 16px;
+          text-align: right;
+          direction: rtl;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+          position: relative;
+        ">
+        <div
+          id="closeLeadPopup"
+          style="
+            position: absolute;
+            top: 10px;
+            left: 17px;
+            cursor: pointer;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #333;
+          ">
+          ×
+        </div>
+
+        <h3 style="margin-top: 0; color: #2e5541">השאר פרטים ונחזור אליך</h3>
+        <p style="color: #555; margin-bottom: 1rem">
+          נציג יחזור אליך בהקדם עם מידע ומחירים.
+        </p>
+
+        <div
+          id="formError"
+          style="
+            display: none;
+            background: #ffebeb;
+            color: #b40000;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+          "></div>
+        <div
+          id="formSuccess"
+          style="
+            display: none;
+            background: #e9f8e9;
+            color: #0f5d0f;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+          "></div>
+        <form id="leadForm">
+          <label>שם העסק <span style="color: red">*</span></label>
+          <input
+            type="text"
+            id="businessName"
+            style="
+              width: 100%;
+              box-sizing: border-box;
+              padding: 10px;
+              padding-left: 12px;
+              padding-right: 12px;
+              margin: 6px 0 12px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+            " />
+
+          <label>שם מלא <span style="color: red">*</span></label>
+          <input
+            type="text"
+            id="fullName"
+            style="
+              width: 100%;
+              box-sizing: border-box;
+              padding: 10px;
+              padding-left: 12px;
+              padding-right: 12px;
+              margin: 6px 0 12px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+            " />
+
+          <div style="margin-bottom: 16px">
+            <label>מייל</label>
+            <input
+              id="email"
+              type="email"
+              style="
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px 12px;
+                margin-top: 6px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+              " />
+          </div>
+
+          <label>טלפון <span style="color: red">*</span></label>
+          <input
+            type="tel"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            id="phone"
+            style="
+              width: 100%;
+              box-sizing: border-box;
+              padding: 10px;
+              padding-left: 12px;
+              padding-right: 12px;
+              margin: 6px 0 12px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+            " />
+
+          <label>תחום עניין <span style="color: red">*</span></label>
+          <div
+            id="categoryButtons"
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              margin: 6px 0 12px;
+            ">
+            <button
+              type="button"
+              class="catBtn"
+              data-value="ידיות"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              ידיות
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="גלגלים"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              גלגלים
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="מברשות"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              מברשות
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="רשתות"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              רשתות
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="מחברי אלומיניום"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              מחברי אלומיניום
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="אביזרי נעילה לחלונות"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              אביזרי נעילה לחלונות
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="מנעולים חשמליים"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              מנעולים חשמליים
+            </button>
+            <button
+              type="button"
+              class="catBtn"
+              data-value="אחר"
+              style="
+                padding: 10px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                cursor: pointer;
+              ">
+              אחר
+            </button>
+          </div>
+          <input type="hidden" id="category" />
+
+          <label>תיאור הבקשה (אופציונלי)</label>
+          <textarea
+            id="message"
+            rows="3"
+            style="
+              width: 100%;
+              box-sizing: border-box;
+              padding: 10px;
+              padding-left: 12px;
+              padding-right: 12px;
+              margin: 6px 0 16px;
+              border: 1px solid #ccc;
+            border-radius: 6px;
+            "></textarea>
+
+          <div
+            style="
+              margin-bottom: 20px;
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              font-size: 0.88rem;
+              color: #444;
+              line-height: 1.4;
+            ">
+            <input
+              type="checkbox"
+              id="privacyConsent"
+              style="margin-top: 3px; cursor: pointer; transform: scale(1.2)" />
+            <label for="privacyConsent" style="cursor: pointer">
+              אני מאשר/ת שמסירת הפרטים נעשית מרצוני החופשי לצורך קבלת הצעה, וכי
+              קראתי את
+              <a
+                href="#privacy"
+                onclick="document.getElementById('leadPopup').style.display = 'none';"
+                style="color: #2e5541; font-weight: 700"
+                >מדיניות הפרטיות</a
+              >.
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            style="
+              width: 100%;
+              padding: 12px;
+              background: #c4d71f;
+              border: none;
+              border-radius: 25px;
+              font-size: 1.1rem;
+              font-weight: bold;
+              cursor: pointer;
+              color: #1f1f1f;
+            ">
+            שלח
+          </button>
+        </form>
+      </div>
     </div>
+    <!-- Move id to the section containing קטלוג מוצרים -->
+    <script>
+      // Move id="mainContent" to the section containing קטלוג מוצרים h2
+      document.addEventListener("DOMContentLoaded", function () {
+        // Find the section with h2 "קטלוג מוצרים"
+        var allSections = document.querySelectorAll("section.container");
+        for (var i = 0; i < allSections.length; i++) {
+          var h2 = allSections[i].querySelector("h2");
+          if (h2 && h2.textContent.trim() === "קטלוג מוצרים") {
+            allSections[i].id = "mainContent";
+            break;
+          }
+        }
+      });
+      // Show scroll-to-top button after scrolling down
+      const scrollBtn = document.getElementById("scrollTopBtn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          scrollBtn.style.display = "block";
+        } else {
+          scrollBtn.style.display = "none";
+        }
+      });
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+    <div style="text-align: center; padding: 2rem 1rem 0;">
+      <a
+        id="blogBtn"
+        href="blog/index.html"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 1rem;
+          padding: 1rem 2.5rem;
+          background-color: white;
+          color: #1e40af;
+          border: 2px solid #1e40af;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(30, 64, 175, 0.15);
+        "
+        onmouseover="this.style.backgroundColor='#1e40af'; this.style.color='white'; this.style.boxShadow='0 6px 20px rgba(30, 64, 175, 0.3)'; this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.backgroundColor='white'; this.style.color='#1e40af'; this.style.boxShadow='0 4px 15px rgba(30, 64, 175, 0.15)'; this.style.transform='translateY(0)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0">
+           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v12h16V6H4zm2 3h12v2H6V9zm0 4h12v2H6v-2z"/>
+        </svg>
+        לבלוג של אנפי
+      </a>
+    </div>
+    <footer>
+      <p>אנפי יבוא ושיווק בע״מ | מעל 60 שנים של ניסיון</p>
+      <p>
+        <a
+          href="mailto:anfialuminium@gmail.com"
+          style="color: white; text-decoration: none"
+          >anfialuminium@gmail.com</a
+        >
+        |
+        <a href="tel:0528366744" style="color: white; text-decoration: none"
+          >שחר 052-8366744</a
+        >
+      </p>
+      <p>
+        <a href="#privacy" style="color: white; text-decoration: none"
+          >מדיניות פרטיות</a
+        >
+        |
+        <a href="#accessibility" style="color: white; text-decoration: none"
+          >הצהרת נגישות</a
+        >
+      </p>
+    </footer>
+    <script>
+      // Hash navigation for privacy/accessibility
+      function handleHashSections() {
+        var hash = location.hash;
+        var privacy = document.getElementById("privacy");
+        var accessibility = document.getElementById("accessibility");
+        var leadPopup = document.getElementById("leadPopup");
+        // main catalog section is the first .container inside a section
+        var mainCatalogSection = document.querySelector("section.container");
+        if (!privacy || !accessibility || !mainCatalogSection) return;
+        // Hide all by default
+        privacy.style.display = "none";
+        accessibility.style.display = "none";
+        mainCatalogSection.style.display = "block";
+        // Show relevant section if hash matches
+        if (hash === "#privacy") {
+          privacy.style.display = "block";
+          accessibility.style.display = "none";
+          mainCatalogSection.style.display = "none";
+          if (leadPopup) leadPopup.style.display = "none";
+          window.scrollTo(0, 0);
+        } else if (hash === "#accessibility") {
+          accessibility.style.display = "block";
+          privacy.style.display = "none";
+          mainCatalogSection.style.display = "none";
+          if (leadPopup) leadPopup.style.display = "none";
+          window.scrollTo(0, 0);
+        }
+      }
+      window.addEventListener("hashchange", handleHashSections);
+      window.addEventListener("DOMContentLoaded", handleHashSections);
+
+      // Popup enlarge for gallery images
+      document.querySelectorAll(".handles-gallery img").forEach((img) => {
+        img.addEventListener("click", () => {
+          const popup = document.createElement("div");
+          popup.classList.add("image-popup");
+          popup.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+          document.body.appendChild(popup);
+          popup.addEventListener("click", () => popup.remove());
+        });
+      });
+
+      // Popup enlarge for main product images (background-image)
+      document.querySelectorAll(".product-image").forEach((div) => {
+        div.addEventListener("click", () => {
+          // Get the background-image url property
+          const bg = window.getComputedStyle(div).backgroundImage;
+          // Extract the url from the string: url("...") or url('...')
+          const match = bg.match(/url\(["']?(.*?)["']?\)/);
+          if (match && match[1]) {
+            const imgUrl = match[1];
+            const popup = document.createElement("div");
+            popup.classList.add("image-popup");
+            popup.innerHTML = `
+          <div class="popup-close">סגור</div>
+          <img src="${imgUrl}" alt="">
+        `;
+            document.body.appendChild(popup);
+            popup
+              .querySelector(".popup-close")
+              .addEventListener("click", () => popup.remove());
+            popup.addEventListener("click", () => popup.remove());
+          }
+        });
+        // Optional: indicate clickable
+        div.style.cursor = "zoom-in";
+      });
+
+      // Popup enlarge for all images inside .handle-item and .table-container
+      document
+        .querySelectorAll(".handle-item img, .table-container img")
+        .forEach((img) => {
+          img.style.cursor = "zoom-in";
+          img.addEventListener("click", () => {
+            const popup = document.createElement("div");
+            popup.classList.add("image-popup");
+            popup.innerHTML = `
+          <div class="popup-close">סגור</div>
+          <img src="${img.src}" alt="${img.alt}">
+        `;
+            document.body.appendChild(popup);
+            popup
+              .querySelector(".popup-close")
+              .addEventListener("click", () => popup.remove());
+            popup.addEventListener("click", (e) => {
+              if (e.target === popup) popup.remove();
+            });
+          });
+        });
+
+      // Toggle all sections
+      function toggleAll() {
+        const sections = [
+          document.getElementById("brushTableContainer"),
+          document.getElementById("handlesContainer"),
+          document.getElementById("pullHandlesContainer"),
+          document.getElementById("wheelsContainer"),
+          document.getElementById("netsContainer"),
+          document.getElementById("cornersContainer"),
+          document.getElementById("windowLocksContainer"),
+          document.getElementById("locksContainer"),
+        ];
+        const btn = document.getElementById("toggleAllBtn");
+        const shouldHide = btn.textContent.trim() === "הסתר הכל";
+        sections.forEach((sec) => {
+          if (sec) sec.style.display = shouldHide ? "none" : "block";
+        });
+        btn.textContent = shouldHide ? "הצג הכל" : "הסתר הכל";
+        document.getElementById("toggleBrushTableBtn").textContent = shouldHide
+          ? "הצג טבלת מברשות"
+          : "הסתר טבלת מברשות";
+        document.getElementById("toggleHandlesBtn").textContent = shouldHide
+          ? "הצג ידיות"
+          : "הסתר ידיות";
+        document.getElementById("togglePullHandlesBtn").textContent = shouldHide
+          ? "הצג ידיות משיכה"
+          : "הסתר ידיות משיכה";
+        document.getElementById("toggleWheelsBtn").textContent = shouldHide
+          ? "הצג גלגלים"
+          : "הסתר גלגלים";
+        document.getElementById("toggleNetsBtn").textContent = shouldHide
+          ? "הצג רשתות"
+          : "הסתר רשתות";
+        document.getElementById("toggleCornersBtn").textContent = shouldHide
+          ? "הצג מחברי אלומיניום"
+          : "הסתר מחברי אלומיניום";
+        document.getElementById("toggleWindowLocksBtn").textContent = shouldHide
+          ? "הצג אביזרי נעילה לחלונות"
+          : "הסתר אביזרי נעילה לחלונות";
+        document.getElementById("toggleLocksBtn").textContent = shouldHide
+          ? "הצג מנעולים חשמליים"
+          : "הסתר מנעולים חשמליים";
+      }
+      document
+        .getElementById("toggleAllBtn")
+        .addEventListener("click", toggleAll);
+
+      // Function to toggle brush table visibility and button text
+      function toggleBrushTable() {
+        const container = document.getElementById("brushTableContainer");
+        const btn = document.getElementById("toggleBrushTableBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר טבלת מברשות";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג טבלת מברשות";
+        }
+      }
+
+      // Function to toggle handles list visibility and button text
+      function toggleHandles() {
+        const container = document.getElementById("handlesContainer");
+        const btn = document.getElementById("toggleHandlesBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר ידיות";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג ידיות";
+        }
+      }
+
+      function togglePullHandles() {
+        const container = document.getElementById("pullHandlesContainer");
+        const btn = document.getElementById("togglePullHandlesBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר ידיות משיכה";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג ידיות משיכה";
+        }
+      }
+
+      function toggleWheels() {
+        const container = document.getElementById("wheelsContainer");
+        const btn = document.getElementById("toggleWheelsBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר גלגלים";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג גלגלים";
+        }
+      }
+
+      function toggleNets() {
+        const container = document.getElementById("netsContainer");
+        const btn = document.getElementById("toggleNetsBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר רשתות";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג רשתות";
+        }
+      }
+
+      function toggleCorners() {
+        const container = document.getElementById("cornersContainer");
+        const btn = document.getElementById("toggleCornersBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר מחברי אלומיניום";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג מחברי אלומיניום";
+        }
+      }
+
+      function toggleWindowLocks() {
+        const container = document.getElementById("windowLocksContainer");
+        const btn = document.getElementById("toggleWindowLocksBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר אביזרי נעילה לחלונות";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג אביזרי נעילה לחלונות";
+        }
+      }
+
+      function toggleLocks() {
+        const container = document.getElementById("locksContainer");
+        const btn = document.getElementById("toggleLocksBtn");
+        if (
+          container.style.display === "none" ||
+          container.style.display === ""
+        ) {
+          container.style.display = "block";
+          btn.textContent = "הסתר מנעולים חשמליים";
+        } else {
+          container.style.display = "none";
+          btn.textContent = "הצג מנעולים חשמליים";
+        }
+      }
+
+      // Category button selection logic (multi-select)
+      document.querySelectorAll(".catBtn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const selected = btn.classList.toggle("selected");
+          btn.style.background = selected ? "#c4d71f" : "white";
+
+          const selectedValues = Array.from(
+            document.querySelectorAll(".catBtn.selected")
+          ).map((b) => b.dataset.value);
+
+          document.getElementById("category").value = selectedValues.join(", ");
+        });
+      });
+
+      // Statistics Tracking
+      const STATS_URL = "https://script.google.com/macros/s/AKfycbxNOvhsOV9ziR-IsftBgu2tAXgHx1gj7jy00yfZSadz67hspkPPbMzjn7Q003UWQCSq/exec";
+
+      function logStat(eventType) {
+        const data = {
+          action: "logStat",
+          eventType: eventType,
+          device: /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString()
+        };
+
+        // Use sendBeacon for reliable, non-blocking tracking
+        if (navigator.sendBeacon) {
+          // Sending as string without explicit Blob type avoids preflight (defaults to text/plain)
+          navigator.sendBeacon(STATS_URL, JSON.stringify(data));
+        } else {
+          fetch(STATS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data),
+            keepalive: true
+          });
+        }
+      }
+
+      // Track Page View
+      window.addEventListener("DOMContentLoaded", () => {
+        logStat("page_view");
+      });
+
+      // Track Download
+      document.getElementById("downloadPdfBtn").addEventListener("click", () => {
+        logStat("catalog_download");
+      });
+
+      // Track WhatsApp Clicks
+      const whatsappBtn = document.querySelector(".whatsapp-float");
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener("click", () => {
+          logStat("whatsapp_click");
+        });
+      }
+
+      // Open popup on CTA button click
+      const openLeadPopupBtn = document.getElementById("openLeadPopupBtn");
+      if (openLeadPopupBtn) {
+        openLeadPopupBtn.addEventListener("click", () => {
+          logStat("lead_popup_open");
+          document.getElementById("leadPopup").style.display = "flex";
+        });
+      }
+
+      document
+        .getElementById("closeLeadPopup")
+        .addEventListener("click", () => {
+          document.getElementById("leadPopup").style.display = "none";
+        });
+
+      // Handle lead form submission
+      const leadForm = document.getElementById("leadForm");
+      if (leadForm) {
+        leadForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const businessNameInput = document.getElementById("businessName");
+          const fullNameInput = document.getElementById("fullName");
+          const phoneInput = document.getElementById("phone");
+          const messageInput = document.getElementById("message");
+          const selectedCategories = Array.from(
+            document.querySelectorAll(".catBtn.selected")
+          ).map((b) => b.dataset.value);
+
+          const data = {
+            businessName: businessNameInput.value,
+            fullName: fullNameInput.value,
+            phone: phoneInput.value,
+            email: document.getElementById("email").value,
+            category: selectedCategories.join(", "),
+            message: messageInput.value,
+          };
+
+          // Validation
+          if (
+            !data.businessName.trim() ||
+            !data.fullName.trim() ||
+            !data.phone.trim() ||
+            !data.category.trim() ||
+            !document.getElementById("privacyConsent").checked
+          ) {
+            const err = document.getElementById("formError");
+            if (!document.getElementById("privacyConsent").checked) {
+              err.innerText = "יש לאשר את הסכמתך למדיניות הפרטיות להמשך.";
+            } else {
+              err.innerText =
+                "אנא מלא שם עסק, שם מלא, טלפון ותחום עניין לפני השליחה.";
+            }
+            err.style.display = "block";
+            err.style.background = "#ffebeb";
+            err.style.color = "#b40000";
+            return;
+          }
+
+          logStat("lead_submission_attempt");
+
+          fetch(STATS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data),
+          }).then(() => {
+            logStat("lead_submission_success");
+          });
+
+          document.getElementById("formError").style.display = "none";
+          const success = document.getElementById("formSuccess");
+          success.innerText = "תודה! הפרטים נשלחו בהצלחה.";
+          success.style.display = "block";
+          setTimeout(() => {
+            document.getElementById("leadPopup").style.display = "none";
+          }, 2000);
+          leadForm.reset();
+        });
+      }
+
+      // Add event listeners for toggle buttons
+      document
+        .getElementById("toggleBrushTableBtn")
+        .addEventListener("click", toggleBrushTable);
+      document
+        .getElementById("toggleHandlesBtn")
+        .addEventListener("click", toggleHandles);
+      document
+        .getElementById("togglePullHandlesBtn")
+        .addEventListener("click", togglePullHandles);
+      document
+        .getElementById("toggleWheelsBtn")
+        .addEventListener("click", toggleWheels);
+      document
+        .getElementById("toggleNetsBtn")
+        .addEventListener("click", toggleNets);
+      document
+        .getElementById("toggleCornersBtn")
+        .addEventListener("click", toggleCorners);
+      document
+        .getElementById("toggleWindowLocksBtn")
+        .addEventListener("click", toggleWindowLocks);
+      document
+        .getElementById("toggleLocksBtn")
+        .addEventListener("click", toggleLocks);
+    </script>
   </body>
 </html>
