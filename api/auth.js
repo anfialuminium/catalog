@@ -26,14 +26,14 @@ export default async function handler(req, res) {
   }
   body = body || {};
 
-  const password = body.password;
-  const SYSTEM_PASSWORD = process.env.SYSTEM_PASSWORD;
+  const password = (body.password || '').trim();
+  const SYSTEM_PASSWORD = (process.env.SYSTEM_PASSWORD || '').trim();
 
   // בדיקה אם משתנה הסביבה הוגדר ב-Vercel
   if (!SYSTEM_PASSWORD) {
     return res.status(500).json({ 
       success: false, 
-      message: 'משתנה הסביבה SYSTEM_PASSWORD אינו מוגדר ב-Vercel' 
+      message: 'משתנה הסביבה SYSTEM_PASSWORD אינו מוגדר בפרויקט זה ב-Vercel. ודא שהוספת אותו לפרויקט של הקטלוג וביצעת Redeploy.' 
     });
   }
 
