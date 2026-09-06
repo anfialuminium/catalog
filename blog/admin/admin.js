@@ -1,5 +1,3 @@
-const ADMIN_PASSWORD = '3737';
-
 // UI Elements
 const loginArea = document.getElementById('login-area');
 const adminPanel = document.getElementById('admin-panel');
@@ -48,13 +46,42 @@ if (sessionStorage.getItem('anfi_admin_logged_in') === 'true') {
 }
 
 // Login Logic
-loginBtn.addEventListener('click', () => {
-    if (passwordInput.value === ADMIN_PASSWORD) {
-        sessionStorage.setItem('anfi_admin_logged_in', 'true');
-        showAdmin();
-    } else {
-        loginError.style.display = 'block';
-        passwordInput.value = '';
+loginBtn.addEventListener('click', async () => {
+    const enteredPassword = passwordInput.value.trim();
+    if (!enteredPassword) return;
+
+    loginBtn.disabled = true;
+    const originalText = loginBtn.innerText;
+    loginBtn.innerText = 'מתחבר...';
+
+    try {
+        const response = await fetch('/api/auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: enteredPassword })
+        });
+        const result = await response.json();
+        if (response.ok && result.success) {
+            sessionStorage.setItem('anfi_admin_logged_in', 'true');
+            loginError.style.display = 'none';
+            showAdmin();
+        } else {
+            loginError.style.display = 'block';
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    } catch (err) {
+        console.error('Auth error:', err);
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
+            sessionStorage.setItem('anfi_admin_logged_in', 'true');
+            loginError.style.display = 'none';
+            showAdmin();
+            return;
+        }
+        alert('שגיאה בחיבור לשרת האימות (/api/auth). ודא שהפרויקט רץ ב-Vercel.');
+    } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerText = originalText;
     }
 });
 
@@ -221,7 +248,10 @@ postForm.addEventListener('submit', async (e) => {
     
     const id = postIdInput.value;
     const title = postTitleInput.value;
-    const image_url = postImageInput.value;
+    let image_url = (postImageInput.value || '').trim();
+    if (image_url) {
+        image_url = image_url.replaceAll('https://anfialuminium.github.io/catalog/', 'https://www.anfi.co.il/');
+    }
     
     let content;
     // Sync content if in HTML view
@@ -230,6 +260,12 @@ postForm.addEventListener('submit', async (e) => {
         quill.clipboard.dangerouslyPasteHTML(content); // Keep Quill in sync
     } else {
         content = quill.root.innerHTML;
+    }
+
+    if (content) {
+        content = content
+            .replaceAll('https://anfialuminium.github.io/catalog/index.html', 'https://www.anfi.co.il/')
+            .replaceAll('https://anfialuminium.github.io/catalog/', 'https://www.anfi.co.il/');
     }
 
     const postData = { title, image_url, content, updated_at: new Date().toISOString() };

@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --primary: #2e5541;
@@ -115,6 +116,54 @@
             font-weight: 700;
         }
 
+        .leads-section {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .leads-section h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .leads-table th, .leads-table td {
+            padding: 12px 14px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .leads-table th {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .leads-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .leads-table a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .leads-table a:hover {
+            text-decoration: underline;
+        }
+
         #login-overlay {
             position: fixed;
             inset: 0;
@@ -154,6 +203,28 @@
             transform: scale(1.05);
         }
 
+        .nav-catalog-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-catalog-btn:hover {
+            background: var(--accent);
+            color: var(--dark-bg);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 600px) {
             .dashboard { padding: 1rem; }
             .stat-card .value { font-size: 2.2rem; }
@@ -167,9 +238,23 @@
     <h1>כניסה למערכת דוחות</h1>
     <input type="password" id="pass-input" placeholder="הכנס סיסמה">
     <button onclick="checkAccess()">כניסה</button>
+    <a href="index.html" class="nav-catalog-btn" style="margin-top: 1rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        מעבר לקטלוג
+    </a>
 </div>
 
 <div class="dashboard" id="main-dashboard" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <a href="index.html" class="nav-catalog-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            מעבר לקטלוג
+        </a>
+        <button onclick="fetchStats()" class="nav-catalog-btn" style="cursor: pointer;">
+            רענן נתונים ↻
+        </button>
+    </div>
+
     <header>
         <img src="logo white.png" alt="Anfi">
         <h1>סיכום פעילות קטלוג</h1>
@@ -203,74 +288,186 @@
             עד כה, סך הכל <span id="conv-rate">0%</span> מהמבקרים הורידו את הקטלוג.
         </div>
     </div>
+
+    <div class="leads-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="margin: 0;">פניות אחרונות מטופס יצירת קשר</h2>
+            <button onclick="fetchStats()" class="refresh-btn" style="padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem; cursor: pointer;">רענן נתונים ↻</button>
+        </div>
+        <div style="overflow-x: auto;">
+            <p id="no-leads-msg" style="color: var(--text-dim); text-align: center; margin: 1rem 0;">טוען פניות...</p>
+            <table id="leads-table" class="leads-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>תאריך</th>
+                        <th>שם מלא</th>
+                        <th>שם עסק</th>
+                        <th>טלפון</th>
+                        <th>אימייל</th>
+                        <th>תחום עניין</th>
+                        <th>הודעה</th>
+                    </tr>
+                </thead>
+                <tbody id="leads-tbody"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbxNOvhsOV9ziR-IsftBgu2tAXgHx1gj7jy00yfZSadz67hspkPPbMzjn7Q003UWQCSq/exec";
+    const SUPABASE_URL = "https://abqracafkjerlcemqnva.supabase.co";
+    const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFicXJhY2Fma2plcmxjZW1xbnZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NDk1NTYsImV4cCI6MjA4MDMyNTU1Nn0.WejWdsYxqC7ESs3C8UkGhWUpnDJ7xD5j4-n9BKRE7rE";
+    const supabaseClient =
+        window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
     let chartInstance = null;
 
-    function checkAccess() {
-        if (document.getElementById('pass-input').value === "3737") {
-            document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('main-dashboard').style.display = 'block';
-            fetchStats();
-        } else {
-            alert('סיסמה שגויה');
+    // Auto login if already authenticated in this session
+    if (sessionStorage.getItem('stats_authenticated') === 'true') {
+        document.getElementById('login-overlay').style.display = 'none';
+        document.getElementById('main-dashboard').style.display = 'block';
+        window.addEventListener('DOMContentLoaded', fetchStats);
+    }
+
+    async function checkAccess() {
+        const passInput = document.getElementById('pass-input');
+        const loginBtn = document.querySelector('#login-overlay button');
+        const enteredPassword = passInput.value.trim();
+
+        if (!enteredPassword) {
+            alert('נא להזין סיסמה');
+            return;
+        }
+
+        loginBtn.disabled = true;
+        const originalText = loginBtn.innerText;
+        loginBtn.innerText = 'מאמת...';
+
+        try {
+            const response = await fetch('/api/auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: enteredPassword })
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                sessionStorage.setItem('stats_authenticated', 'true');
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-dashboard').style.display = 'block';
+                fetchStats();
+            } else {
+                alert(result.message || 'סיסמה שגויה');
+                passInput.value = '';
+                passInput.focus();
+            }
+        } catch (err) {
+            console.error('Auth error:', err);
+            // Local development fallback
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
+                console.warn('שרת האימות המקומי לא רץ - מאפשר גישה מקומית לצורכי פיתוח בלבד');
+                sessionStorage.setItem('stats_authenticated', 'true');
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-dashboard').style.display = 'block';
+                fetchStats();
+                return;
+            }
+            alert('שגיאה בתקשורת עם שרת האימות (/api/auth). ודא שהפרויקט רץ ב-Vercel.');
+        } finally {
+            loginBtn.disabled = false;
+            loginBtn.innerText = originalText;
         }
     }
 
     document.getElementById('pass-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAccess(); });
 
-    async function fetchStats(retryCount = 0) {
+    async function fetchStats() {
         try {
-            const url = `${GAS_URL}?action=getStats&_nocache=${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-            const response = await fetch(url, { redirect: 'follow' });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-            const text = await response.text();
-            let result;
-            try {
-                result = JSON.parse(text);
-            } catch (jsonErr) {
-                if (retryCount < 2) {
-                    console.warn("Retrying fetchStats after non-JSON response...");
-                    await new Promise(res => setTimeout(res, 1000));
-                    return fetchStats(retryCount + 1);
-                }
-                throw new Error("תגובת השרת אינה בפורמט JSON תקין");
+            if (!supabaseClient) {
+                throw new Error("ספריית Supabase לא נטענה בדף");
             }
 
-            if (result.success) render(result.data);
-            else throw new Error(result.error || "שגיאה לא ידועה בשרת");
+            // 1. Fetch events from catalog_events
+            const { data: events, error: eventsErr } = await supabaseClient
+                .from('catalog_events')
+                .select('event_type, created_at')
+                .order('created_at', { ascending: true });
+
+            if (eventsErr) throw eventsErr;
+
+            // 2. Fetch leads from catalog_leads
+            const { data: leads, error: leadsErr } = await supabaseClient
+                .from('catalog_leads')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (leadsErr) console.warn("Leads fetch warning:", leadsErr);
+
+            const summary = {
+                page_view: 0,
+                catalog_download: 0,
+                whatsapp_click: 0,
+                total_leads: (leads || []).length
+            };
+
+            const dailyMap = {};
+
+            (events || []).forEach(evt => {
+                const type = evt.event_type;
+                if (type === 'page_view') summary.page_view++;
+                else if (type === 'catalog_download') summary.catalog_download++;
+                else if (type === 'whatsapp_click') summary.whatsapp_click++;
+
+                if (evt.created_at) {
+                    const dateStr = evt.created_at.substring(0, 10);
+                    if (!dailyMap[dateStr]) {
+                        dailyMap[dateStr] = { views: 0, downloads: 0 };
+                    }
+                    if (type === 'page_view') dailyMap[dateStr].views++;
+                    if (type === 'catalog_download') dailyMap[dateStr].downloads++;
+                }
+            });
+
+            const sortedDates = Object.keys(dailyMap).sort();
+            const viewsList = sortedDates.map(d => dailyMap[d].views);
+            const downloadsList = sortedDates.map(d => dailyMap[d].downloads);
+
+            render({
+                summary: summary,
+                daily: {
+                    labels: sortedDates,
+                    views: viewsList,
+                    downloads: downloadsList
+                },
+                leads: leads || []
+            });
+
         } catch (err) {
             console.error("Dashboard Error:", err);
-            alert("שגיאה בטעינת נתונים (" + err.message + "). בצע רענון לדף.");
+            alert("שגיאה בטעינת נתונים מ-Supabase (" + err.message + "). בצע רענון לדף.");
         }
     }
 
     function render(data) {
         const s = data.summary;
-        const totalLeads = (s.total_leads || 0) + (s.whatsapp_click || 0);
         
         document.getElementById('total-views').innerText = s.page_view || 0;
         document.getElementById('total-downloads').innerText = s.catalog_download || 0;
-        document.getElementById('total-leads').innerText = totalLeads;
+        document.getElementById('total-leads').innerText = s.total_leads || 0;
         document.getElementById('whatsapp-clicks').innerText = s.whatsapp_click || 0;
         
-        const rate = (((s.catalog_download || 0) / (s.page_view || 1)) * 100).toFixed(1);
+        const rate = s.page_view > 0 ? (((s.catalog_download || 0) / s.page_view) * 100).toFixed(1) : 0;
         document.getElementById('conv-rate').innerText = `${rate}%`;
 
+        // Render chart
         const ctx = document.getElementById('mainChart').getContext('2d');
         if (chartInstance) chartInstance.destroy();
         
-        // Format dates for display (e.g., 20/04)
         const formattedLabels = (data.daily.labels || []).map(label => {
             try {
                 const date = new Date(label);
-                return date.toLocaleDateString('he-IL', { day: '2-digit', month: '12' === '12' ? '2-digit' : 'short' });
+                return date.toLocaleDateString('he-IL', { day: '2-digit', month: '2-digit' });
             } catch (e) { return label; }
         });
 
@@ -304,6 +501,47 @@
                 }
             }
         });
+
+        // Render leads table
+        const leads = data.leads || [];
+        const noLeadsMsg = document.getElementById('no-leads-msg');
+        const leadsTable = document.getElementById('leads-table');
+        const tbody = document.getElementById('leads-tbody');
+        tbody.innerHTML = '';
+
+        if (leads.length === 0) {
+            noLeadsMsg.innerText = 'טרם התקבלו פניות חדשות בטופס.';
+            noLeadsMsg.style.display = 'block';
+            leadsTable.style.display = 'none';
+        } else {
+            noLeadsMsg.style.display = 'none';
+            leadsTable.style.display = 'table';
+
+            leads.forEach(lead => {
+                const tr = document.createElement('tr');
+                const dateStr = lead.created_at ? new Date(lead.created_at).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }) : '-';
+                const phoneHtml = lead.phone ? `<a href="tel:${escapeHtml(lead.phone)}">${escapeHtml(lead.phone)}</a>` : '-';
+                const emailHtml = lead.email ? `<a href="mailto:${escapeHtml(lead.email)}">${escapeHtml(lead.email)}</a>` : '-';
+
+                tr.innerHTML = `
+                    <td style="white-space: nowrap;">${dateStr}</td>
+                    <td><strong>${escapeHtml(lead.full_name || '')}</strong></td>
+                    <td>${escapeHtml(lead.business_name || '-')}</td>
+                    <td dir="ltr" style="text-align: right;">${phoneHtml}</td>
+                    <td>${emailHtml}</td>
+                    <td>${escapeHtml(lead.category || '-')}</td>
+                    <td style="max-width: 250px; word-break: break-word;">${escapeHtml(lead.message || '-')}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.innerText = str;
+        return div.innerHTML;
     }
 </script>
 </body>

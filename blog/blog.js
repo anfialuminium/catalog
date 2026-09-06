@@ -41,9 +41,10 @@ async function renderPosts() {
         postElement.className = 'card';
         
         const dateFormatted = new Date(post.created_at).toLocaleDateString('he-IL');
+        const imageUrl = (post.image_url || '').replaceAll('https://anfialuminium.github.io/catalog/', 'https://www.anfi.co.il/');
         
         postElement.innerHTML = `
-            ${post.image_url ? `<div class="card-img" style="background-image: url('${post.image_url}')"></div>` : ''}
+            ${imageUrl ? `<div class="card-img" style="background-image: url('${imageUrl}')"></div>` : ''}
             <div class="card-content">
                 <div class="post-meta">
                     <span>${dateFormatted}</span>

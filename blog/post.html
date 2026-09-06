@@ -87,6 +87,7 @@
             const dateFormatted = new Date(post.created_at).toLocaleDateString('he-IL');
             
             const sanitizedContent = (post.content || '').replaceAll('https://anfialuminium.github.io/catalog/index.html', 'https://www.anfi.co.il/').replaceAll('https://anfialuminium.github.io/catalog/', 'https://www.anfi.co.il/');
+            const imageUrl = (post.image_url || '').replaceAll('https://anfialuminium.github.io/catalog/', 'https://www.anfi.co.il/');
 
             container.innerHTML = `
                 <div class="post-header">
@@ -95,7 +96,7 @@
                         <span>פורסם בתאריך: ${dateFormatted}</span>
                     </div>
                 </div>
-                ${post.image_url ? `<img src="${post.image_url}" class="post-full-image" alt="${post.title}">` : ''}
+                ${imageUrl ? `<img src="${imageUrl}" class="post-full-image" alt="${post.title}">` : ''}
                 <div class="post-content-text">${sanitizedContent}</div>
             `;
         } catch (error) {
