@@ -3,9 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אנפי - הבלוג שלנו</title>
+    <title>הבלוג של אנפי | שאלות נפוצות, טיפים ומדריכים על מברשות אטימה, רשתות ופרזול</title>
+    <meta name="description" content="הבלוג של אנפי יבוא ושיווק: שאלות ותשובות נפוצות ומדריכים מקצועיים על מברשות אטימה, מברשות איטום, רשתות לחלונות ודלתות, רשת גלילה ופרזול לאלומיניום." />
+    <meta name="keywords" content="מברשות אטימה, מברשות איטום, רשת גלילה, רשתות לחלונות, אנפי בלוג, פרזול לאלומיניום" />
+    <link rel="canonical" href="https://www.anfi.co.il/blog/" />
     <link rel="icon" type="image/png" href="../favicon.png">
     <link rel="stylesheet" href="style.css">
+    <!-- Structured Data: FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "אילו סוגי מברשות אטימה קיימים לפרופילי אלומיניום?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "אנו באנפי משווקים מגוון רחב של מברשות אטימה ומברשות איטום למערכות אלומיניום: מברשות אטימה רגילות (מסיבי שיער צפופים החוסמים כניסת אבק ורוח), מברשות אטימה סנפיר (בעלות מחיצת פלסטיק מרכזית גמישה המונעת חדירת מים ומספקת בידוד אקוסטי מוגבר), ומברשות אטימה בהדבקה עם פס דבק חזק להתקנה ישירה ומהירה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מה ההבדל בין מברשת אטימה רגילה למברשת אטימה סנפיר?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "מברשת אטימה רגילה מספקת מענה מעולה לאטימה מפני אבק, לכלוך ורוח קלה. מברשת סנפיר כוללת בתוך הסיבים מחיצה גמישה ('סנפיר') שחוסמת חדירת מי גשמים בלחצי רוח גבוהים, מונעת שריקות רוח ומספקת אטימה תרמית ואקוסטית מתקדמת יותר."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מהם היתרונות של רשת גלילה לחלונות?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "רשת גלילה היא פתרון אסתטי ונוח במיוחד: הרשת נגללת לתוך קסטה עליונה קומפקטית ומאפשרת פתיחה וסגירה קלה ומהירה רק כשיש צורך. היא אידיאלית למפתחים שבהם לא ניתן להתקין רשת הזזה או רשת כנף, ושומרת על נוף נקי ומעבר אור מלא."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "אילו סוגי רשתות לחלונות ודלתות ניתן להזמין?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "אנו מספקים רשתות פיברגלס איכותיות ועמידות, רשתות שקופות למראה כמעט בלתי נראה ומעבר אוויר ואור מרבי, רשתות פוליפרופילן, רשתות בעלי חיים עמידות במיוחד לשריטות, ורשתות גלילה לפי מידה עד לגובה של 2.50 מטר כולל אפשרות לחיתוך מותאם."
+          }
+        }
+      ]
+    }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
 </head>
@@ -31,6 +75,37 @@
         <h3>עדיין אין פוסטים בבלוג.</h3>
         <p>חזרו בקרוב לעדכונים חדשים!</p>
     </div>
+
+    <!-- FAQ Section for SEO and Customer Guide -->
+    <section id="faq" style="margin-top: 3.5rem; margin-bottom: 2rem;">
+        <h2 style="font-size: 2rem; color: var(--primary); margin-bottom: 2rem; text-align: center;">שאלות ותשובות נפוצות</h2>
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.2rem; text-align: right;">
+            <div style="background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); border-right: 5px solid var(--primary);">
+                <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--primary);">אילו סוגי מברשות אטימה קיימים לפרופילי אלומיניום?</h3>
+                <p style="margin: 0; color: #444; line-height: 1.7; font-size: 1.05rem;">
+                    אנו באנפי משווקים מגוון רחב של מברשות אטימה ומברשות איטום למערכות אלומיניום: <strong>מברשות אטימה רגילות</strong> (מסיבי שיער צפופים החוסמים כניסת אבק ורוח), <strong>מברשות אטימה סנפיר</strong> (בעלות מחיצת פלסטיק מרכזית גמישה המונעת חדירת מים ומספקת בידוד אקוסטי מוגבר), ו<strong>מברשות אטימה בהדבקה</strong> עם פס דבק חזק להתקנה ישירה ומהירה.
+                </p>
+            </div>
+            <div style="background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); border-right: 5px solid var(--primary);">
+                <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--primary);">מה ההבדל בין מברשת אטימה רגילה למברשת אטימה סנפיר?</h3>
+                <p style="margin: 0; color: #444; line-height: 1.7; font-size: 1.05rem;">
+                    מברשת אטימה רגילה מספקת מענה מעולה לאטימה מפני אבק, לכלוך ורוח קלה. מברשת סנפיר כוללת בתוך הסיבים מחיצה גמישה ('סנפיר') שחוסמת חדירת מי גשמים בלחצי רוח גבוהים, מונעת שריקות רוח ומספקת אטימה תרמית ואקוסטית מתקדמת יותר.
+                </p>
+            </div>
+            <div style="background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); border-right: 5px solid var(--primary);">
+                <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--primary);">מהם היתרונות של רשת גלילה לחלונות?</h3>
+                <p style="margin: 0; color: #444; line-height: 1.7; font-size: 1.05rem;">
+                    <strong>רשת גלילה</strong> היא פתרון אסתטי ונוח במיוחד: הרשת נגללת לתוך קסטה עליונה קומפקטית ומאפשרת פתיחה וסגירה קלה ומהירה רק כשיש צורך. היא אידיאלית למפתחים שבהם לא ניתן להתקין רשת הזזה או רשת כנף, ושומרת על נוף נקי ומעבר אור מלא.
+                </p>
+            </div>
+            <div style="background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); border-right: 5px solid var(--primary);">
+                <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--primary);">אילו סוגי רשתות לחלונות ודלתות ניתן להזמין?</h3>
+                <p style="margin: 0; color: #444; line-height: 1.7; font-size: 1.05rem;">
+                    אנו מספקים <strong>רשתות פיברגלס</strong> איכותיות ועמידות, <strong>רשתות שקופות</strong> למראה כמעט בלתי נראה ומעבר אוויר ואור מרבי, <strong>רשתות פוליפרופילן</strong>, <strong>רשתות בעלי חיים</strong> עמידות במיוחד לשריטות, ו<strong>רשתות גלילה</strong> לפי מידה עד לגובה של 2.50 מטר כולל אפשרות לחיתוך מותאם.
+                </p>
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer>
