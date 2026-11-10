@@ -1942,6 +1942,10 @@
       const supabaseClient =
         window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
+      // Google Apps Script Web App for Google Sheets & Email Notifications
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbziqkEgPE-dFj8CLYrzf6wq3axvBp44XV7Oi6neFq73s2MbG7-TwRl2axMjvv8D1DLv/exec";
+
       // Statistics Tracking
       async function logStat(eventType) {
         try {
@@ -2052,12 +2056,13 @@
 
           logStat("lead_submission_attempt");
 
+          // 1. Save lead to Supabase (internal database & dashboard)
           try {
             if (supabaseClient) {
               const { error } = await supabaseClient
                 .from("catalog_leads")
                 .insert([leadData]);
-              if (error) throw error;
+              if (error) console.error("Supabase insert error:", error);
             } else {
               await fetch(`${SUPABASE_URL}/rest/v1/catalog_leads`, {
                 method: "POST",
@@ -2073,6 +2078,24 @@
             logStat("lead_submission_success");
           } catch (leadErr) {
             console.error("Error saving lead to Supabase:", leadErr);
+          }
+
+          // 2. Send lead to Google Apps Script (appends to Google Sheet & sends email alert)
+          if (GOOGLE_SCRIPT_URL) {
+            try {
+              fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({
+                  action: "saveLead",
+                  ...leadData
+                }),
+                keepalive: true
+              });
+            } catch (gasErr) {
+              console.error("Error sending lead to Google Script:", gasErr);
+            }
           }
 
           document.getElementById("formError").style.display = "none";
